@@ -2,6 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Frederik Gelder</Authors>
+    <Product />
+    <Company></Company>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Copyright>2021</Copyright>
+    <PackageId>ArxLibertatisEditorIO_Frederik_Gelder</PackageId>
+    <Description />
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/fredlllll/ArxLibertatisEditorIO</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/fredlllll/ArxLibertatisEditorIO</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>arx fatalis libertatis editor</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +24,13 @@
 
   <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
