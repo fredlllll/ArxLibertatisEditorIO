@@ -29,23 +29,29 @@ namespace ArxLibertatisEditorIO
             private set;
         }
 
+        public ArxLevelRaw()
+        {
+            dlf = new DLF_IO();
+            llf = new LLF_IO();
+            fts = new FTS_IO();
+
+            LevelName = "unknown";
+        }
+
         public void LoadLevel(string name)
         {
             LevelName = name;
 
-            dlf = new DLF_IO();
             using (FileStream fs = new FileStream(ArxPaths.GetDlfPath(name), FileMode.Open, FileAccess.Read))
             {
                 dlf.LoadFrom(DLF_IO.EnsureUnpacked(fs));
             }
 
-            llf = new LLF_IO();
             using (FileStream fs = new FileStream(ArxPaths.GetLlfPath(name), FileMode.Open, FileAccess.Read))
             {
                 llf.LoadFrom(LLF_IO.EnsureUnpacked(fs));
             }
 
-            fts = new FTS_IO();
             using (FileStream fs = new FileStream(ArxPaths.GetFtsPath(name), FileMode.Open, FileAccess.Read))
             {
                 fts.LoadFrom(FTS_IO.EnsureUnpacked(fs));

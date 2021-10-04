@@ -13,10 +13,11 @@
     <PackageProjectUrl>https://github.com/fredlllll/ArxLibertatisEditorIO</PackageProjectUrl>
     <RepositoryUrl>https://github.com/fredlllll/ArxLibertatisEditorIO</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>arx fatalis libertatis editor</PackageTags>
+    <PackageTags>arx fatalis libertatis editor io</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
 	<Title>ArxLibertatisEditorIO</Title>
-	<Version>1.0.1</Version>
+	<Version>1.0.2</Version>
+	<PackageReleaseNotes>added default constructor for ArxLevelRaw so it can be used without loading from a file</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
