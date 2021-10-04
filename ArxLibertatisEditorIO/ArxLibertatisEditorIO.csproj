@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Frederik Gelder</Authors>
-    <Product />
+    <Product></Product>
     <Company></Company>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>2021</Copyright>
-    <PackageId>ArxLibertatisEditorIO_Frederik_Gelder</PackageId>
+    <PackageId>ArxLibertatisEditorIO</PackageId>
     <Description />
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/fredlllll/ArxLibertatisEditorIO</PackageProjectUrl>
@@ -15,6 +15,8 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>arx fatalis libertatis editor</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
+	<Title>ArxLibertatisEditorIO</Title>
+	<Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
