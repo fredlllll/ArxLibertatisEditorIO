@@ -7,9 +7,9 @@ namespace ArxLibertatisEditorIO.RawIO.LLF
     {
         public float version;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-        public char[] identifier;
+        public byte[] identifier;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-        public char[] lastuser;
+        public byte[] lastuser;
         public uint time; //originally signed int. same reason as in dlf header
         public int numLights;
         public int numShadowPolys;

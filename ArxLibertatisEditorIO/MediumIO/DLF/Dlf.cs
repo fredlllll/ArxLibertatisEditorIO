@@ -106,9 +106,12 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
                 paths[i].WriteTo(dlf.paths[i]);
             }
 
+            
             if (header.lighting)
             {
                 lightingHeader.WriteTo(dlf.lightingHeader);
+                IOHelper.EnsureArraySize(ref dlf.lightColors, lightColors.Count);
+                dlf.lightingHeader.numLights = lightColors.Count;
                 for (int i = 0; i < lightColors.Count; ++i)
                 {
                     dlf.lightColors[i] = IOHelper.ColorToBGRA(lightColors[i]);

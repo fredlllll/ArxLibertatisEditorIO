@@ -6,7 +6,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
     public struct FTS_IO_UNIQUE_HEADER
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-        public char[] path;
+        public byte[] path;
         public int count;
         public float version;
         public int uncompressedsize;

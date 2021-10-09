@@ -90,11 +90,41 @@ namespace ArxLibertatisEditorIO.Util
             return BitConverter.ToUInt32(bytes, 0);
         }
 
-        public static void EnsureArraySize<T>(ref T[] arr, int size)
+        public static uint ColorToRGBA(Color color)
         {
-            if (arr.Length != size)
+            byte[] bytes = new byte[]
+            {
+                (byte)(color.r*255),
+                (byte)(color.g*255),
+                (byte)(color.b*255),
+                (byte)(color.a*255),
+            };
+
+            return BitConverter.ToUInt32(bytes, 0);
+        }
+
+        public static void EnsureArraySize<T>(ref T[] arr, int size, bool keepContent = false)
+        {
+            if (arr == null)
             {
                 arr = new T[size];
+            }
+            else if (arr.Length != size)
+            {
+                if (keepContent)
+                {
+                    T[] tmp = new T[size];
+                    size = Math.Min(size, arr.Length);
+                    for (int i = 0; i < size; ++i)
+                    {
+                        tmp[i] = arr[i];
+                    }
+                    arr = tmp;
+                }
+                else
+                {
+                    arr = new T[size];
+                }
             }
         }
     }

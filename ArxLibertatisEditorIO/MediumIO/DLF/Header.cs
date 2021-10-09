@@ -41,12 +41,11 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
 
             //fixed fields
             header.identifier = IOHelper.GetBytes("DANAE_FILE", 16);
-            //TODO: only assign if not set or size differs
-            header.ipad1 = new int[256];
-            header.ipad2 = new int[250];
-            header.fpad1 = new float[253];
-            header.cpad1 = new byte[4096];
-            header.ipad3 = new int[256];
+            IOHelper.EnsureArraySize(ref header.ipad1, 256);
+            IOHelper.EnsureArraySize(ref header.ipad2, 250);
+            IOHelper.EnsureArraySize(ref header.fpad1, 253);
+            IOHelper.EnsureArraySize(ref header.cpad1, 4096);
+            IOHelper.EnsureArraySize(ref header.ipad3, 256);
         }
     }
 }
