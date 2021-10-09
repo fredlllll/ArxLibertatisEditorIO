@@ -1,23 +1,23 @@
-﻿using ArxLibertatisEditorIO.IO.DLF;
-using ArxLibertatisEditorIO.IO.FTS;
-using ArxLibertatisEditorIO.IO.LLF;
+﻿using ArxLibertatisEditorIO.RawIO.DLF;
+using ArxLibertatisEditorIO.RawIO.FTS;
+using ArxLibertatisEditorIO.RawIO.LLF;
 using System.IO;
 
-namespace ArxLibertatisEditorIO
+namespace ArxLibertatisEditorIO.RawIO
 {
-    public class ArxLevelRaw
+    public class RawArxLevel
     {
-        private DLF_IO dlf;
+        private readonly DLF_IO dlf;
         public DLF_IO DLF
         {
             get { return dlf; }
         }
-        private LLF_IO llf;
+        private readonly LLF_IO llf;
         public LLF_IO LLF
         {
             get { return llf; }
         }
-        private FTS_IO fts;
+        private readonly FTS_IO fts;
         public FTS_IO FTS
         {
             get { return fts; }
@@ -29,7 +29,7 @@ namespace ArxLibertatisEditorIO
             private set;
         }
 
-        public ArxLevelRaw()
+        public RawArxLevel()
         {
             dlf = new DLF_IO();
             llf = new LLF_IO();

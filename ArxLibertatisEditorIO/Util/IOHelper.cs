@@ -27,6 +27,12 @@ namespace ArxLibertatisEditorIO.Util
             return retval;
         }
 
+        /// <summary>
+        /// get fixed length bytes of a string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="bytesLength"></param>
+        /// <returns></returns>
         public static byte[] GetBytes(string str, int bytesLength)
         {
             byte[] retval = new byte[bytesLength];
@@ -42,16 +48,16 @@ namespace ArxLibertatisEditorIO.Util
             return retval;
         }
 
-        public static Color FromBGRA(uint bgra)
+        public static Color ColorFromBGRA(uint bgra)
         {
             byte[] bytes = BitConverter.GetBytes(bgra);
-            return new Color(bytes[2] / 255f, bytes[1] / 255f, bytes[0] / 255f);
+            return new Color(bytes[2] / 255f, bytes[1] / 255f, bytes[0] / 255f, bytes[3] / 255f);
         }
 
-        public static Color FromRGB(uint rgba)
+        public static Color ColorFromRGBA(uint rgba)
         {
             byte[] bytes = BitConverter.GetBytes(rgba);
-            return new Color(bytes[0] / 255f, bytes[1] / 255f, bytes[2] / 255f);
+            return new Color(bytes[0] / 255f, bytes[1] / 255f, bytes[2] / 255f, bytes[3] / 255f);
         }
 
         public static string ArxPathToPlatformPath(string arxPath)
@@ -71,7 +77,7 @@ namespace ArxLibertatisEditorIO.Util
             return z * sizex + x;
         }
 
-        public static uint ToBGRA(Color color)
+        public static uint ColorToBGRA(Color color)
         {
             byte[] bytes = new byte[]
             {
@@ -82,6 +88,14 @@ namespace ArxLibertatisEditorIO.Util
             };
 
             return BitConverter.ToUInt32(bytes, 0);
+        }
+
+        public static void EnsureArraySize<T>(ref T[] arr, int size)
+        {
+            if (arr.Length != size)
+            {
+                arr = new T[size];
+            }
         }
     }
 }
