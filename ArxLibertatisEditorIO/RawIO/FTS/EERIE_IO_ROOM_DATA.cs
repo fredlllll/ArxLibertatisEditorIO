@@ -3,11 +3,11 @@
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct EERIE_IO_ROOM_DATA
+    public unsafe struct EERIE_IO_ROOM_DATA
     {
         public int nb_portals;
         public int nb_polys;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
-        public int[] padd;
+        public fixed int padd[6];
     }
 }

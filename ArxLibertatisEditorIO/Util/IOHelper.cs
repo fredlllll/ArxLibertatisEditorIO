@@ -74,6 +74,9 @@ namespace ArxLibertatisEditorIO.Util
 
         public static int XZToCellIndex(int x, int z, int sizex, int sizez)
         {
+            x = Mathi.Clamp(x, 0, sizex-1);
+            z = Mathi.Clamp(z, 0, sizez-1);
+
             return z * sizex + x;
         }
 
