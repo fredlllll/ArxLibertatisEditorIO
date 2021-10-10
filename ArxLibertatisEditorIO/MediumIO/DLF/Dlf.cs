@@ -1,4 +1,5 @@
 ﻿using ArxLibertatisEditorIO.MediumIO.Shared;
+using ArxLibertatisEditorIO.RawIO.DLF;
 using ArxLibertatisEditorIO.Util;
 using System.Collections.Generic;
 
@@ -17,7 +18,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
 
         private byte[] nodesData = new byte[0];
 
-        public void LoadFrom(RawIO.DLF.DLF_IO dlf)
+        public void LoadFrom(DLF_IO dlf)
         {
             header.ReadFrom(dlf.header);
 
@@ -74,42 +75,42 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             nodesData = dlf.nodesData;
         }
 
-        public void WriteTo(RawIO.DLF.DLF_IO dlf)
+        public void WriteTo(DLF_IO dlf)
         {
-            header.WriteTo(dlf.header);
+            header.WriteTo(ref dlf.header);
 
             IOHelper.EnsureArraySize(ref dlf.scenes, scenes.Count);
             dlf.header.numScenes = scenes.Count;
             for (int i = 0; i < scenes.Count; ++i)
             {
-                scenes[i].WriteTo(dlf.scenes[i]);
+                scenes[i].WriteTo(ref dlf.scenes[i]);
             }
 
             IOHelper.EnsureArraySize(ref dlf.inters, inters.Count);
             dlf.header.numInters = inters.Count;
             for (int i = 0; i < inters.Count; ++i)
             {
-                inters[i].WriteTo(dlf.inters[i]);
+                inters[i].WriteTo(ref dlf.inters[i]);
             }
 
             IOHelper.EnsureArraySize(ref dlf.fogs, fogs.Count);
             dlf.header.numFogs = fogs.Count;
             for (int i = 0; i < fogs.Count; ++i)
             {
-                fogs[i].WriteTo(dlf.fogs[i]);
+                fogs[i].WriteTo(ref dlf.fogs[i]);
             }
 
             IOHelper.EnsureArraySize(ref dlf.paths, paths.Count);
             dlf.header.numPaths = paths.Count;
             for (int i = 0; i < paths.Count; ++i)
             {
-                paths[i].WriteTo(dlf.paths[i]);
+                paths[i].WriteTo(ref dlf.paths[i]);
             }
 
-            
+
             if (header.lighting)
             {
-                lightingHeader.WriteTo(dlf.lightingHeader);
+                lightingHeader.WriteTo(ref dlf.lightingHeader);
                 IOHelper.EnsureArraySize(ref dlf.lightColors, lightColors.Count);
                 dlf.lightingHeader.numLights = lightColors.Count;
                 for (int i = 0; i < lightColors.Count; ++i)
@@ -122,7 +123,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             dlf.header.numLights = lights.Count;
             for (int i = 0; i < lights.Count; ++i)
             {
-                lights[i].WriteTo(dlf.lights[i]);
+                lights[i].WriteTo(ref dlf.lights[i]);
             }
 
             dlf.nodesData = nodesData;

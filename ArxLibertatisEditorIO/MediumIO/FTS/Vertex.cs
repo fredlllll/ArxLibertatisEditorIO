@@ -21,7 +21,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             normal = poly.normals[index].ToVector3();
         }
 
-        internal void WriteTo(FTS_IO_EERIEPOLY poly, int index)
+        internal void WriteTo(ref FTS_IO_EERIEPOLY poly, int index)
         {
             poly.vertices[index].posX = position.X;
             poly.vertices[index].posY = position.Y;

@@ -105,7 +105,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
 
                 for (int i = 0; i < polygons.Count; ++i)
                 {
-                    polygons[i].WriteTo(fts, cell.polygons[i]);
+                    polygons[i].WriteTo(fts, ref cell.polygons[i]);
                 }
                 for (int i = 0; i < anchors.Count; ++i)
                 {
@@ -175,7 +175,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
 
         public void WriteTo(FTS_IO fts)
         {
-            header.WriteTo(fts.header);
+            header.WriteTo(ref fts.header);
 
             IOHelper.EnsureArraySize(ref fts.uniqueHeaders, subHeaders.Count);
             for (int i = 0; i < subHeaders.Count; ++i)
@@ -183,7 +183,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
                 subHeaders[i].WriteTo(ref fts.uniqueHeaders[i]);
             }
 
-            sceneHeader.WriteTo(fts.sceneHeader);
+            sceneHeader.WriteTo(ref fts.sceneHeader);
 
             pathToTc.Clear();
 
@@ -238,7 +238,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             for (int i = 0; i < portals.Count; ++i)
             {
                 var port = portals[i];
-                port.WriteTo(fts.portals[i]);
+                port.WriteTo(ref fts.portals[i]);
                 if (!rooms.TryGetValue(port.room_1, out LevelRoom room))
                 {
                     room = new LevelRoom();

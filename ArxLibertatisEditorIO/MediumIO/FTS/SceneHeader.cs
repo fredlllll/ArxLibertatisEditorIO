@@ -25,7 +25,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             Mscenepos = header.Mscenepos.ToVector3();
         }
 
-        internal void WriteTo(FTS_IO_SCENE_HEADER header)
+        internal void WriteTo(ref FTS_IO_SCENE_HEADER header)
         {
             string vers = version.Major + "." + version.Minor;
             header.version = float.Parse(vers, System.Globalization.CultureInfo.InvariantCulture);

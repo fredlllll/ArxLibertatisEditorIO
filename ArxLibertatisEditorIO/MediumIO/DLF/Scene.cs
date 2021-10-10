@@ -12,7 +12,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             name = IOHelper.GetString(scene.name);
         }
 
-        internal void WriteTo(DLF_IO_SCENE scene)
+        internal void WriteTo(ref DLF_IO_SCENE scene)
         {
             scene.name = IOHelper.GetBytes(name, 512);
 

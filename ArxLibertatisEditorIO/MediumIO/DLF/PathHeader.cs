@@ -33,7 +33,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             ambiance = IOHelper.GetString(header.ambiance);
         }
 
-        internal void WriteTo(DLF_IO_PATH_HEADER header)
+        internal void WriteTo(ref DLF_IO_PATH_HEADER header)
         {
             header.name = IOHelper.GetBytes(name, 64);
             header.idx = idx;

@@ -35,7 +35,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             frequency = fog.frequency;
         }
 
-        internal void WriteTo(DLF_IO_FOG fog)
+        internal void WriteTo(ref DLF_IO_FOG fog)
         {
             fog.pos = new RawIO.Shared.SavedVec3(position);
             fog.rgb = new RawIO.Shared.SavedColor(color);

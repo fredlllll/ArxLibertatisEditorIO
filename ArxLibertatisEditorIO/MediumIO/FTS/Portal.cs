@@ -20,9 +20,9 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             useportal = portal.useportal != 0;
         }
 
-        internal void WriteTo(EERIE_IO_PORTALS portal)
+        internal void WriteTo(ref EERIE_IO_PORTALS portal)
         {
-            poly.WriteTo(portal.poly);
+            poly.WriteTo(ref portal.poly);
             portal.room_1 = room_1;
             portal.room_2 = room_2;
             portal.useportal = (short)(useportal ? 1 : 0);

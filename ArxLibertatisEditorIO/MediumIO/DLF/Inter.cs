@@ -21,7 +21,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             flags = inter.flags;
         }
 
-        internal void WriteTo(DLF_IO_INTER inter)
+        internal void WriteTo(ref DLF_IO_INTER inter)
         {
             inter.name = IOHelper.GetBytes(name, 512);
             inter.pos = new RawIO.Shared.SavedVec3(position);

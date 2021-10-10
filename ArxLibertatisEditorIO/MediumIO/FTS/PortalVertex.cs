@@ -29,7 +29,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             normal = poly.nrml[index].ToVector3();
         }
 
-        internal void WriteTo(EERIE_IO_EERIEPOLY poly, int index)
+        internal void WriteTo(ref EERIE_IO_EERIEPOLY poly, int index)
         {
             poly.v[index].pos = new RawIO.Shared.SavedVec3(pos);
             poly.v[index].rhw = rhw;

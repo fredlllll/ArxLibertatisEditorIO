@@ -19,7 +19,7 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
             time = DateTimeOffset.FromUnixTimeSeconds(header.time);
         }
 
-        internal void WriteTo(LLF_IO_HEADER header)
+        internal void WriteTo(ref LLF_IO_HEADER header)
         {
             string vers = version.Major + "." + version.Minor;
             header.version = float.Parse(vers, System.Globalization.CultureInfo.InvariantCulture);

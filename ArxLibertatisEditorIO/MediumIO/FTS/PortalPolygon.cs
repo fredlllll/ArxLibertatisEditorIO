@@ -46,7 +46,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             }
         }
 
-        internal void WriteTo(EERIE_IO_EERIEPOLY poly)
+        internal void WriteTo(ref EERIE_IO_EERIEPOLY poly)
         {
             poly.type = type;
             poly.min = new RawIO.Shared.SavedVec3(min);

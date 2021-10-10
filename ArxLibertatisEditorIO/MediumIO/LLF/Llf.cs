@@ -34,10 +34,10 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
 
         public void WriteTo(LLF_IO llf)
         {
-            header.WriteTo(llf.header);
+            header.WriteTo(ref llf.header);
 
 
-            lightingHeader.WriteTo(llf.lightingHeader);
+            lightingHeader.WriteTo(ref llf.lightingHeader);
             IOHelper.EnsureArraySize(ref llf.lightColors, lightColors.Count);
             llf.lightingHeader.numLights = lightColors.Count;
             for (int i = 0; i < lightColors.Count; ++i)
@@ -50,7 +50,7 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
             llf.header.numLights = lights.Count;
             for (int i = 0; i < lights.Count; ++i)
             {
-                lights[i].WriteTo(llf.lights[i]);
+                lights[i].WriteTo(ref llf.lights[i]);
             }
         }
     }

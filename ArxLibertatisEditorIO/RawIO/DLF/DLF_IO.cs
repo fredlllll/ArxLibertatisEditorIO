@@ -21,7 +21,6 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         {
             using (StructReader reader = new StructReader(unpackedStream, System.Text.Encoding.ASCII, true))
             {
-
                 header = reader.ReadStruct<DLF_IO_HEADER>();
 
                 scenes = new DLF_IO_SCENE[header.numScenes];

@@ -16,7 +16,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             time = path.time;
         }
 
-        internal void WriteTo(DLF_IO_PATHWAYS path)
+        internal void WriteTo(ref DLF_IO_PATHWAYS path)
         {
             path.rpos = new RawIO.Shared.SavedVec3(rpos);
             path.flag = flag;

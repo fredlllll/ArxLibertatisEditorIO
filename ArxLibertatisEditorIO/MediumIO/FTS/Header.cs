@@ -19,7 +19,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             version = new Version(int.Parse(parts[0]), int.Parse(parts[1]));
         }
 
-        internal void WriteTo(FTS_IO_UNIQUE_HEADER header)
+        internal void WriteTo(ref FTS_IO_UNIQUE_HEADER header)
         {
             string vers = version.Major + "." + version.Minor;
             header.version = float.Parse(vers, System.Globalization.CultureInfo.InvariantCulture);

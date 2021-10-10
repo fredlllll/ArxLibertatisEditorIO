@@ -21,15 +21,15 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             }
         }
 
-        internal void WriteTo(DLF_IO_PATH path)
+        internal void WriteTo(ref DLF_IO_PATH path)
         {
-            pathHeader.WriteTo(path.header);
+            pathHeader.WriteTo(ref path.header);
 
             IOHelper.EnsureArraySize(ref path.paths, pathways.Count);
             path.header.numPathways = pathways.Count;
             for (int i = 0; i < pathways.Count; ++i)
             {
-                pathways[i].WriteTo(path.paths[i]);
+                pathways[i].WriteTo(ref path.paths[i]);
             }
         }
     }

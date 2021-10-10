@@ -13,7 +13,7 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
             modeLight = header.modeLight;
         }
 
-        internal void WriteTo(DANAE_IO_LIGHTINGHEADER header)
+        internal void WriteTo(ref DANAE_IO_LIGHTINGHEADER header)
         {
             header.viewMode = viewMode;
             header.modeLight = modeLight;

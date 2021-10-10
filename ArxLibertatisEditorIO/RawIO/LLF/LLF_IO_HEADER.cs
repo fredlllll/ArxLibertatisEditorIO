@@ -3,7 +3,7 @@
 namespace ArxLibertatisEditorIO.RawIO.LLF
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public class LLF_IO_HEADER
+    public struct LLF_IO_HEADER
     {
         public float version;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]

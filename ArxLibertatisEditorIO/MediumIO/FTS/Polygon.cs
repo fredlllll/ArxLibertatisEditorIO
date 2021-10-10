@@ -54,11 +54,11 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             }
         }
 
-        public void WriteTo(Fts fts,FTS_IO_EERIEPOLY polygon)
+        public void WriteTo(Fts fts, ref FTS_IO_EERIEPOLY polygon)
         {
             for (int i = 0; i < 4; ++i)
             {
-                vertices[i].WriteTo(polygon, i);
+                vertices[i].WriteTo(ref polygon, i);
             }
             polygon.norm = new RawIO.Shared.SavedVec3(norm);
             polygon.norm2 = new RawIO.Shared.SavedVec3(norm2);
@@ -67,7 +67,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             polygon.type = polyType;
             polygon.transval = transVal;
 
-            if(!fts.pathToTc.TryGetValue(texturePath,out polygon.tex))
+            if (!fts.pathToTc.TryGetValue(texturePath, out polygon.tex))
             {
                 polygon.tex = -1;
             }

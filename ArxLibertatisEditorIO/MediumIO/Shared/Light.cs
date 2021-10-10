@@ -37,7 +37,7 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
             extras = light.extras;
         }
 
-        internal void WriteTo(DANAE_IO_LIGHT light)
+        internal void WriteTo(ref DANAE_IO_LIGHT light)
         {
 
             light.pos = new SavedVec3(pos);
