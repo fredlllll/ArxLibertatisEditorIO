@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace ArxLibertatisEditorIO.RawIO.DLF
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct DLF_IO_PATH_HEADER
+    public unsafe struct DLF_IO_PATH_HEADER
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 64)]
         public byte[] name;
@@ -17,14 +17,11 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         public float farClip;
         public float reverb;
         public float ambientMaxVolume;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 26)]
-        public float[] fpad;
+        public fixed float fpad[26];
         public int height;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 31)]
-        public int[] ipad;
+        public fixed int ipad[31];
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
         public byte[] ambiance;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
-        public byte[] cpad;
+        public fixed byte cpad[128];
     }
 }

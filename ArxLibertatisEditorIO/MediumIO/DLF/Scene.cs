@@ -15,10 +15,6 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
         internal void WriteTo(ref DLF_IO_SCENE scene)
         {
             scene.name = IOHelper.GetBytes(name, 512);
-
-            //fixed fields
-            scene.pad = new int[16];
-            scene.fpad = new float[16];
         }
     }
 }

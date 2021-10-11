@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace ArxLibertatisEditorIO.RawIO.DLF
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct DLF_IO_FOG
+    public unsafe struct DLF_IO_FOG
     {
         public SavedVec3 pos;
         public SavedColor rgb;
@@ -18,11 +18,8 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         public int tolive;
         public int blend;
         public float frequency;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
-        public float[] fpadd;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
-        public int[] lpadd;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-        public byte[] cpadd;
+        public fixed float fpadd[32];
+        public fixed int lpadd[32];
+        public fixed byte cpadd[256];
     }
 }

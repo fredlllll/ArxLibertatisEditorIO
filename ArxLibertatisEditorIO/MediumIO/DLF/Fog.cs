@@ -49,10 +49,6 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             fog.tolive = tolive;
             fog.blend = blend;
             fog.frequency = frequency;
-
-            fog.fpadd = new float[32];
-            fog.lpadd = new int[32];
-            fog.cpadd = new byte[256];
         }
     }
 }

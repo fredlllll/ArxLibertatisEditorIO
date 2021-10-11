@@ -53,9 +53,6 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
             light.ex_speed = ex_speed;
             light.ex_flaresize = ex_flaresize;
             light.extras = extras;
-
-            IOHelper.EnsureArraySize(ref light.fpad, 24);
-            IOHelper.EnsureArraySize(ref light.ipad, 31);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace ArxLibertatisEditorIO.RawIO.DLF
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct DLF_IO_HEADER
+    public unsafe struct DLF_IO_HEADER
     {
         public float version;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
@@ -20,8 +20,7 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         public int numNodelinks;
         public int numZones;
         public int lighting;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-        public int[] ipad1;
+        public fixed int ipad1[256];
         public int numLights;
         public int numFogs;
 
@@ -29,14 +28,10 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         public int numIgnoredPolys;
         public int numChildPolys;
         public int numPaths;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 250)]
-        public int[] ipad2;
+        public fixed int ipad2[250];
         public SavedVec3 offset;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 253)]
-        public float[] fpad1;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4096)]
-        public byte[] cpad1;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-        public int[] ipad3;
+        public fixed float fpad1[253];
+        public fixed byte cpad1[4096];
+        public fixed int ipad3[256];
     }
 }

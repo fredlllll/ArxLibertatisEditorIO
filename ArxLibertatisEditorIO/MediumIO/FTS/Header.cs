@@ -24,8 +24,6 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             string vers = version.Major + "." + version.Minor;
             header.version = float.Parse(vers, System.Globalization.CultureInfo.InvariantCulture);
             header.path = IOHelper.GetBytes(path, 256);
-
-            IOHelper.EnsureArraySize(ref header.pad,3);
         }
     }
 }

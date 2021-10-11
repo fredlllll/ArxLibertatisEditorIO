@@ -46,10 +46,6 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             header.ambientMaxVolume = ambientMaxVolume;
             header.height = height;
             header.ambiance = IOHelper.GetBytes(ambiance, 128);
-
-            header.fpad = new float[26];
-            header.ipad = new int[31];
-            header.cpad = new byte[128];
         }
     }
 }

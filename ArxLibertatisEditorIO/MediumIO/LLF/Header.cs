@@ -28,10 +28,6 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
 
             //fixed fields
             header.identifier = IOHelper.GetBytes("DANAE_LLH_FILE", 16);
-            IOHelper.EnsureArraySize(ref header.ipad1, 256);
-            IOHelper.EnsureArraySize(ref header.fpad, 256);
-            IOHelper.EnsureArraySize(ref header.cpad, 4096);
-            IOHelper.EnsureArraySize(ref header.ipad2, 256);
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace ArxLibertatisEditorIO.RawIO.Shared
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct DANAE_IO_LIGHT
+    public unsafe struct DANAE_IO_LIGHT
     {
         public SavedVec3 pos;
         public SavedColor rgb;
@@ -17,10 +17,8 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
         public float ex_size;
         public float ex_speed;
         public float ex_flaresize;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 24)]
-        public float[] fpad;
+        public fixed float fpad[24];
         public int extras;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 31)]
-        public int[] ipad;
+        public fixed int ipad[31];
     }
 }

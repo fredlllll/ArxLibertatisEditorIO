@@ -7,7 +7,6 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
     {
         public int nb_portals;
         public int nb_polys;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
         public fixed int padd[6];
     }
 }

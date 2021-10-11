@@ -3,13 +3,11 @@
 namespace ArxLibertatisEditorIO.RawIO.DLF
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct DLF_IO_SCENE
+    public unsafe struct DLF_IO_SCENE
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 512)]
         public byte[] name;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-        public int[] pad;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-        public float[] fpad;
+        public fixed int pad[16];
+        public fixed float fpad[16];
     }
 }

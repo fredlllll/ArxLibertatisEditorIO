@@ -3,7 +3,7 @@
 namespace ArxLibertatisEditorIO.RawIO.LLF
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct LLF_IO_HEADER
+    public unsafe struct LLF_IO_HEADER
     {
         public float version;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
@@ -15,13 +15,9 @@ namespace ArxLibertatisEditorIO.RawIO.LLF
         public int numShadowPolys;
         public int numIgnoredPolys;
         public int numBackgroundPolys;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-        public int[] ipad1;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-        public float[] fpad;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4096)]
-        public byte[] cpad;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-        public int[] ipad2;
+        public fixed int ipad1[256];
+        public fixed float fpad[256];
+        public fixed byte cpad[4096];
+        public fixed int ipad2[256];
     }
 }

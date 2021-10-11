@@ -21,10 +21,6 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             path.rpos = new RawIO.Shared.SavedVec3(rpos);
             path.flag = flag;
             path.time = time;
-
-            path.fpadd = new float[2];
-            path.lpadd = new int[2];
-            path.cpadd = new byte[32];
         }
     }
 }

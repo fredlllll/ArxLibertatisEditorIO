@@ -7,7 +7,7 @@ namespace ArxLibertatisEditorIO.MediumIO
 {
     public class MediumArxLevel
     {
-        private readonly RawArxLevel rawLevel;
+        public readonly RawArxLevel rawLevel;
 
         private readonly Dlf dlf;
         public Dlf DLF

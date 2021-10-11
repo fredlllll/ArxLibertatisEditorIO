@@ -28,10 +28,6 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             inter.angle = new RawIO.Shared.SavedAnglef(euler);
             inter.ident = identifier;
             inter.flags = flags;
-
-            //fixed fields
-            inter.ipad = new int[14];
-            inter.fpad = new float[16];
         }
     }
 }
