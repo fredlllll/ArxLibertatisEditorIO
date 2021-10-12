@@ -29,8 +29,8 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
 
         public void WriteTo(StructWriter writer)
         {
-            data.nb_polys = polygons == null ? 0 : polygons.Length;
-            data.nb_portals = portals == null ? 0 : portals.Length;
+            data.nb_polys = CalcNumPolygons();
+            data.nb_portals = CalcNumPortals();
             writer.WriteStruct(data);
 
             for (int i = 0; i < data.nb_portals; i++)
@@ -44,13 +44,23 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             }
         }
 
+        public int CalcNumPortals()
+        {
+            return portals == null ? 0 : portals.Length;
+        }
+
+        public int CalcNumPolygons()
+        {
+            return polygons == null ? 0 : polygons.Length;
+        }
+
         public int CalculateWrittenSize()
         {
             int size = 0;
 
             size += Marshal.SizeOf<EERIE_IO_ROOM_DATA>();
-            size += sizeof(int) * portals.Length;
-            size += Marshal.SizeOf<FTS_IO_EP_DATA>() * polygons.Length;
+            size += sizeof(int) * CalcNumPortals();
+            size += Marshal.SizeOf<FTS_IO_EP_DATA>() * CalcNumPolygons();
 
             return size;
         }
@@ -61,6 +71,11 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             float x = 0;
             float y = 0;
             float z = 0;
+
+            if (polygons == null)
+            {
+                return Vector3.Zero;
+            }
 
             for (int i = 0; i < polygons.Length; ++i)
             {

@@ -17,7 +17,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
 
         internal void ReadFrom(DLF_IO_HEADER header)
         {
-            string vers = header.version.ToString("0.0000");
+            string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
             version = new Version(int.Parse(parts[0]), int.Parse(parts[1]));
             lastUser = IOHelper.GetString(header.lastUser);
@@ -41,6 +41,17 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
 
             //fixed fields
             header.identifier = IOHelper.GetBytes("DANAE_FILE", 16);
+        }
+
+        public override string ToString()
+        {
+            return $"Version: {version}\n" +
+                $"Last User: {lastUser}\n" +
+                $"Time: {time}\n" +
+                $"Position Edit: {positionEdit}\n" +
+                $"Eulers Edit: {eulersEdit}\n" +
+                $"Lighting: {lighting}\n" +
+                $"Offset: {offset}";
         }
     }
 }

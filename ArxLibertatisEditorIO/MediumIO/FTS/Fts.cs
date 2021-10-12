@@ -1,4 +1,5 @@
-﻿using ArxLibertatisEditorIO.RawIO.FTS;
+﻿using ArxLibertatisEditorIO.MediumIO.LLF;
+using ArxLibertatisEditorIO.RawIO.FTS;
 using ArxLibertatisEditorIO.Util;
 using System;
 using System.Collections.Generic;
@@ -198,6 +199,14 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
                 }
             }
 
+            IOHelper.EnsureArraySize(ref fts.textureContainers, pathToTc.Count);
+            //save texture containers
+            foreach (var kv in pathToTc)
+            {
+                fts.textureContainers[kv.Value].fic = IOHelper.GetBytes(kv.Key, 256);
+                fts.textureContainers[kv.Value].tc = kv.Value;
+            }
+
             Dictionary<int, LevelRoom> rooms = new Dictionary<int, LevelRoom>();
 
             //add polygons to list in cell
@@ -231,7 +240,8 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             IOHelper.EnsureArraySize(ref fts.cells, cells.Length);
             for (int i = 0; i < cells.Length; ++i)
             {
-                cells[i].WriteTo(this, ref fts.cells[i]);
+                var c = cells[i];
+                c.WriteTo(this, ref fts.cells[i]);
             }
 
             IOHelper.EnsureArraySize(ref fts.portals, portals.Count);
@@ -285,6 +295,15 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
                     fts.roomDistances[idx].endpos = new RawIO.Shared.SavedVec3(center_j);
                 }
             }
+        }
+        public override string ToString()
+        {
+            return $"Header:\n{Output.Indent(header.ToString())}\n" +
+                $"Sub Headers({subHeaders.Count}):\n{Output.ToString(subHeaders)}\n" +
+                $"Scene Header:\n{Output.Indent(sceneHeader.ToString())}\n" +
+                $"Polygons({polygons.Count}):\n{Output.ToString(polygons)}\n" +
+                $"Anchors({anchors.Count}):\n{Output.ToString(anchors)}\n" +
+                $"Portals({portals.Count}):\n{Output.ToString(portals)}";
         }
     }
 }

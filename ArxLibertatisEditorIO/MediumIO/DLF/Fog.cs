@@ -50,5 +50,21 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             fog.blend = blend;
             fog.frequency = frequency;
         }
+
+        public override string ToString()
+        {
+            return $"Position: {position}\n" +
+                $"Color: {color}\n" +
+                $"Size: {size}\n" +
+                $"Special: {special}\n" +
+                $"Scale: {scale}\n" +
+                $"Move: {move}\n" +
+                $"Euler: {euler}\n" +
+                $"Speed: {speed}\n" +
+                $"Rotate Speed: {rotateSpeed}\n" +
+                $"To Live: {tolive}\n" +
+                $"Blend: {blend}\n" +
+                $"Frequency: {frequency}";
+        }
     }
 }

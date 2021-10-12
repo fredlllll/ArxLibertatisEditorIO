@@ -1,6 +1,7 @@
 ﻿using ArxLibertatisEditorIO.RawIO.DLF;
 using ArxLibertatisEditorIO.RawIO.FTS;
 using ArxLibertatisEditorIO.RawIO.LLF;
+using System;
 using System.IO;
 
 namespace ArxLibertatisEditorIO.RawIO
@@ -26,7 +27,7 @@ namespace ArxLibertatisEditorIO.RawIO
         public string LevelName
         {
             get;
-            private set;
+            set;
         }
 
         public RawArxLevel()
@@ -38,36 +39,46 @@ namespace ArxLibertatisEditorIO.RawIO
             LevelName = "unknown";
         }
 
-        public void LoadLevel(string name)
+        public void LoadLevel(string dlfPath, string llfPath, string ftsPath)
         {
-            LevelName = name;
-
-            using (FileStream fs = new FileStream(ArxPaths.GetDlfPath(name), FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(dlfPath, FileMode.Open, FileAccess.Read))
             {
                 dlf.LoadFrom(DLF_IO.EnsureUnpacked(fs));
             }
 
-            using (FileStream fs = new FileStream(ArxPaths.GetLlfPath(name), FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(llfPath, FileMode.Open, FileAccess.Read))
             {
                 llf.LoadFrom(LLF_IO.EnsureUnpacked(fs));
             }
 
-            using (FileStream fs = new FileStream(ArxPaths.GetFtsPath(name), FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(ftsPath, FileMode.Open, FileAccess.Read))
             {
                 fts.LoadFrom(FTS_IO.EnsureUnpacked(fs));
             }
         }
 
-        public void SaveLevel(string name)
+        public void LoadLevel(string name)
         {
             LevelName = name;
+
+            string dlfPath = ArxPaths.GetDlfPath(name);
+            string llfPath = ArxPaths.GetLlfPath(name);
+            string ftsPath = ArxPaths.GetFtsPath(name);
+
+            LoadLevel(dlfPath, llfPath, ftsPath);
+        }
+
+        public void SaveLevel(string dlfPath, string llfPath, string ftsPath)
+        {
+            Console.WriteLine(ftsPath);
 
             using (MemoryStream ms = new MemoryStream())
             {
                 dlf.WriteTo(ms);
                 ms.Position = 0;
+                Directory.CreateDirectory(Path.GetDirectoryName(dlfPath));
                 using (var packedStream = DLF_IO.EnsurePacked(ms))
-                using (FileStream fs = new FileStream(ArxPaths.GetDlfPath(name), FileMode.Create, FileAccess.Write))
+                using (FileStream fs = new FileStream(dlfPath, FileMode.Create, FileAccess.Write))
                 {
                     packedStream.CopyTo(fs);
                 }
@@ -77,8 +88,9 @@ namespace ArxLibertatisEditorIO.RawIO
             {
                 llf.WriteTo(ms);
                 ms.Position = 0;
+                Directory.CreateDirectory(Path.GetDirectoryName(llfPath));
                 using (var packedStream = LLF_IO.EnsurePacked(ms))
-                using (FileStream fs = new FileStream(ArxPaths.GetLlfPath(name), FileMode.Create, FileAccess.Write))
+                using (FileStream fs = new FileStream(llfPath, FileMode.Create, FileAccess.Write))
                 {
                     packedStream.CopyTo(fs);
                 }
@@ -86,29 +98,32 @@ namespace ArxLibertatisEditorIO.RawIO
 
             using (MemoryStream ms = new MemoryStream())
             {
-                fts.header.uncompressedsize = fts.CalculateWrittenSize(true);
-
-                fts.sceneHeader.nb_textures = fts.textureContainers.Length;
-                fts.sceneHeader.nb_polys = fts.CalculatePolyCount();
-                fts.sceneHeader.nb_anchors = fts.anchors.Length;
-                fts.sceneHeader.nb_portals = fts.portals.Length;
-                fts.sceneHeader.nb_rooms = fts.rooms.Length - 1;
-
-                for (int i = 0; i < fts.rooms.Length; ++i)
-                {
-                    fts.rooms[i].data.nb_polys = fts.rooms[i].polygons.Length;
-                    fts.rooms[i].data.nb_portals = fts.rooms[i].portals.Length;
-                }
-
                 fts.WriteTo(ms);
 
                 ms.Position = 0;
+                Directory.CreateDirectory(Path.GetDirectoryName(ftsPath));
                 using (var packedStream = FTS_IO.EnsurePacked(ms))
-                using (FileStream fs = new FileStream(ArxPaths.GetFtsPath(name), FileMode.Create, FileAccess.Write))
+                using (FileStream fs = new FileStream(ftsPath, FileMode.Create, FileAccess.Write))
                 {
                     packedStream.CopyTo(fs);
                 }
             }
+        }
+
+        public void SaveLevel(string name)
+        {
+            LevelName = name;
+
+            string dlfPath = ArxPaths.GetDlfPath(name);
+            string llfPath = ArxPaths.GetLlfPath(name);
+            string ftsPath = ArxPaths.GetFtsPath(name);
+
+            SaveLevel(dlfPath, llfPath, ftsPath);
+        }
+
+        public void SaveLevel()
+        {
+            SaveLevel(LevelName);
         }
     }
 }

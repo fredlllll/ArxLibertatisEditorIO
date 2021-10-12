@@ -16,5 +16,10 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
         {
             scene.name = IOHelper.GetBytes(name, 512);
         }
+
+        public override string ToString()
+        {
+            return "Name: " + name;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using ArxLibertatisEditorIO.RawIO.LLF;
 using ArxLibertatisEditorIO.Util;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ArxLibertatisEditorIO.MediumIO.LLF
 {
@@ -36,7 +37,6 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
         {
             header.WriteTo(ref llf.header);
 
-
             lightingHeader.WriteTo(ref llf.lightingHeader);
             IOHelper.EnsureArraySize(ref llf.lightColors, lightColors.Count);
             llf.lightingHeader.numLights = lightColors.Count;
@@ -45,13 +45,19 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
                 llf.lightColors[i] = IOHelper.ColorToBGRA(lightColors[i]);
             }
 
-
             IOHelper.EnsureArraySize(ref llf.lights, lights.Count);
             llf.header.numLights = lights.Count;
             for (int i = 0; i < lights.Count; ++i)
             {
                 lights[i].WriteTo(ref llf.lights[i]);
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Header:\n{Output.Indent(header.ToString())}\n" +
+                $"LightingHeader:\n{Output.Indent(lightingHeader.ToString())}\n" +
+                $"Lights({lights.Count}):\n{Output.ToString(lights)}";
         }
     }
 }

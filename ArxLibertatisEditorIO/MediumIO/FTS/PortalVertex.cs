@@ -39,5 +39,16 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             poly.v[index].tv = tv;
             poly.nrml[index] = new RawIO.Shared.SavedVec3(normal);
         }
+
+        public override string ToString()
+        {
+            return $"Position: {pos}\n" +
+                $"rhw : {rhw}\n" +
+                $"Color: {color}\n" +
+                $"Specular: {specular}\n" +
+                $"U: {tu}\n" +
+                $"V: {tv}\n" +
+                $"Normal: {normal}";
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ArxLibertatisEditorIO.RawIO.FTS;
+﻿using ArxLibertatisEditorIO.MediumIO.LLF;
+using ArxLibertatisEditorIO.RawIO.FTS;
 using ArxLibertatisEditorIO.Util;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,8 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
 
         public void WriteTo(Fts fts, ref FTS_IO_EERIEPOLY polygon)
         {
+            IOHelper.EnsureArraySize(ref polygon.vertices, 4);
+            IOHelper.EnsureArraySize(ref polygon.normals, 4);
             for (int i = 0; i < 4; ++i)
             {
                 vertices[i].WriteTo(ref polygon, i);
@@ -73,6 +76,18 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             }
 
             polygon.paddy = 0;
+        }
+
+        public override string ToString()
+        {
+            return $"Vertices:\n{Output.ToString(vertices)}\n" +
+                $"Normal : {norm}\n" +
+                $"Normal 2: {norm2}\n" +
+                $"Area: {area}\n" +
+                $"Room: {room}\n" +
+                $"Poly Type: {polyType}\n" +
+                $"Texture Path: {texturePath}\n" +
+                $"Transparency Value: {transVal}";
         }
     }
 }

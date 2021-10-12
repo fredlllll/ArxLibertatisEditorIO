@@ -32,5 +32,11 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
                 pathways[i].WriteTo(ref path.paths[i]);
             }
         }
+
+        public override string ToString()
+        {
+            return $"Path Header:\n{Output.Indent(pathHeader.ToString())}\n" +
+                $"Pathways({pathways.Count}):\n{Output.ToString(pathways)}";
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
 
         internal void ReadFrom(LLF_IO_HEADER header)
         {
-            string vers = header.version.ToString("0.0000");
+            string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
             version = new Version(int.Parse(parts[0]), int.Parse(parts[1]));
             lastUser = IOHelper.GetString(header.lastuser);
@@ -28,6 +28,13 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
 
             //fixed fields
             header.identifier = IOHelper.GetBytes("DANAE_LLH_FILE", 16);
+        }
+
+        public override string ToString()
+        {
+            return $"Version: {version}\n" +
+                $"Last User: {lastUser}\n" +
+                $"Time: {time}";
         }
     }
 }

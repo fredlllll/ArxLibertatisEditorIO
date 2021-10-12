@@ -23,5 +23,10 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             header.check = checksum;
             IOHelper.EnsureArraySize(ref header.check, 512, true);
         }
+
+        public override string ToString()
+        {
+            return $"Path: {path}";
+        }
     }
 }

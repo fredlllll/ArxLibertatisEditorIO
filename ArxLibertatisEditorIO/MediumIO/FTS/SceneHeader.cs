@@ -16,7 +16,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
 
         internal void ReadFrom(FTS_IO_SCENE_HEADER header)
         {
-            string vers = header.version.ToString("0.0000");
+            string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
             version = new Version(int.Parse(parts[0]), int.Parse(parts[1]));
             sizex = header.sizex;
@@ -33,6 +33,15 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             header.sizez = sizez;
             header.playerpos = new RawIO.Shared.SavedVec3(playerpos);
             header.Mscenepos = new RawIO.Shared.SavedVec3(Mscenepos);
+        }
+
+        public override string ToString()
+        {
+            return $"Version: {version}\n" +
+                $"SizeX: {sizex}\n" +
+                $"SizeZ: {sizez}\n" +
+                $"Player Pos: {playerpos}\n" +
+                $"Scene Pos: {Mscenepos}";
         }
     }
 }

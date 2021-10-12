@@ -29,5 +29,14 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             inter.ident = identifier;
             inter.flags = flags;
         }
+
+        public override string ToString()
+        {
+            return $"Name:{name}\n" +
+                $"Position:{position}\n" +
+                $"Eulers:{euler}\n" +
+                $"Identifier:{identifier}\n" +
+                $"Flags:{flags}";
+        }
     }
 }

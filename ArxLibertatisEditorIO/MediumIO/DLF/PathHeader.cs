@@ -47,5 +47,33 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             header.height = height;
             header.ambiance = IOHelper.GetBytes(ambiance, 128);
         }
+
+        public override string ToString()
+        {
+            /*
+            public string name;
+        public short idx;
+        public short flags; //TODO: enum
+        public Vector3 initPos;
+        public Vector3 pos;
+        public Color color;
+        public float farClip;
+        public float reverb;
+        public float ambientMaxVolume;
+        public int height;
+        public string ambiance;
+            */
+            return $"Name:{name}\n" +
+                $"Index:{idx}\n" +
+                $"Flags:{flags}\n" +
+                $"Init Pos:{initPos}\n" +
+                $"Pos:{pos}\n" +
+                $"Color:{color}\n" +
+                $"Far Clip:{farClip}\n" +
+                $"Reverb:{reverb}\n" +
+                $"Ambient Max Volume:{ambientMaxVolume}\n" +
+                $"Height:{height}\n" +
+                $"Ambiance:{ambiance}";
+        }
     }
 }

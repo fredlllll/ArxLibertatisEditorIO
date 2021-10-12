@@ -128,5 +128,17 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
 
             dlf.nodesData = nodesData;
         }
+
+        public override string ToString()
+        {
+            return $"Header:\n{Output.Indent(header.ToString())}\n" +
+                $"Scenes({scenes.Count}):\n{Output.ToString(scenes)}\n" +
+                $"Inters({inters.Count}):\n{Output.ToString(inters)}\n" +
+                $"Fogs({fogs.Count}):\n{Output.ToString(fogs)}\n" +
+                $"Paths({paths.Count}):\n{Output.ToString(paths)}\n" +
+                (header.lighting ? $"LightingHeader:\n{lightingHeader}\n" +
+                $"Light Colors({lightColors.Count}):\n{Output.ToString(lightColors)}\n" : "") +
+                $"Lights({lights.Count}):\n{Output.ToString(lights)}";
+        }
     }
 }

@@ -38,5 +38,14 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
                 anchor.linkedAnchors[i] = linkedAnchors[i];
             }
         }
+
+        public override string ToString()
+        {
+            return $"Pos: {pos}\n" +
+                $"Radius: {radius}\n" +
+                $"Height: {height}\n" +
+                $"Flags: {flags}\n" +
+                $"Linked Anchors({linkedAnchors.Count}):\n{Output.ToString(linkedAnchors)}";
+        }
     }
 }

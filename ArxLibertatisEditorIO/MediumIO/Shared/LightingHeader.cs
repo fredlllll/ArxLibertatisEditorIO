@@ -19,5 +19,11 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
             header.modeLight = modeLight;
             header.ipad = 0;
         }
+
+        public override string ToString()
+        {
+            return $"View Mode: {viewMode}\n" +
+                $"Mode Light: {modeLight}";
+        }
     }
 }

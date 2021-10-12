@@ -12,6 +12,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public Vector3 position;
         public Vector2 uv;
         public Vector3 normal;
+        public Color color;
 
         internal void ReadFrom(FTS_IO_EERIEPOLY poly, int index)
         {
@@ -28,7 +29,16 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             poly.vertices[index].posZ = position.Z;
             poly.vertices[index].texU = uv.X;
             poly.vertices[index].texV = uv.Y;
+
             poly.normals[index] = new RawIO.Shared.SavedVec3(normal);
+        }
+
+        public override string ToString()
+        {
+            return $"Position: {position}\n" +
+                $"UV : {uv}\n" +
+                $"Normal: {normal}\n" +
+                $"Color: {color}";
         }
     }
 }

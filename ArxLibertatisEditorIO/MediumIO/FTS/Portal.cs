@@ -1,4 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.FTS;
+using ArxLibertatisEditorIO.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,6 +27,14 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             portal.room_1 = room_1;
             portal.room_2 = room_2;
             portal.useportal = (short)(useportal ? 1 : 0);
+        }
+
+        public override string ToString()
+        {
+            return $"Polygon:\n{Output.Indent(poly.ToString())}\n" +
+                $"Room 1: {room_1}\n" +
+                $"Room 2: {room_2}\n" +
+                $"useportal: {useportal}";
         }
     }
 }

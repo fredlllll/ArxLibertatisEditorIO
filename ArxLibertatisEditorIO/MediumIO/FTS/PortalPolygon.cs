@@ -62,5 +62,21 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             poly.room = room;
             poly.misc = misc;
         }
+
+        public override string ToString()
+        {
+            return $"Type: {type}\n" +
+                $"Min: {min}\n" +
+                $"Max: {max}\n" +
+                $"Norm: {norm}\n" +
+                $"Norm2: {norm2}\n" +
+                $"Vertices:\n{Output.ToString(vertices)}\n" +
+                $"tex: {tex}\n" +
+                $"Center: {center}\n" +
+                $"Transparency Value: {transval}\n" +
+                $"Area: {area}\n" +
+                $"Room: {room}\n" +
+                $"Misc: {misc}";
+        }
     }
 }

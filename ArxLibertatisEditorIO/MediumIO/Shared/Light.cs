@@ -54,5 +54,37 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
             light.ex_flaresize = ex_flaresize;
             light.extras = extras;
         }
+
+        public override string ToString()
+        {
+            /*
+            public Vector3 pos;
+        public Color color;
+        public float fallStart;
+        public float fallEnd;
+        public float intensity;
+        public float i; //no idea what this does
+        public Color ex_flicker;
+        public float ex_radius;
+        public float ex_frequency;
+        public float ex_size;
+        public float ex_speed;
+        public float ex_flaresize;
+        public int extras; //maybe bool or flags?
+            */
+            return $"Position: {pos}\n" +
+                $"Color: {color}\n" +
+                $"Fall Start: {fallStart}\n" +
+                $"Fall End: {fallEnd}\n" +
+                $"Intensity: {intensity}\n" +
+                $"i: {i}\n" +
+                $"ex_flicker: {ex_flicker}\n" +
+                $"ex_radius: {ex_radius}\n" +
+                $"ex_frequency: {ex_frequency}\n" +
+                $"ex_size: {ex_size}\n" +
+                $"ex_speed: {ex_speed}\n" +
+                $"ex_flaresize: {ex_flaresize}\n" +
+                $"extras: {extras}";
+        }
     }
 }
