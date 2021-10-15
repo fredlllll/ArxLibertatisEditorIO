@@ -70,8 +70,6 @@ namespace ArxLibertatisEditorIO.RawIO
 
         public void SaveLevel(string dlfPath, string llfPath, string ftsPath)
         {
-            Console.WriteLine(ftsPath);
-
             using (MemoryStream ms = new MemoryStream())
             {
                 dlf.WriteTo(ms);

@@ -17,26 +17,26 @@ namespace ArxLibertatisEditorIO.Util
 
         public static void LogInfo(string msg)
         {
-
+            Log(msg, LogLevel.Info);
         }
 
         public static void LogWarning(string msg)
         {
-
+            Log(msg, LogLevel.Warning);
         }
 
         public static void LogError(string msg)
         {
-
+            Log(msg, LogLevel.Error);
         }
         public static void LogDebug(string msg)
         {
-
+            Log(msg, LogLevel.Debug);
         }
 
         public static void Log(string msg, LogLevel level)
         {
-            if(level >= logLevel)
+            if (level >= logLevel)
             {
                 Console.WriteLine(msg);
             }

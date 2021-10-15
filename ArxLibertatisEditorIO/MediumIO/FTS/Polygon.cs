@@ -19,7 +19,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public float area;//TODO: could calc
         public short room;  //TODO: replace with room instance?
         public PolyType polyType;
-        public string texturePath;
+        public int textureContainerId;
         public float transVal;
 
         public int VertexCount
@@ -37,7 +37,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             get { return !IsQuad; }
         }
 
-        public void ReadFrom(Fts fts, FTS_IO_EERIEPOLY polygon)
+        public void ReadFrom(FTS_IO_EERIEPOLY polygon)
         {
             for (int i = 0; i < 4; ++i)
             {
@@ -48,14 +48,11 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             area = polygon.area;
             room = polygon.room;
             polyType = polygon.type;
+            textureContainerId = polygon.tex;
             transVal = polygon.transval;
-            if (!fts.tcToPath.TryGetValue(polygon.tex, out texturePath))
-            {
-                texturePath = "";
-            }
         }
 
-        public void WriteTo(Fts fts, ref FTS_IO_EERIEPOLY polygon)
+        public void WriteTo(ref FTS_IO_EERIEPOLY polygon)
         {
             IOHelper.EnsureArraySize(ref polygon.vertices, 4);
             IOHelper.EnsureArraySize(ref polygon.normals, 4);
@@ -68,14 +65,8 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             polygon.area = area;
             polygon.room = room;
             polygon.type = polyType;
+            polygon.tex = textureContainerId;
             polygon.transval = transVal;
-
-            if (!fts.pathToTc.TryGetValue(texturePath, out polygon.tex))
-            {
-                polygon.tex = -1;
-            }
-
-            polygon.paddy = 0;
         }
 
         public override string ToString()
@@ -86,7 +77,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
                 $"Area: {area}\n" +
                 $"Room: {room}\n" +
                 $"Poly Type: {polyType}\n" +
-                $"Texture Path: {texturePath}\n" +
+                $"Texture Container Id: {textureContainerId}\n" +
                 $"Transparency Value: {transVal}";
         }
     }

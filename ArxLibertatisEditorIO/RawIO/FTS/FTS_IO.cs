@@ -108,13 +108,15 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
 
         public void WriteTo(Stream s)
         {
-            header.uncompressedsize = CalculateWrittenSize(true);
+            header.count = uniqueHeaders.Length;
 
             sceneHeader.nb_textures = textureContainers.Length;
             sceneHeader.nb_polys = CalculatePolyCount();
             sceneHeader.nb_anchors = anchors.Length;
             sceneHeader.nb_portals = portals.Length;
             sceneHeader.nb_rooms = rooms.Length - 1;
+
+            header.uncompressedsize = CalculateWrittenSize(true);
 
             StructWriter writer = new StructWriter(s);
 

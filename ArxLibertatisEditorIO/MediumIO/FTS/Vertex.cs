@@ -12,7 +12,6 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public Vector3 position;
         public Vector2 uv;
         public Vector3 normal;
-        public Color color;
 
         internal void ReadFrom(FTS_IO_EERIEPOLY poly, int index)
         {
@@ -37,8 +36,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         {
             return $"Position: {position}\n" +
                 $"UV : {uv}\n" +
-                $"Normal: {normal}\n" +
-                $"Color: {color}";
+                $"Normal: {normal}";
         }
     }
 }

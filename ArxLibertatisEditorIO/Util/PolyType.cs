@@ -11,7 +11,7 @@ namespace ArxLibertatisEditorIO.Util
         TRANS = 1 << 2,
         WATER = 1 << 3,
         GLOW = 1 << 4,
-        IGNORE = 1 << 5,
+        IGNORE = 1 << 5, //dont calc lighting for this one
         QUAD = 1 << 6,
         TILED = 1 << 7,
         METAL = 1 << 8,

@@ -64,36 +64,5 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
 
             return size;
         }
-
-        public Vector3 CalculateCenter(FTS_IO fts)
-        {
-            int count = 0;
-            float x = 0;
-            float y = 0;
-            float z = 0;
-
-            if (polygons == null)
-            {
-                return Vector3.Zero;
-            }
-
-            for (int i = 0; i < polygons.Length; ++i)
-            {
-                var poly = polygons[i];
-                var cellIndex = IOHelper.XZToCellIndex(poly.cell_x, poly.cell_z, fts.sceneHeader.sizex, fts.sceneHeader.sizez);
-                var cell = fts.cells[cellIndex];
-                var p = cell.polygons[poly.idx];
-
-                var vertCount = p.type.HasFlag(PolyType.QUAD) ? 4 : 3;
-                for (int j = 0; j < vertCount; ++j)
-                {
-                    x += p.vertices[j].posX;
-                    y += p.vertices[j].posY;
-                    z += p.vertices[j].posZ;
-                    ++count;
-                }
-            }
-            return new Vector3(x / count, y / count, z / count);
-        }
     }
 }

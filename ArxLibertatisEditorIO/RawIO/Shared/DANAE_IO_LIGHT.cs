@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using ArxLibertatisEditorIO.Util;
+using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.Shared
 {
@@ -18,7 +19,7 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
         public float ex_speed;
         public float ex_flaresize;
         public fixed float fpad[24];
-        public int extras;
+        public ExtrasType extras;
         public fixed int ipad[31];
     }
 }

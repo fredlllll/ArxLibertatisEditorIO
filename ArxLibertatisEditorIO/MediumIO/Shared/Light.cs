@@ -18,7 +18,7 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
         public float ex_size;
         public float ex_speed;
         public float ex_flaresize;
-        public int extras; //maybe bool or flags?
+        public ExtrasType extras;
 
         internal void ReadFrom(DANAE_IO_LIGHT light)
         {

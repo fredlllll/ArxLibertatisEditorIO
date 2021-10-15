@@ -28,6 +28,8 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
 
         public void WriteTo(StructWriter writer)
         {
+            sceneInfo.nbpoly = polygons.Length;
+            sceneInfo.nbianchors = anchors.Length;
             writer.WriteStruct(sceneInfo);
 
             for (int i = 0; i < polygons.Length; i++)

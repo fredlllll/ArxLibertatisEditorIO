@@ -80,6 +80,13 @@ namespace ArxLibertatisEditorIO.Util
             return z * sizex + x;
         }
 
+        public static (int x, int z) CellIndexToXZ(int index, int sizex)
+        {
+            int z = index / sizex;
+            int x = index % sizex;
+            return (x, z);
+        }
+
         public static uint ColorToBGRA(Color color)
         {
             byte[] bytes = new byte[]
