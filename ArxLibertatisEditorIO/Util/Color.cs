@@ -25,7 +25,6 @@
 
         public override string ToString()
         {
-            //<-2082,7783. -309,9998. 7350,121>
             return $"<R:{r} / G:{g} / B:{b} / A:{a}>";
         }
     }
