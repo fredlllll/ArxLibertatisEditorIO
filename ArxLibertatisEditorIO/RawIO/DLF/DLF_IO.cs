@@ -74,6 +74,12 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
 
         public void WriteTo(Stream s)
         {
+            header.numScenes = scenes.Length;
+            header.numInters = inters.Length;
+            header.numLights = lights.Length;
+            header.numFogs = fogs.Length;
+            header.numPaths = paths.Length;
+
             using (StructWriter writer = new StructWriter(s, System.Text.Encoding.ASCII, true))
             {
                 writer.WriteStruct(header);
@@ -90,6 +96,7 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
 
                 if (header.lighting != 0)
                 {
+                    lightingHeader.numLights = lightColors.Length;
                     writer.WriteStruct(lightingHeader);
 
                     for (int i = 0; i < lightColors.Length; i++)

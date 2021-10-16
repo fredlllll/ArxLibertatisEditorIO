@@ -100,11 +100,6 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
                 textureContainers[i].WriteTo(ref fts.textureContainers[i]);
             }
 
-            int cellCountShould = fts.sceneHeader.sizex * fts.sceneHeader.sizez;
-            if (cells.Count != cellCountShould)
-            {
-                Logging.LogWarning($"cell count is {cells.Count} but should be {cellCountShould}");
-            }
             IOHelper.EnsureArraySize(ref fts.cells, cells.Count);
             for (int i = 0; i < cells.Count; ++i)
             {

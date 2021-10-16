@@ -12,7 +12,7 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         public short flags;
         public SavedVec3 initPos;
         public SavedVec3 pos;
-        public int numPathways;
+        internal int numPathways;
         public SavedColor rgb;
         public float farClip;
         public float reverb;

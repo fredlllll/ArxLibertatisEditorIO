@@ -9,7 +9,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public SavedVec3 pos;
         public float radius;
         public float height;
-        public short nb_linked;
+        internal short nb_linked;
         public short flags;
     }
 }

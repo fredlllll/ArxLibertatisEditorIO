@@ -11,7 +11,7 @@ namespace ArxLibertatisEditorIO.RawIO.LLF
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
         public byte[] lastuser;
         public uint time; //originally signed int. same reason as in dlf header
-        public int numLights;
+        internal int numLights;
         public int numShadowPolys;
         public int numIgnoredPolys;
         public int numBackgroundPolys;

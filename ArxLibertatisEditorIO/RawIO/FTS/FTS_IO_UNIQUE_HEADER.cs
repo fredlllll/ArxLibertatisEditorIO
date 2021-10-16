@@ -7,7 +7,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
         public byte[] path;
-        public int count;
+        internal int count;
         public float version;
         public int uncompressedsize;
         public fixed int pad[3];

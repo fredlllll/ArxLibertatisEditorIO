@@ -19,6 +19,7 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
 
         public void WriteTo(StructWriter writer)
         {
+            header.numPathways = paths.Length;
             writer.WriteStruct(header);
             for (int i = 0; i < paths.Length; i++)
             {

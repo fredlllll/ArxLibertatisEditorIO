@@ -21,6 +21,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
 
         public void WriteTo(StructWriter writer)
         {
+            data.nb_linked = (short)linkedAnchors.Length;
             writer.WriteStruct(data);
 
             for (int i = 0; i < linkedAnchors.Length; i++)

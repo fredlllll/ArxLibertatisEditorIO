@@ -134,6 +134,11 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
                 writer.WriteStruct(textureContainers[i]);
             }
 
+            int cellCountShould = sceneHeader.sizex * sceneHeader.sizez;
+            if (cells.Length != cellCountShould)
+            {
+                Logging.LogWarning($"cells length is {cells.Length} but should be {cellCountShould}");
+            }
             for (int i = 0; i < cells.Length; i++)
             {
                 cells[i].WriteTo(writer);
