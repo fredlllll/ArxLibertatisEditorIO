@@ -1,7 +1,7 @@
 ﻿using ArxLibertatisEditorIO.RawIO.DLF;
 using ArxLibertatisEditorIO.RawIO.FTS;
 using ArxLibertatisEditorIO.RawIO.LLF;
-using System;
+using ArxLibertatisEditorIO.Util;
 using System.IO;
 
 namespace ArxLibertatisEditorIO.RawIO
@@ -70,6 +70,12 @@ namespace ArxLibertatisEditorIO.RawIO
 
         public void SaveLevel(string dlfPath, string llfPath, string ftsPath)
         {
+            if (dlf.scenes.Length > 0)
+            {
+                //make sure the fts we save is loaded as scene, if scene is present in dlf
+                dlf.scenes[0].name = IOHelper.GetBytes("Graph\\Levels\\" + Path.GetFileName(Path.GetDirectoryName(ftsPath)), 512);
+            }
+
             using (MemoryStream ms = new MemoryStream())
             {
                 dlf.WriteTo(ms);

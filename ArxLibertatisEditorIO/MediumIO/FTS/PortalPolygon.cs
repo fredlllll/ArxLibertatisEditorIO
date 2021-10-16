@@ -1,15 +1,12 @@
 ﻿using ArxLibertatisEditorIO.RawIO.FTS;
 using ArxLibertatisEditorIO.Util;
-using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.MediumIO.FTS
 {
     public class PortalPolygon
     {
-        public int type; //TODO: Enum?
+        public PolyType type = PolyType.QUAD; //all portal polys should have QUAD set, nothing else
         public Vector3 min;
         public Vector3 max;
         public Vector3 norm;

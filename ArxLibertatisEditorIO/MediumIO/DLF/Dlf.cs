@@ -18,6 +18,11 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
 
         private byte[] nodesData = new byte[0];
 
+        public Dlf()
+        {
+            scenes.Add(new Scene()); //dlf without scene doesnt work, so add one
+        }
+
         public void LoadFrom(DLF_IO dlf)
         {
             header.ReadFrom(dlf.header);

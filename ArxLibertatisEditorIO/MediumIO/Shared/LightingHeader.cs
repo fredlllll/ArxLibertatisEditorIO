@@ -4,8 +4,8 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
 {
     public class LightingHeader
     {
-        public int viewMode; // unused
-        public int modeLight; // unused
+        public int viewMode; // unused in libertatis, used for lighting recalc it seems?
+        public int modeLight; // same as above
 
         internal void ReadFrom(DANAE_IO_LIGHTINGHEADER header)
         {

@@ -8,7 +8,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
     {
         public string name;
         public short idx;
-        public short flags; //TODO: enum
+        public PathFlags flags; //TODO: enum
         public Vector3 initPos;
         public Vector3 pos;
         public Color color;

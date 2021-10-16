@@ -11,7 +11,7 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         public SavedVec3 pos;
         public SavedAnglef angle;
         public int ident;
-        public int flags;
+        public int flags; //apparently completely unused on level load
         public fixed int ipad[14];
         public fixed float fpad[16];
     }

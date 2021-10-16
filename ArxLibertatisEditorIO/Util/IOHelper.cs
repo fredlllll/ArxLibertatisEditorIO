@@ -36,14 +36,17 @@ namespace ArxLibertatisEditorIO.Util
         public static byte[] GetBytes(string str, int bytesLength)
         {
             byte[] retval = new byte[bytesLength];
-            try
+            if (str != null)
             {
-                Encoding.ASCII.GetBytes(str, 0, str.Length, retval, 0);
-            }
-            catch (ArgumentException) //not enough space in retval for the string
-            {
-                byte[] bytes = Encoding.ASCII.GetBytes(str);
-                Array.Copy(bytes, retval, bytesLength);
+                try
+                {
+                    Encoding.ASCII.GetBytes(str, 0, str.Length, retval, 0);
+                }
+                catch (ArgumentException) //not enough space in retval for the string
+                {
+                    byte[] bytes = Encoding.ASCII.GetBytes(str);
+                    Array.Copy(bytes, retval, bytesLength);
+                }
             }
             return retval;
         }
@@ -74,8 +77,8 @@ namespace ArxLibertatisEditorIO.Util
 
         public static int XZToCellIndex(int x, int z, int sizex, int sizez)
         {
-            x = Mathi.Clamp(x, 0, sizex-1);
-            z = Mathi.Clamp(z, 0, sizez-1);
+            x = Mathi.Clamp(x, 0, sizex - 1);
+            z = Mathi.Clamp(z, 0, sizez - 1);
 
             return z * sizex + x;
         }

@@ -1,10 +1,8 @@
 ﻿using ArxLibertatisEditorIO.MediumIO;
-using ArxLibertatisEditorIO.MediumIO.Shared;
 using ArxLibertatisEditorIO.Util;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.WellDoneIO
 {
@@ -15,7 +13,7 @@ namespace ArxLibertatisEditorIO.WellDoneIO
         internal readonly Dictionary<int, string> tcToTex = new Dictionary<int, string>();
         internal readonly Dictionary<string, int> texToTc = new Dictionary<string, int>();
 
-        public void LoadLevel(MediumArxLevel mal)
+        public MediumArxLevel LoadLevel(MediumArxLevel mal)
         {
             //make texture dict
             tcToTex.Clear();
@@ -44,9 +42,10 @@ namespace ArxLibertatisEditorIO.WellDoneIO
             }
 
             tcToTex.Clear();
+            return mal;
         }
 
-        public void SaveLevel(MediumArxLevel mal)
+        public MediumArxLevel SaveLevel(MediumArxLevel mal)
         {
             texToTc.Clear();
 
@@ -174,6 +173,7 @@ namespace ArxLibertatisEditorIO.WellDoneIO
             }
 
             texToTc.Clear();
+            return mal;
         }
 
         internal static Tuple<int, int> GetPolygonCellPos(Polygon polygon)

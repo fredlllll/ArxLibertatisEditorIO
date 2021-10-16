@@ -2,7 +2,6 @@
 using ArxLibertatisEditorIO.RawIO.LLF;
 using ArxLibertatisEditorIO.Util;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ArxLibertatisEditorIO.MediumIO.LLF
 {

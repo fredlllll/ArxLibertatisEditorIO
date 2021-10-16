@@ -1,4 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.Shared;
+using ArxLibertatisEditorIO.Util;
 using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.DLF
@@ -9,7 +10,7 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 64)]
         public byte[] name;
         public short idx;
-        public short flags;
+        public PathFlags flags;
         public SavedVec3 initPos;
         public SavedVec3 pos;
         internal int numPathways;

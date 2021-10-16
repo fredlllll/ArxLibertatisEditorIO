@@ -1,24 +1,22 @@
 ﻿using ArxLibertatisEditorIO.RawIO.FTS;
 using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.MediumIO.FTS
 {
     public class SceneHeader
     {
-        public Version version;
-        public int sizex; //TODO: put all cells into a special structure that handles this and coordinates
-        public int sizez;
+        public Version version = new Version(0,141);
+        public int sizex = 160;
+        public int sizez = 160;
         public Vector3 playerpos;
         public Vector3 Mscenepos;
 
         internal void ReadFrom(FTS_IO_SCENE_HEADER header)
         {
-            string vers = header.version.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture);
+            string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
-            version = new Version(int.Parse(parts[0]), int.Parse(parts[1]));
+            version = new Version(int.Parse(parts[0]), int.Parse(parts[1].TrimEnd('0')));
             sizex = header.sizex;
             sizez = header.sizez;
             playerpos = header.playerpos.ToVector3();

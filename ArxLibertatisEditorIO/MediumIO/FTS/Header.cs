@@ -1,21 +1,19 @@
 ﻿using ArxLibertatisEditorIO.RawIO.FTS;
 using ArxLibertatisEditorIO.Util;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.MediumIO.FTS
 {
     public class Header
     {
         public string path;
-        public Version version;
+        public Version version = new Version(0, 141);
 
         internal void ReadFrom(FTS_IO_UNIQUE_HEADER header)
         {
-            string vers = header.version.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture);
+            string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
-            version = new Version(int.Parse(parts[0]), int.Parse(parts[1]));
+            version = new Version(int.Parse(parts[0]), int.Parse(parts[1].TrimEnd('0')));
             path = IOHelper.GetString(header.path);
         }
 

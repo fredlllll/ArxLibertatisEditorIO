@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.Util
 {
     [Flags]
     public enum ExtrasType : int
     {
+        None = 0,
         EXTRAS_SEMIDYNAMIC = 0x00000001,
         EXTRAS_EXTINGUISHABLE = 0x00000002, //can be ignited or doused by spells etc
         EXTRAS_STARTEXTINGUISHED = 0x00000004, //starts extinguished

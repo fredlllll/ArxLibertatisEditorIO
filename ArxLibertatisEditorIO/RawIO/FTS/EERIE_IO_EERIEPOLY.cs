@@ -1,4 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.Shared;
+using ArxLibertatisEditorIO.Util;
 using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
@@ -6,7 +7,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct EERIE_IO_EERIEPOLY
     {
-        public int type;
+        public PolyType type;
         public SavedVec3 min;
         public SavedVec3 max;
         public SavedVec3 norm;

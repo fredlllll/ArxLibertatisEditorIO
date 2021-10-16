@@ -1,9 +1,6 @@
-﻿using ArxLibertatisEditorIO.MediumIO.LLF;
-using ArxLibertatisEditorIO.RawIO.FTS;
+﻿using ArxLibertatisEditorIO.RawIO.FTS;
 using ArxLibertatisEditorIO.Util;
-using System;
 using System.Collections.Generic;
-using System.Numerics;
 
 namespace ArxLibertatisEditorIO.MediumIO.FTS
 {
@@ -18,6 +15,18 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public readonly List<Portal> portals = new List<Portal>();
         public readonly List<Room> rooms = new List<Room>();
         public readonly List<RoomDistance> roomDistances = new List<RoomDistance>();
+
+        public Fts()
+        {
+            //prefill grid
+            for (int i = 0; i < 160 * 160; ++i)
+            {
+                cells.Add(Cell.FromIndex(i, 160));
+            }
+            rooms.Add(new Room()); //at least 2 rooms have to exist in a level cause of an assert, and nb_rooms being off by one
+            rooms.Add(new Room());
+            roomDistances.Add(new RoomDistance());
+        }
 
         public void LoadFrom(FTS_IO fts)
         {

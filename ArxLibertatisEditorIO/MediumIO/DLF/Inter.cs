@@ -10,7 +10,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
         public Vector3 position;
         public Vector3 euler;
         public int identifier;
-        public int flags; //TODO: convert to enum flags
+        public int flags; //apparently completely unused on level load
 
         internal void ReadFrom(DLF_IO_INTER inter)
         {

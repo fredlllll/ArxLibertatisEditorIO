@@ -1,9 +1,7 @@
 ﻿using ArxLibertatisEditorIO.RawIO.FTS;
 using ArxLibertatisEditorIO.Util;
-using System;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.MediumIO.FTS
 {
@@ -46,10 +44,10 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
 
         public Vector3 CalculateCenter(Fts fts)
         {
-            int count = 0;
+            int vertexCount = 0;
             Vector3 center = Vector3.Zero;
 
-            if (polygons == null)
+            if (polygons == null || polygons.Count == 0)
             {
                 return Vector3.Zero;
             }
@@ -65,10 +63,10 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
                 for (int j = 0; j < vertCount; ++j)
                 {
                     center += p.vertices[j].position;
-                    ++count;
+                    ++vertexCount;
                 }
             }
-            return center / count;
+            return center / vertexCount;
         }
 
         public override string ToString()

@@ -1,4 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.Shared;
+using ArxLibertatisEditorIO.Util;
 using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.DLF
@@ -9,7 +10,7 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         public SavedVec3 pos;
         public SavedColor rgb;
         public float size;
-        public int special;
+        public FogSpecial special;
         public float scale;
         public SavedVec3 move;
         public SavedAnglef angle;

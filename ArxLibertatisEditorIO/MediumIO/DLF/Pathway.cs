@@ -1,4 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.DLF;
+using ArxLibertatisEditorIO.Util;
 using System.Numerics;
 
 namespace ArxLibertatisEditorIO.MediumIO.DLF
@@ -6,8 +7,8 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
     public class Pathway
     {
         public Vector3 rpos;
-        public int flag; //enum?
-        public uint time; //seems to be time to get there or to stay there
+        public PathwayType flag = PathwayType.STANDARD;
+        public uint time; //game time
 
         internal void ReadFrom(DLF_IO_PATHWAYS path)
         {

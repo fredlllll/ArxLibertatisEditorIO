@@ -9,7 +9,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
         public Vector3 position;
         public Color color;
         public float size;
-        public int special; //TODO: what does this even do?
+        public FogSpecial special;
         public float scale;
         public Vector3 move;
         public Vector3 euler;

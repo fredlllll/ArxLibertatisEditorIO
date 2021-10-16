@@ -1,14 +1,11 @@
 ﻿using ArxLibertatisEditorIO.RawIO.FTS;
-using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.MediumIO.FTS
 {
     public class RoomDistance
     {
-        public float distance; // -1 means use truedist
+        public float distance = -1; // -1 means use truedist, whatever that is
         public Vector3 startpos;
         public Vector3 endpos;
 

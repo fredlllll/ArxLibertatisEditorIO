@@ -31,19 +31,20 @@ namespace ArxLibertatisEditorIO.MediumIO
             fts = new Fts();
         }
 
-        public void LoadLevel(RawArxLevel raw)
+        public RawArxLevel LoadLevel(RawArxLevel raw)
         {
-
             dlf.LoadFrom(raw.DLF);
             llf.LoadFrom(raw.LLF);
             fts.LoadFrom(raw.FTS);
+            return raw;
         }
 
-        public void SaveLevel(RawArxLevel raw)
+        public RawArxLevel SaveLevel(RawArxLevel raw)
         {
             dlf.WriteTo(raw.DLF);
             fts.WriteTo(raw.FTS);
             llf.WriteTo(raw.LLF);
+            return raw;
         }
 
         public override string ToString()

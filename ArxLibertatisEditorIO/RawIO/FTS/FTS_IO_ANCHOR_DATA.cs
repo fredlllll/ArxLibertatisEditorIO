@@ -1,4 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.Shared;
+using ArxLibertatisEditorIO.Util;
 using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
@@ -10,6 +11,6 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public float radius;
         public float height;
         internal short nb_linked;
-        public short flags;
+        public AnchorFlags flags;
     }
 }

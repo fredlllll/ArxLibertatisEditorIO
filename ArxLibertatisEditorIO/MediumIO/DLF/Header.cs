@@ -7,19 +7,19 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
 {
     public class Header
     {
-        public Version version;
-        public string lastUser;
-        public DateTimeOffset time;
+        public Version version = new Version(1,44);
+        public string lastUser = "ArxLibertatisEditorIO";
+        public DateTimeOffset time = DateTimeOffset.UtcNow;
         public Vector3 positionEdit;
         public Vector3 eulersEdit;
-        public bool lighting;
+        public bool lighting = false;
         public Vector3 offset;
 
         internal void ReadFrom(DLF_IO_HEADER header)
         {
             string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
-            version = new Version(int.Parse(parts[0]), int.Parse(parts[1]));
+            version = new Version(int.Parse(parts[0]), int.Parse(parts[1].TrimEnd('0')));
             lastUser = IOHelper.GetString(header.lastUser);
             time = DateTimeOffset.FromUnixTimeSeconds(header.time);
             positionEdit = header.positionEdit.ToVector3();
