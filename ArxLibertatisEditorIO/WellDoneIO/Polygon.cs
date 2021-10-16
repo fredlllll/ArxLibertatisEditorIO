@@ -57,9 +57,16 @@ namespace ArxLibertatisEditorIO.WellDoneIO
             poly.area = area;
             poly.room = room;
             poly.polyType = polyType;
-            if (!wdal.texToTc.TryGetValue(texturePath, out poly.textureContainerId))
+            if (texturePath == null)
             {
-                poly.textureContainerId = wdal.texToTc[texturePath] = wdal.texToTc.Count + 1;
+                poly.textureContainerId = 0;
+            }
+            else
+            {
+                if (!wdal.texToTc.TryGetValue(texturePath, out poly.textureContainerId))
+                {
+                    poly.textureContainerId = wdal.texToTc[texturePath] = wdal.texToTc.Count + 1;
+                }
             }
             poly.transVal = transVal;
         }
