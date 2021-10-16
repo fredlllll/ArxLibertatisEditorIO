@@ -39,14 +39,12 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
 
             lightingHeader.WriteTo(ref llf.lightingHeader);
             IOHelper.EnsureArraySize(ref llf.lightColors, lightColors.Count);
-            llf.lightingHeader.numLights = lightColors.Count;
             for (int i = 0; i < lightColors.Count; ++i)
             {
                 llf.lightColors[i] = IOHelper.ColorToBGRA(lightColors[i]);
             }
 
             IOHelper.EnsureArraySize(ref llf.lights, lights.Count);
-            llf.header.numLights = lights.Count;
             for (int i = 0; i < lights.Count; ++i)
             {
                 lights[i].WriteTo(ref llf.lights[i]);

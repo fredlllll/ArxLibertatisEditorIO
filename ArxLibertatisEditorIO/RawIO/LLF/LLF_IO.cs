@@ -36,6 +36,9 @@ namespace ArxLibertatisEditorIO.RawIO.LLF
         {
             var writer = new StructWriter(s);
 
+            header.numLights = lights.Length;
+            lightingHeader.numLights = lightColors.Length;
+
             writer.WriteStruct(header);
 
             for (int i = 0; i < lights.Length; i++)
