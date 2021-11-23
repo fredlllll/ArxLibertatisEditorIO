@@ -36,10 +36,19 @@ namespace ArxLibertatisEditorIO.Util
 
         public static void Log(string msg, LogLevel level)
         {
-            if (level >= logLevel)
+            if (logHandler != null)
             {
-                Console.WriteLine(msg);
+                logHandler(msg, level);
+            }
+            else
+            {
+                if (level >= logLevel)
+                {
+                    Console.WriteLine(msg);
+                }
             }
         }
+
+        public static Action<string, LogLevel> logHandler = null;
     }
 }

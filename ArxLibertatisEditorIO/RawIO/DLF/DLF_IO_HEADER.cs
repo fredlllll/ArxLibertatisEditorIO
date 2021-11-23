@@ -24,9 +24,9 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         internal int numLights;
         internal int numFogs;
 
-        public int numBackgroundPolys;
-        public int numIgnoredPolys;
-        public int numChildPolys;
+        public int numBackgroundPolys; //unused in libertatis
+        public int numIgnoredPolys; //unused in libertatis
+        public int numChildPolys; //unused in libertatis
         internal int numPaths;
         public fixed int ipad2[250];
         public SavedVec3 offset;

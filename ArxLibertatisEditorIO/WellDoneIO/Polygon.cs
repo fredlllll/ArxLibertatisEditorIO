@@ -9,9 +9,9 @@ namespace ArxLibertatisEditorIO.WellDoneIO
         new Vertex(),new Vertex(), new Vertex(), new Vertex()
         };
 
-        public Vector3 norm;//TODO: could calc
-        public Vector3 norm2;//TODO: could calc
-        public float area;//TODO: could calc
+        public Vector3 norm;
+        public Vector3 norm2;
+        public float area;
 
         public short room;
 
@@ -66,6 +66,26 @@ namespace ArxLibertatisEditorIO.WellDoneIO
                 }
             }
             poly.transVal = transVal;
+        }
+
+        public void RecalculateArea()
+        {
+            area = MathHelper.AreaOfTriangle(vertices[0].position, vertices[1].position, vertices[2].position);
+            if (polyType.HasFlag(PolyType.QUAD))
+            {
+                area += MathHelper.AreaOfTriangle(vertices[1].position, vertices[2].position, vertices[3].position);
+            }
+        }
+
+        public void RecalculateNormals()
+        {
+            norm = vertices[0].normal + vertices[1].normal + vertices[2].normal;
+            norm = Vector3.Normalize(norm);
+            if (polyType.HasFlag(PolyType.QUAD))
+            {
+                norm2 = vertices[1].normal + vertices[2].normal + vertices[3].normal;
+                norm2 = Vector3.Normalize(norm2);
+            }
         }
     }
 }
