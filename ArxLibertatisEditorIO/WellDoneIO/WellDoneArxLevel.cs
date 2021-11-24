@@ -122,12 +122,15 @@ namespace ArxLibertatisEditorIO.WellDoneIO
                 for (int j = 0; j < c.polygons.Count; ++j)
                 {
                     var p = c.polygons[j];
-                    var room = mal.FTS.rooms[p.room];
-                    var rp = new MediumIO.FTS.RoomPolygon();
-                    rp.cell_x = (short)cellx;
-                    rp.cell_z = (short)cellz;
-                    rp.idx = (short)j;
-                    room.polygons.Add(rp);
+                    if (p.room >= 0)
+                    {
+                        var rp = new MediumIO.FTS.RoomPolygon();
+                        rp.cell_x = (short)cellx;
+                        rp.cell_z = (short)cellz;
+                        rp.idx = (short)j;
+                        var room = mal.FTS.rooms[p.room];
+                        room.polygons.Add(rp);
+                    }
                 }
             }
 
