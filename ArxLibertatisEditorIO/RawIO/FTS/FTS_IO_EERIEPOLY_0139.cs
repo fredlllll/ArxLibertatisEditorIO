@@ -1,14 +1,17 @@
 ﻿using ArxLibertatisEditorIO.RawIO.Shared;
 using ArxLibertatisEditorIO.Util;
+using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct FTS_IO_EERIEPOLY
+    public struct FTS_IO_EERIEPOLY_0139
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public FTS_IO_VERTEX[] vertices;
+        public FTS_IO_VERTEX_0139[] vertices;
         public int tex;
         public SavedVec3 norm;
         public SavedVec3 norm2;
@@ -32,6 +35,26 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
                 $"type: {type}\n" +
                 $"room: {room}\n" +
                 $"paddy: {paddy}";
+        }
+
+        public void WriteTo(ref FTS_IO_EERIEPOLY op,int x,int z)
+        {
+            op.vertices = new FTS_IO_VERTEX[4];
+            for (int i = 0; i < 4; ++i)
+            {
+                var ov = new FTS_IO_VERTEX();
+                vertices[i].WriteTo(ref ov,x,z);
+                op.vertices[i] = ov;
+            }
+            op.tex = tex;
+            op.norm = norm;
+            op.norm2 = norm2;
+            op.normals = normals;
+            op.transval = transval;
+            op.area = area;
+            op.type = type;
+            op.room = room;
+            op.paddy = paddy;
         }
     }
 }

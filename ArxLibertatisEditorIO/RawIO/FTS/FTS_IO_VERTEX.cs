@@ -10,5 +10,10 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public float posZ;
         public float texU;
         public float texV;
+
+        public override string ToString()
+        {
+            return $"posY: {posY}\n posX: {posX}\n posZ: {posZ}\ntexU: {texU}\ntexV: {texV}";
+        }
     }
 }

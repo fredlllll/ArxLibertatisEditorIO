@@ -12,5 +12,14 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public float height;
         internal short nb_linked;
         public AnchorFlags flags;
+
+        public override string ToString()
+        {
+            return $"pos: {pos}\n" +
+                $"radius: {radius}\n" +
+                $"height: {height}\n" +
+                $"nb_linked: {nb_linked}\n" +
+                $"flags: {flags}";
+        }
     }
 }

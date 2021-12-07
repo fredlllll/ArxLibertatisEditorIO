@@ -42,6 +42,11 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
         {
             return new Vector3(x, y, z);
         }
+
+        public override string ToString()
+        {
+            return $"x: {x}, y: {y}, z: {z}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -54,13 +59,13 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
         public SavedAnglef(Vector3 euler)
         {
             a = euler.X; //TODO: check if this is rads or degrees and if its flipped or anything
-            b = euler.Y+90;
+            b = euler.Y + 90;
             g = euler.Z;
         }
 
         public Vector3 ToEuler()
         {
-            return new Vector3(a, b-90, g); //TODO: seems that rotation is handled differently depending on what type of object its used on...
+            return new Vector3(a, b - 90, g); //TODO: seems that rotation is handled differently depending on what type of object its used on...
         }
     }
 
@@ -73,5 +78,15 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
         public uint specular;
         public float tu;
         public float tv;
+
+        public override string ToString()
+        {
+            return $"pos: {pos}\n" +
+                $"rhw: {rhw}\n" +
+                $"color: {color}\n" +
+                $"specular: {specular}\n" +
+                $"tu: {tu}\n" +
+                $"tv: {tv}";
+        }
     }
 }

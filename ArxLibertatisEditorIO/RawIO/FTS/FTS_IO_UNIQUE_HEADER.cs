@@ -11,5 +11,14 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public float version;
         public int uncompressedsize;
         public fixed int pad[3];
+
+        public override string ToString()
+        {
+            return $"path: {path}\n" +
+                $"count: {count}\n"+
+                $"version: {version}\n"+
+                $"uncompressed size: {uncompressedsize}\n"+
+                $"pad: {pad[0]},{pad[1]},{pad[3]}";
+        }
     }
 }

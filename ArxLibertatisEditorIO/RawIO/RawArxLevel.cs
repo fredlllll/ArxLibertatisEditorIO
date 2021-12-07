@@ -8,20 +8,23 @@ namespace ArxLibertatisEditorIO.RawIO
 {
     public class RawArxLevel
     {
-        private readonly DLF_IO dlf;
+        private DLF_IO dlf;
         public DLF_IO DLF
         {
             get { return dlf; }
+            set { dlf = value; }
         }
-        private readonly LLF_IO llf;
+        private LLF_IO llf;
         public LLF_IO LLF
         {
             get { return llf; }
+            set { llf = value; }
         }
-        private readonly FTS_IO fts;
+        private FTS_IO fts;
         public FTS_IO FTS
         {
             get { return fts; }
+            set { fts = value; }
         }
 
         public string LevelName

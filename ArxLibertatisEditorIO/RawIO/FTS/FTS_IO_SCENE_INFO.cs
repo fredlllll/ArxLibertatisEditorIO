@@ -7,5 +7,10 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
     {
         internal int nbpoly;
         internal int nbianchors;
+
+        public override string ToString()
+        {
+            return $"nbpoly: {nbpoly}\nnbianchors: {nbianchors}";
+        }
     }
 }

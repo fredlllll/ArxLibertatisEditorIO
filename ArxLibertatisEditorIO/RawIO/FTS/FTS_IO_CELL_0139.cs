@@ -1,23 +1,25 @@
 ﻿using ArxLibertatisEditorIO.Util;
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
-    public struct FTS_IO_CELL
+    public class FTS_IO_CELL_0139
     {
         public FTS_IO_SCENE_INFO sceneInfo;
-        public FTS_IO_EERIEPOLY[] polygons;
+        public FTS_IO_EERIEPOLY_0139[] polygons;
         public int[] anchors;
 
         public void ReadFrom(StructReader reader)
         {
             sceneInfo = reader.ReadStruct<FTS_IO_SCENE_INFO>();
 
-            polygons = new FTS_IO_EERIEPOLY[sceneInfo.nbpoly];
+            polygons = new FTS_IO_EERIEPOLY_0139[sceneInfo.nbpoly];
             for (int i = 0; i < sceneInfo.nbpoly; i++)
             {
-                polygons[i] = reader.ReadStruct<FTS_IO_EERIEPOLY>();
+                polygons[i] = reader.ReadStruct<FTS_IO_EERIEPOLY_0139>();
             }
 
             anchors = new int[sceneInfo.nbianchors];
@@ -60,6 +62,21 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             return $"sceneInfo: {Output.Indent(sceneInfo.ToString())}\n" +
             $"polygons: {Output.ToString(polygons)}\n" +
             $"anchors: {Output.ToString(anchors)}";
+        }
+
+        public void WriteTo(ref FTS_IO_CELL oc, int x, int z)
+        {
+            oc.sceneInfo = sceneInfo;
+            oc.anchors = anchors;
+
+            oc.polygons = new FTS_IO_EERIEPOLY[polygons.Length];
+            for (int i = 0; i < polygons.Length; ++i)
+            {
+                var p = polygons[i];
+                var op = new FTS_IO_EERIEPOLY();
+                p.WriteTo(ref op,x,z);
+                oc.polygons[i] = op;
+            }
         }
     }
 }

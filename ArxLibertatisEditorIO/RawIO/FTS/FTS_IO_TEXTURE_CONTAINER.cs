@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using ArxLibertatisEditorIO.Util;
+using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
@@ -9,5 +10,12 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public int temp;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
         public byte[] fic;
+
+        public override string ToString()
+        {
+            return $"tc: {tc}\n" +
+                $"tmp: {temp}\n" + 
+                $"fic: {IOHelper.GetString(fic)}";
+        }
     }
 }

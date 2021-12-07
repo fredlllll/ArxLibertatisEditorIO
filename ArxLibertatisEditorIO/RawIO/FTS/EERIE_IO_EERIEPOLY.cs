@@ -24,5 +24,23 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public float area;
         public short room;
         public short misc;
+
+        public override string ToString()
+        {
+            return $"type: {type}\n" +
+                $"min: {min}\n" +
+                $"max: {max}\n" +
+                $"norm: {norm}\n" +
+                $"norm2: {norm2}\n" +
+                $"v: {Output.ToString(v)}\n" +
+                $"unused: {IOHelper.GetString(unused)}\n" +
+                $"nrml: {Output.ToString(nrml)}\n" +
+                $"tex: {tex}\n" +
+                $"center: {center}\n" +
+                $"transval: {transval}\n" +
+                $"area: {area}\n" +
+                $"room: {room}\n" +
+                $"misc: {misc}";
+        }
     }
 }
