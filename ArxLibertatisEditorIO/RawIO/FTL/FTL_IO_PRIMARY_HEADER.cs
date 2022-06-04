@@ -7,8 +7,8 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
         public byte[] ident; // FTL\0
-        public float version;
+        public float version; // 0.83257f
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 512)]
-        public byte[] checksum; //not read by game, so we luckily dont have to provide it
+        public byte[] checksum; // not read by game, so we luckily dont have to provide it
     }
 }
