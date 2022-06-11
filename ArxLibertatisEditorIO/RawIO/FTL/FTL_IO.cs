@@ -11,8 +11,8 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
 
         public bool has3DDataSection = false;
         public FTL_IO_3D_DATA_SECTION _3DDataSection;
-        //apparently all the other sections are unused and undocumented, saving other contents of file into arrays, this will break values in secondary header if modified (for now)
-        byte[] dataTill3Ddata, dataTillFileEnd;
+        //apparently all the other sections are unused and undocumented, saving other contents of file into arrays, this will break values in secondary header if modified
+        public byte[] dataTill3Ddata, dataTillFileEnd;
 
         public void ReadFrom(Stream s)
         {
@@ -31,7 +31,6 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
             {
                 dataTill3Ddata = null;
             }
-
 
             if (secondaryHeader.offset_3Ddata >= 0)
             {
@@ -63,30 +62,28 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
 
             writer.WriteStruct(header);
 
+            //dont write unused stuff back as we have no way of updating secondary header offset
+            secondaryHeader.offset_clothes_data = -1;
+            secondaryHeader.offset_collision_spheres = -1;
+            secondaryHeader.offset_cylinder = -1;
+            secondaryHeader.offset_physics_box = -1;
+            secondaryHeader.offset_progressive_data = -1;
+
             var secondaryHeaderPosition = s.Position;
             writer.WriteStruct(secondaryHeader); //write header with old values for now
-
-            if (dataTill3Ddata != null)
-            {
-                writer.Write(dataTill3Ddata);
-            }
 
             if (has3DDataSection)
             {
                 secondaryHeader.offset_3Ddata = (int)s.Position;
-                writer.WriteStruct(_3DDataSection);
+                _3DDataSection.WriteTo(writer);
             }
             else
             {
                 secondaryHeader.offset_3Ddata = -1;
             }
 
-            if (dataTillFileEnd != null)
-            {
-                writer.Write(dataTillFileEnd);
-            }
-
             var end = s.Position;
+
             s.Position = secondaryHeaderPosition;
             writer.WriteStruct(secondaryHeader); //update offsets
             s.Position = end; //go back to end, in case user wants to do more with the stream

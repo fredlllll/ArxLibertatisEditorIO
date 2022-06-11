@@ -28,6 +28,26 @@ namespace ArxLibertatisEditorIO.Util
         }
 
         /// <summary>
+        /// does the same as GetString but searches for \0 from the start, so it might truncate data, but you will not have \0 in your strings
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string GetStringSafe(byte[] bytes)
+        {
+            int strlen = bytes.Length;
+            for (int i = 0; i < bytes.Length; ++i)
+            {
+                if (bytes[i] == 0)
+                {
+                    strlen = i;
+                    break;
+                }
+            }
+            string retval = Encoding.ASCII.GetString(bytes, 0, strlen);
+            return retval;
+        }
+
+        /// <summary>
         /// get fixed length bytes of a string
         /// </summary>
         /// <param name="str"></param>

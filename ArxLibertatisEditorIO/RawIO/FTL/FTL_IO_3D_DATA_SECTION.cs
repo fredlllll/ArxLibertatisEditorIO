@@ -72,12 +72,17 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
                     selected[j] = reader.ReadInt32();
                 }
             }
-
-
         }
 
         public void WriteTo(StructWriter writer)
         {
+            header.nb_vertex = vertexList.Length;
+            header.nb_faces = faceList.Length;
+            header.nb_maps = textureContainers.Length;
+            header.nb_groups = groups.Length;
+            header.nb_action = actionList.Length;
+            header.nb_selections = selections.Length;
+
             writer.WriteStruct(header);
 
             for (int i = 0; i < vertexList.Length; i++)
@@ -93,6 +98,42 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
             for (int i = 0; i < textureContainers.Length; i++)
             {
                 writer.WriteStruct(textureContainers[i]);
+            }
+
+            for (int i = 0; i < groups.Length; ++i)
+            {
+                groups[i].group.nb_index = groups[i].indices.Length;
+                writer.WriteStruct(groups[i]);
+            }
+
+            for (int i = 0; i < groups.Length; i++)
+            {
+                var indices = groups[i].indices;
+                for (int j = 0; j < indices.Length; j++)
+                {
+                    writer.Write(indices[j]);
+                }
+            }
+
+            for (int i = 0; i < actionList.Length; i++)
+            {
+                writer.WriteStruct(actionList[i]);
+            }
+
+            //same as with groups
+            for (int i = 0; i < selections.Length; i++)
+            {
+                selections[i].selection.nb_selected = selections[i].selected.Length;
+                writer.WriteStruct(selections[i]);
+            }
+
+            for (int i = 0; i < selections.Length; i++)
+            {
+                var selected = selections[i].selected;
+                for (int j = 0; j < selected.Length; j++)
+                {
+                    writer.Write(selected[j]);
+                }
             }
         }
     }
