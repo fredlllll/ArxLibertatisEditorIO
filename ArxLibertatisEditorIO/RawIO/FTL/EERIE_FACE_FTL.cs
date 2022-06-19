@@ -1,4 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.Shared;
+using ArxLibertatisEditorIO.Util;
 using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTL
@@ -6,7 +7,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct EERIE_FACE_FTL
     {
-        public int facetype; // 0 = flat, 1 = text, 2 = Double-Side
+        public PolyType facetype; // 0 = flat, 1 = text, 2 = Double-Side
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
         public uint[] rgb;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]

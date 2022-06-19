@@ -7,13 +7,6 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
 {
     public class Face
     {
-        public enum FaceType : int
-        {
-            Flat = 0,
-            Text = 1,
-            DoubleSided = 2,
-        }
-
         public class EerieFaceVertex
         {
             public Color color;
@@ -23,7 +16,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
             public Vector3 normal;
         }
 
-        public FaceType faceType = FaceType.Flat;
+        public PolyType faceType = PolyType.None;
         public readonly EerieFaceVertex[] vertices = new EerieFaceVertex[]
         {
             new EerieFaceVertex(),
@@ -38,7 +31,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
 
         internal void ReadFrom(EERIE_FACE_FTL face)
         {
-            faceType = (FaceType)face.facetype;
+            faceType = face.facetype;
             textureContainerIndex = face.texid;
             transval = face.transval;
             normal = face.norm.ToVector3();
@@ -59,7 +52,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
 
         internal void WriteTo(ref EERIE_FACE_FTL face)
         {
-            face.facetype = (int)faceType;
+            face.facetype = faceType;
             face.texid = textureContainerIndex;
             face.transval = transval;
             face.norm = new RawIO.Shared.SavedVec3(normal);
