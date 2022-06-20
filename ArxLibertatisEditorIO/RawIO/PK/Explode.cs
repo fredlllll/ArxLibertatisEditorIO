@@ -3,6 +3,9 @@ using System.IO;
 
 namespace ArxLibertatisEditorIO.RawIO.PK
 {
+    /// <summary>
+    /// translated from https://github.com/arx/ArxLibertatis/blob/master/src/io/Blast.cpp
+    /// </summary>
     public class Explode
     {
         public static byte[] DoExplode(byte[] bytes)
@@ -50,17 +53,7 @@ namespace ArxLibertatisEditorIO.RawIO.PK
             BLAST_INVALID_OFFSET = -3, // distance is too far back
         }
 
-        /*
- * Return need bits from the input stream.  This always leaves less than
- * eight bits in the buffer.  bits() works properly for need == 0.
- *
- * Format notes:
- *
- * - Bits are stored in bytes from the least significant bit to the most
- *   significant bit.  Therefore bits are dropped from the bottom of the bit
- *   buffer, using shift right, and new bytes are appended to the top of the
- *   bit buffer, using shift left.
- */
+
 
 
         class Blast
@@ -110,6 +103,21 @@ namespace ArxLibertatisEditorIO.RawIO.PK
                 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8
             };
 
+            /// <summary>
+            /// Return need bits from the input stream.This always leaves less than
+            /// eight bits in the buffer.bits() works properly for need == 0.
+            ///
+            /// Format notes:
+            ///
+            /// - Bits are stored in bytes from the least significant bit to the most
+            /// significant bit.Therefore bits are dropped from the bottom of the bit
+            /// buffer, using shift right, and new bytes are appended to the top of the
+            /// bit buffer, using shift left.
+            ///
+            /// </summary>
+            /// <param name="s"></param>
+            /// <param name="need"></param>
+            /// <returns></returns>
             static int Bits(State s, int need)
             {
 
@@ -350,6 +358,8 @@ namespace ArxLibertatisEditorIO.RawIO.PK
                         }
                     }
                 } while (true);
+
+                s.outputStream.Write(s.outBuffer, 0, s.next);
 
                 return BlastResult.BLAST_SUCCESS;
             }
