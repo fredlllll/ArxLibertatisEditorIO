@@ -13,6 +13,8 @@ namespace ArxLibertatisEditorIO.RawIO
 
         public static byte[] Unpack(byte[] bytes)
         {
+            //return Explode.DoExplode(bytes);
+
             uint inSize = (uint)bytes.Length;
 
             var pinnedBytes = GCHandle.Alloc(bytes, GCHandleType.Pinned);
