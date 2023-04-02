@@ -6,7 +6,7 @@
     <Product></Product>
     <Company></Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Copyright>2021</Copyright>
+    <Copyright>2023</Copyright>
     <PackageId>ArxLibertatisEditorIO</PackageId>
     <Description />
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -16,8 +16,8 @@
     <PackageTags>arx fatalis libertatis editor io</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
 	<Title>ArxLibertatisEditorIO</Title>
-	<Version>1.1.10</Version>
-	<PackageReleaseNotes>added default constructor for ArxLevelRaw so it can be used without loading from a file</PackageReleaseNotes>
+	<Version>1.2.1</Version>
+	<PackageReleaseNotes>cleanup and add operators and util functions to Color</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

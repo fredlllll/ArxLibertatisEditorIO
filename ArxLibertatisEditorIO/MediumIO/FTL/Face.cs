@@ -1,6 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.FTL;
 using ArxLibertatisEditorIO.Util;
-using System;
 using System.Numerics;
 
 namespace ArxLibertatisEditorIO.MediumIO.FTL

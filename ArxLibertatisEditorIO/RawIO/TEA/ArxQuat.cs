@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ArxLibertatisEditorIO.RawIO.TEA
+﻿namespace ArxLibertatisEditorIO.RawIO.TEA
 {
     public struct ArxQuat
     {

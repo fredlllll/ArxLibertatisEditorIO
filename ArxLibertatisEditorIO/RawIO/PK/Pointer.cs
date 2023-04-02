@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ArxLibertatisEditorIO.RawIO.PK
+﻿namespace ArxLibertatisEditorIO.RawIO.PK
 {
     public struct Pointer<T>
     {

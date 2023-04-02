@@ -1,9 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.Shared;
 using ArxLibertatisEditorIO.Util;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.RawIO.TEA
 {

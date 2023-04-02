@@ -1,5 +1,4 @@
 ﻿using ArxLibertatisEditorIO.Util;
-using System;
 using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS

@@ -1,9 +1,6 @@
 ﻿using ArxLibertatisEditorIO.RawIO.Shared;
 using ArxLibertatisEditorIO.Util;
-using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {

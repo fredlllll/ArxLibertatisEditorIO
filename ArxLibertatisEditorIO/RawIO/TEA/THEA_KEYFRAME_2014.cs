@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
-
-namespace ArxLibertatisEditorIO.RawIO.TEA
+﻿namespace ArxLibertatisEditorIO.RawIO.TEA
 {
     public struct THEA_KEYFRAME_2014
     {

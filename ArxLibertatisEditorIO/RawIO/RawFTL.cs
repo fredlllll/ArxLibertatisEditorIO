@@ -1,8 +1,5 @@
 ﻿using ArxLibertatisEditorIO.RawIO.FTL;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.RawIO
 {
