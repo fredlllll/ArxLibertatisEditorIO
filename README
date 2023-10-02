@@ -1,5 +1,5 @@
-this is a library for reading and writing arx libertatis level files (work in progress)
+this is a library for reading and writing arx libertatis level files
 
-it relies on the ArxIO.dll for reading/decompression. so you will need that in a folder where dllimport will find that dll
+it DOES NOT rely on the ArxIO.dll anymore
 
-work in progress obviously. it also has a nuget package with the same name
+work in progress obviously. it also has a nuget package https://www.nuget.org/packages/ArxLibertatisEditorIO
