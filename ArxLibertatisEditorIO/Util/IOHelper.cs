@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -7,7 +8,27 @@ namespace ArxLibertatisEditorIO.Util
     public static class IOHelper
     {
         /// <summary>
-        /// get a string from bytes
+        /// reads a variable length 0 terminated string from a stream, includes the 0 terminator
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        public static byte[] ReadVariableLengthString(BinaryReader reader)
+        {
+            long start = reader.BaseStream.Position;
+            while(true)
+            {
+                if(reader.ReadByte() == 0)
+                {
+                    break;
+                }
+            }
+            long length = reader.BaseStream.Position - start;
+            reader.BaseStream.Position = start;
+            return reader.ReadBytes((int)length);
+        }
+
+        /// <summary>
+        /// get a string from bytes.
         /// be aware this searches for first non 0 char from the end, so you could end up with 0 chars in the string
         /// </summary>
         /// <param name="bytes"></param>
