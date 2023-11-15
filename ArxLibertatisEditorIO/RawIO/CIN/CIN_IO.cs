@@ -22,7 +22,7 @@ namespace ArxLibertatisEditorIO.RawIO.CIN
         public CIN_IO_KEY_75[] keyframes75;
         public CIN_IO_KEY_76[] keyframes76;
 
-        public void LoadFrom(Stream dataStream)
+        public void ReadFrom(Stream dataStream)
         {
             using (StructReader reader = new StructReader(dataStream, System.Text.Encoding.ASCII, true))
             {
