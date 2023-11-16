@@ -1,10 +1,4 @@
-﻿using ArxLibertatisEditorIO.MediumIO.DLF;
-using ArxLibertatisEditorIO.RawIO.TEA;
-using ArxLibertatisEditorIO.Util;
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
+﻿using ArxLibertatisEditorIO.Util;
 
 namespace ArxLibertatisEditorIO.RawIO.CIN
 {

@@ -1,11 +1,6 @@
-﻿using ArxLibertatisEditorIO.MediumIO.Shared;
-using ArxLibertatisEditorIO.RawIO.Shared;
-using ArxLibertatisEditorIO.Util;
+﻿using ArxLibertatisEditorIO.Util;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace ArxLibertatisEditorIO.RawIO.CIN
 {
