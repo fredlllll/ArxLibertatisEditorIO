@@ -46,17 +46,17 @@ namespace ArxLibertatisEditorIO.RawIO
         {
             using (FileStream fs = new FileStream(dlfPath, FileMode.Open, FileAccess.Read))
             {
-                dlf.LoadFrom(DLF_IO.EnsureUnpacked(fs));
+                dlf.ReadFrom(DLF_IO.EnsureUnpacked(fs));
             }
 
             using (FileStream fs = new FileStream(llfPath, FileMode.Open, FileAccess.Read))
             {
-                llf.LoadFrom(LLF_IO.EnsureUnpacked(fs));
+                llf.ReadFrom(LLF_IO.EnsureUnpacked(fs));
             }
 
             using (FileStream fs = new FileStream(ftsPath, FileMode.Open, FileAccess.Read))
             {
-                fts.LoadFrom(FTS_IO.EnsureUnpacked(fs));
+                fts.ReadFrom(FTS_IO.EnsureUnpacked(fs));
             }
         }
 

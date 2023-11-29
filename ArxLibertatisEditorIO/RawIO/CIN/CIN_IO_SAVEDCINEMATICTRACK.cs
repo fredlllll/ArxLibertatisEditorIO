@@ -2,8 +2,8 @@
 
 namespace ArxLibertatisEditorIO.RawIO.CIN
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public unsafe struct CIN_IO_SAVEDCINEMATICTRACK
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CIN_IO_SAVEDCINEMATICTRACK
     {
         public int startframe;
         public int endframe;

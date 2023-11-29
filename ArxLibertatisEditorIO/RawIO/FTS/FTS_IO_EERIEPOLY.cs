@@ -20,7 +20,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public short room;
         public short paddy;
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"vertices: {Output.ToString(vertices)}\n" +
                 $"tex: {tex}\n" +

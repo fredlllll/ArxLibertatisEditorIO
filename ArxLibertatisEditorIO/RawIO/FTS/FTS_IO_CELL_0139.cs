@@ -61,7 +61,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             $"anchors: {Output.ToString(anchors)}";
         }
 
-        public void WriteTo(ref FTS_IO_CELL oc, int x, int z)
+        public void WriteTo(FTS_IO_CELL oc, int x, int z)
         {
             oc.sceneInfo = sceneInfo;
             oc.anchors = anchors;

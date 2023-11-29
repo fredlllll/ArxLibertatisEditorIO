@@ -2,7 +2,7 @@
 
 namespace ArxLibertatisEditorIO.RawIO.FTL
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct EERIE_ACTIONLIST_FTL
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]

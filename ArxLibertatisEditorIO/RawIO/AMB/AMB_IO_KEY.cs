@@ -2,8 +2,8 @@
 
 namespace ArxLibertatisEditorIO.RawIO.AMB
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public unsafe struct AMB_IO_KEY
+    [StructLayout(LayoutKind.Sequential)]
+    public struct AMB_IO_KEY
     {
         public uint flags;
         public uint start;

@@ -2,8 +2,8 @@
 
 namespace ArxLibertatisEditorIO.RawIO.AMB
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public unsafe struct AMB_IO_HEADER
+    [StructLayout(LayoutKind.Sequential)]
+    public struct AMB_IO_HEADER
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)] // must be "GAMB"
         public byte[] identifier;

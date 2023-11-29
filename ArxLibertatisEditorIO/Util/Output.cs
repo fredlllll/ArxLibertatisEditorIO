@@ -17,7 +17,7 @@ namespace ArxLibertatisEditorIO.Util
             return start + str.Replace("\n", rep);
         }
 
-        public static string ToString<T>(IEnumerable<T> array, int indentCount = 2, int limit=15)
+        public static string ToString<T>(IEnumerable<T> array, int indentCount = 2, int limit = 15)
         {
             int count = array.Count();
             if (count == 0)

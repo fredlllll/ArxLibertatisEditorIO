@@ -2,7 +2,7 @@
 
 namespace ArxLibertatisEditorIO.RawIO.FTL
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct FTL_IO_PRIMARY_HEADER
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]

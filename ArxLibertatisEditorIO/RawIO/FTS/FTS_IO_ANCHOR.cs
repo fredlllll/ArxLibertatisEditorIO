@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
-    public struct FTS_IO_ANCHOR
+    public class FTS_IO_ANCHOR
     {
         public FTS_IO_ANCHOR_DATA data;
         public int[] linkedAnchors;
@@ -40,7 +40,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             return size;
         }
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"data: {data}\nlinked anchors: {Output.ToString(linkedAnchors)}";
         }

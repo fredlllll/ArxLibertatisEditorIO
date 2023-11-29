@@ -20,7 +20,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public short room;
         public short paddy;
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"vertices: {Output.ToString(vertices)}\n" +
                 $"tex: {tex}\n" +
@@ -34,7 +34,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
                 $"paddy: {paddy}";
         }
 
-        public void WriteTo(ref FTS_IO_EERIEPOLY op,int x,int z)
+        public readonly void WriteTo(ref FTS_IO_EERIEPOLY op,int x,int z)
         {
             op.vertices = new FTS_IO_VERTEX[4];
             for (int i = 0; i < 4; ++i)

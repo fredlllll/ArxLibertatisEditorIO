@@ -2,7 +2,7 @@
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct FTS_IO_UNIQUE_HEADER2
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]

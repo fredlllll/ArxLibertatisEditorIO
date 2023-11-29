@@ -2,7 +2,7 @@
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct EERIE_IO_ROOM_DATA
     {
         internal int nb_portals;

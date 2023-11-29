@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTL
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct EERIE_OLD_VERTEX
     {
         public fixed byte unused[32];

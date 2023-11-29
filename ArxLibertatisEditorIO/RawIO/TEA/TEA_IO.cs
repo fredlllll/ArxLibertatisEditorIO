@@ -9,10 +9,9 @@ namespace ArxLibertatisEditorIO.RawIO.TEA
         public THEA_HEADER header;
         public TEA_KEYFRAME[] keyframes;
 
-
-        public void ReadFrom(Stream s)
+        public void ReadFrom(Stream stream)
         {
-            StructReader reader = new StructReader(s, Encoding.ASCII, true);
+            using StructReader reader = new StructReader(stream, Encoding.ASCII, true);
 
             header = reader.ReadStruct<THEA_HEADER>();
 
@@ -24,13 +23,13 @@ namespace ArxLibertatisEditorIO.RawIO.TEA
             }
         }
 
-        public void WriteTo(Stream s)
+        public void WriteTo(Stream stream)
         {
-            StructWriter writer = new StructWriter(s, Encoding.ASCII, true);
+            using StructWriter writer = new StructWriter(stream, Encoding.ASCII, true);
 
             writer.WriteStruct(header);
 
-            for(int i =0; i< keyframes.Length; ++i)
+            for (int i = 0; i < keyframes.Length; ++i)
             {
                 keyframes[i].WriteTo(writer);
             }

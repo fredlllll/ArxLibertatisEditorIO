@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
-    public struct FTS_IO_CELL
+    public class FTS_IO_CELL
     {
         public FTS_IO_SCENE_INFO sceneInfo;
         public FTS_IO_EERIEPOLY[] polygons;

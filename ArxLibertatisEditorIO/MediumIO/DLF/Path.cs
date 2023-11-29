@@ -21,7 +21,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             }
         }
 
-        internal void WriteTo(ref DLF_IO_PATH path)
+        internal void WriteTo(DLF_IO_PATH path)
         {
             pathHeader.WriteTo(ref path.header);
 

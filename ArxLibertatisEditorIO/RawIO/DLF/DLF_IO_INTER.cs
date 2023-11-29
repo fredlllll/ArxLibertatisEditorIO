@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.DLF
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct DLF_IO_INTER
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 512)]

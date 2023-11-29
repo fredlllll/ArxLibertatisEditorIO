@@ -13,7 +13,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         internal short nb_linked;
         public AnchorFlags flags;
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"pos: {pos}\n" +
                 $"radius: {radius}\n" +

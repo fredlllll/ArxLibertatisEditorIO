@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
-    public struct FTS_IO_ROOM
+    public class FTS_IO_ROOM
     {
         public EERIE_IO_ROOM_DATA data;
         public int[] portals;

@@ -10,75 +10,74 @@ namespace ArxLibertatisEditorIO.RawIO.CIN
         public const int CINEMATIC_VERSION_1_76 = (1 << 16) | 76;
 
         public CIN_IO_HEADER header;
-        public byte[] unknown_string; //variable length string
+        public byte[] unknownString; //variable length string
         public CIN_IO_BITMAP[] bitmaps;
         public CIN_IO_SOUND_BASE[] sounds;
         public CIN_IO_SAVEDCINEMATICTRACK savedCinematicTrack;
         public CIN_IO_KEY_75[] keyframes75;
         public CIN_IO_KEY_76[] keyframes76;
 
-        public void ReadFrom(Stream dataStream)
+        public void ReadFrom(Stream stream)
         {
-            using (StructReader reader = new StructReader(dataStream, System.Text.Encoding.ASCII, true))
+            using StructReader reader = new StructReader(stream, System.Text.Encoding.ASCII, true);
+
+            header = reader.ReadStruct<CIN_IO_HEADER>();
+
+            unknownString = IOHelper.ReadVariableLengthString(reader);
+
+            int nbitmaps = reader.ReadInt32();
+            bitmaps = new CIN_IO_BITMAP[nbitmaps];
+            for (int i = 0; i < bitmaps.Length; i++)
             {
-                header = reader.ReadStruct<CIN_IO_HEADER>();
+                var bmp = bitmaps[i] = new CIN_IO_BITMAP();
+                bmp.ReadFrom(reader);
+            }
 
-                unknown_string = IOHelper.ReadVariableLengthString(reader);
-
-                int nbitmaps = reader.ReadInt32();
-                bitmaps = new CIN_IO_BITMAP[nbitmaps];
-                for (int i = 0; i < bitmaps.Length; i++)
-                {
-                    var bmp = bitmaps[i] = new CIN_IO_BITMAP();
-                    bmp.ReadFrom(reader);
-                }
-
-                int nsounds = reader.ReadInt32();
-                sounds = header.version switch
-                {
-                    CINEMATIC_VERSION_1_75 => new CIN_IO_SOUND_75[nsounds],
-                    CINEMATIC_VERSION_1_76 => new CIN_IO_SOUND_76[nsounds],
-                    _ => throw new Exception("unknown version for sound: " + header.version),
-                };
-                for (int i = 0; i < sounds.Length; i++)
-                {
-                    CIN_IO_SOUND_BASE sound;
-                    switch (header.version)
-                    {
-                        case CINEMATIC_VERSION_1_75:
-                            sounds[i] = sound = new CIN_IO_SOUND_75();
-                            sound.ReadFrom(reader);
-                            break;
-                        case CINEMATIC_VERSION_1_76:
-                            sounds[i] = sound = new CIN_IO_SOUND_76();
-                            sound.ReadFrom(reader);
-                            break;
-                    }
-                }
-
-                savedCinematicTrack = reader.ReadStruct<CIN_IO_SAVEDCINEMATICTRACK>();
-
+            int nsounds = reader.ReadInt32();
+            sounds = header.version switch
+            {
+                CINEMATIC_VERSION_1_75 => new CIN_IO_SOUND_75[nsounds],
+                CINEMATIC_VERSION_1_76 => new CIN_IO_SOUND_76[nsounds],
+                _ => throw new Exception("unknown version for sound: " + header.version),
+            };
+            for (int i = 0; i < sounds.Length; i++)
+            {
+                CIN_IO_SOUND_BASE sound;
                 switch (header.version)
                 {
                     case CINEMATIC_VERSION_1_75:
-                        keyframes75 = new CIN_IO_KEY_75[savedCinematicTrack.nbkey];
-                        for (int i = 0; i < savedCinematicTrack.nbkey; ++i)
-                        {
-                            keyframes75[i] = reader.ReadStruct<CIN_IO_KEY_75>();
-                        }
+                        sounds[i] = sound = new CIN_IO_SOUND_75();
+                        sound.ReadFrom(reader);
                         break;
                     case CINEMATIC_VERSION_1_76:
-                        keyframes76 = new CIN_IO_KEY_76[savedCinematicTrack.nbkey];
-                        for (int i = 0; i < savedCinematicTrack.nbkey; ++i)
-                        {
-                            keyframes76[i] = reader.ReadStruct<CIN_IO_KEY_76>();
-                        }
+                        sounds[i] = sound = new CIN_IO_SOUND_76();
+                        sound.ReadFrom(reader);
                         break;
                 }
             }
+
+            savedCinematicTrack = reader.ReadStruct<CIN_IO_SAVEDCINEMATICTRACK>();
+
+            switch (header.version)
+            {
+                case CINEMATIC_VERSION_1_75:
+                    keyframes75 = new CIN_IO_KEY_75[savedCinematicTrack.nbkey];
+                    for (int i = 0; i < savedCinematicTrack.nbkey; ++i)
+                    {
+                        keyframes75[i] = reader.ReadStruct<CIN_IO_KEY_75>();
+                    }
+                    break;
+                case CINEMATIC_VERSION_1_76:
+                    keyframes76 = new CIN_IO_KEY_76[savedCinematicTrack.nbkey];
+                    for (int i = 0; i < savedCinematicTrack.nbkey; ++i)
+                    {
+                        keyframes76[i] = reader.ReadStruct<CIN_IO_KEY_76>();
+                    }
+                    break;
+            }
         }
 
-        public void WriteTo(Stream dataStream)
+        public void WriteTo(Stream stream)
         {
             //make sure that noone changed the version willy nilly, so we dont accidentally write out an invalid file structure
             switch (header.version)
@@ -99,43 +98,42 @@ namespace ArxLibertatisEditorIO.RawIO.CIN
                     break;
             }
 
-            using (StructWriter writer = new StructWriter(dataStream, System.Text.Encoding.ASCII, true))
+            using StructWriter writer = new StructWriter(stream, System.Text.Encoding.ASCII, true);
+
+            writer.WriteStruct(header);
+
+            writer.Write(unknownString);
+
+            writer.Write(bitmaps.Length);
+
+            for (int i = 0; i < bitmaps.Length; i++)
             {
-                writer.WriteStruct(header);
+                bitmaps[i].WriteTo(writer);
+            }
 
-                writer.Write(unknown_string);
+            writer.Write(sounds.Length);
 
-                writer.Write(bitmaps.Length);
+            for (int i = 0; i < sounds.Length; i++)
+            {
+                sounds[i].WriteTo(writer);
+            }
 
-                for (int i = 0; i < bitmaps.Length; i++)
-                {
-                    bitmaps[i].WriteTo(writer);
-                }
+            writer.WriteStruct(savedCinematicTrack);
 
-                writer.Write(sounds.Length);
-
-                for (int i = 0; i < sounds.Length; i++)
-                {
-                    sounds[i].WriteTo(writer);
-                }
-
-                writer.WriteStruct(savedCinematicTrack);
-
-                switch (header.version)
-                {
-                    case CINEMATIC_VERSION_1_75:
-                        for (int i = 0; i < keyframes75.Length; i++)
-                        {
-                            writer.WriteStruct(keyframes75[i]);
-                        }
-                        break;
-                    case CINEMATIC_VERSION_1_76:
-                        for (int i = 0; i < keyframes76.Length; i++)
-                        {
-                            writer.WriteStruct(keyframes76[i]);
-                        }
-                        break;
-                }
+            switch (header.version)
+            {
+                case CINEMATIC_VERSION_1_75:
+                    for (int i = 0; i < keyframes75.Length; i++)
+                    {
+                        writer.WriteStruct(keyframes75[i]);
+                    }
+                    break;
+                case CINEMATIC_VERSION_1_76:
+                    for (int i = 0; i < keyframes76.Length; i++)
+                    {
+                        writer.WriteStruct(keyframes76[i]);
+                    }
+                    break;
             }
         }
     }

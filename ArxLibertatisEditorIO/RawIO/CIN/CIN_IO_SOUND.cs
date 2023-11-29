@@ -25,6 +25,15 @@ namespace ArxLibertatisEditorIO.RawIO.CIN
             writer.Write(soundId);
             writer.Write(soundPath);
         }
+
+        public static explicit operator CIN_IO_SOUND_76(CIN_IO_SOUND_75 self)
+        {
+            return new CIN_IO_SOUND_76()
+            {
+                soundId = -1,
+                soundPath = self.soundPath,
+            };
+        }
     }
 
     public class CIN_IO_SOUND_75 : CIN_IO_SOUND_BASE
@@ -37,6 +46,14 @@ namespace ArxLibertatisEditorIO.RawIO.CIN
         public override void WriteTo(StructWriter writer)
         {
             writer.Write(soundPath);
+        }
+
+        public static explicit operator CIN_IO_SOUND_75(CIN_IO_SOUND_76 self)
+        {
+            return new CIN_IO_SOUND_75()
+            {
+                soundPath = self.soundPath,
+            };
         }
     }
 }

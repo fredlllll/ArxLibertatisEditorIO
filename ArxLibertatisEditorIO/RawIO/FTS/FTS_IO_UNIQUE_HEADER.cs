@@ -2,7 +2,7 @@
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct FTS_IO_UNIQUE_HEADER
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
@@ -12,7 +12,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public int uncompressedsize;
         public fixed int pad[3];
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"path: {path}\n" +
                 $"count: {count}\n"+

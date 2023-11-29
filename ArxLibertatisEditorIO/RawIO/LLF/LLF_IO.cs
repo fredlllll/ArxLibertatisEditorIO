@@ -11,9 +11,9 @@ namespace ArxLibertatisEditorIO.RawIO.LLF
         public DANAE_IO_LIGHTINGHEADER lightingHeader;
         public uint[] lightColors;
 
-        public void LoadFrom(Stream s)
+        public void ReadFrom(Stream s)
         {
-            var reader = new StructReader(s);
+            using var reader = new StructReader(s, System.Text.Encoding.ASCII, true);
 
             header = reader.ReadStruct<LLF_IO_HEADER>();
 
@@ -34,7 +34,7 @@ namespace ArxLibertatisEditorIO.RawIO.LLF
 
         public void WriteTo(Stream s)
         {
-            var writer = new StructWriter(s);
+            using var writer = new StructWriter(s, System.Text.Encoding.ASCII, true);
 
             header.numLights = lights.Length;
             lightingHeader.numLights = lightColors.Length;
@@ -56,31 +56,12 @@ namespace ArxLibertatisEditorIO.RawIO.LLF
 
         public static Stream EnsureUnpacked(Stream s)
         {
-            s.Position = 0;
-            byte[] packed = new byte[s.Length];
-            s.Read(packed, 0, packed.Length);
-            byte[] unpacked = ArxIO.Unpack(packed);
-
-            MemoryStream ms = new MemoryStream();
-            ms.Write(unpacked, 0, unpacked.Length);
-            ms.Position = 0;
-            s.Dispose(); //close old stream
-            return ms;
+            return CompressionUtil.EnsureUncompressed(s, 0, s.Length);
         }
 
         public static Stream EnsurePacked(Stream s)
         {
-            s.Position = 0;
-            byte[] unpacked = new byte[s.Length];
-            s.Read(unpacked, 0, unpacked.Length);
-            byte[] packed = ArxIO.Pack(unpacked);
-
-            MemoryStream ms = new MemoryStream(packed)
-            {
-                Position = 0
-            };
-            s.Dispose(); //close old stream
-            return ms;
+            return CompressionUtil.EnsureCompressed(s, 0, s.Length);
         }
     }
 }

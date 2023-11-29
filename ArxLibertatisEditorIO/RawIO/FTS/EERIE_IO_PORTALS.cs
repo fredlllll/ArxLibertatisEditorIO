@@ -11,7 +11,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public short useportal;
         public short paddy;
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"poly: {poly}\n" +
                 $"room_1: {room_1}\n" +

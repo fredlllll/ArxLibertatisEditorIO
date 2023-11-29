@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct FTS_IO_TEXTURE_CONTAINER
     {
         public int tc;
@@ -11,10 +11,10 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
         public byte[] fic;
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"tc: {tc}\n" +
-                $"tmp: {temp}\n" + 
+                $"tmp: {temp}\n" +
                 $"fic: {IOHelper.GetString(fic)}";
         }
     }

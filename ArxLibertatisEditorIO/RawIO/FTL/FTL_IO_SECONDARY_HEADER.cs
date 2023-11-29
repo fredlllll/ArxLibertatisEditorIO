@@ -2,7 +2,7 @@
 
 namespace ArxLibertatisEditorIO.RawIO.FTL
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct FTL_IO_SECONDARY_HEADER
     {
         //offsets of the sections in the file, -1 means the section is not present

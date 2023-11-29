@@ -2,7 +2,7 @@
 
 namespace ArxLibertatisEditorIO.RawIO.FTL
 {
-    public struct FTL_IO_3D_DATA_SECTION
+    public class FTL_IO_3D_DATA_SECTION
     {
         public FTL_IO_3D_DATA_HEADER header;
 

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTL
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct EERIE_FACE_FTL
     {
         public PolyType facetype; // 0 = flat, 1 = text, 2 = Double-Side

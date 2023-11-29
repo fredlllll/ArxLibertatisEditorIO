@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.LLF
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct LLF_IO_HEADER
     {
         public float version;
@@ -21,7 +21,7 @@ namespace ArxLibertatisEditorIO.RawIO.LLF
         public fixed byte cpad[4096];
         public fixed int ipad2[256];
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"version: {version}\n" +
                 $"identifier: {IOHelper.GetString(identifier)}\n" +

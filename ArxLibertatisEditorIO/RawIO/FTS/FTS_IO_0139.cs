@@ -1,9 +1,12 @@
 ﻿using ArxLibertatisEditorIO.Util;
-using System;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
+    /// <summary>
+    /// demo levels use version 139
+    /// </summary>
     public class FTS_IO_0139
     {
         public FTS_IO_UNIQUE_HEADER_0139 header;
@@ -18,9 +21,9 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public FTS_IO_ROOM[] rooms;
         public FTS_IO_ROOM_DIST_DATA[] roomDistances;
 
-        public void LoadFrom(Stream s)
+        public void ReadFrom(Stream stream)
         {
-            StructReader reader = new StructReader(s);
+            using StructReader reader = new StructReader(stream, System.Text.Encoding.ASCII, true);
 
             header = reader.ReadStruct<FTS_IO_UNIQUE_HEADER_0139>();
 
@@ -111,7 +114,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             sceneHeader.nb_portals = portals.Length;
             sceneHeader.nb_rooms = rooms.Length - 1;
 
-            StructWriter writer = new StructWriter(s);
+            using StructWriter writer = new StructWriter(s, System.Text.Encoding.ASCII, true);
 
             writer.WriteStruct(header);
 
@@ -177,9 +180,9 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             {
                 var c = cells[i];
                 var oc = new FTS_IO_CELL();
-                (int x, int z)=IOHelper.CellIndexToXZ(i, 160);
+                (int x, int z) = IOHelper.CellIndexToXZ(i, 160);
 
-                c.WriteTo(ref oc,x*100,z*100);
+                c.WriteTo(ref oc, x * 100, z * 100);
                 other.cells[i] = oc;
             }
 
@@ -189,55 +192,28 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             other.roomDistances = roomDistances;
         }
 
-        public static Stream EnsureUnpacked(Stream s)
+        static long GetHeaderSize(Stream stream)
         {
-            s.Position = 0;
-            var reader = new StructReader(s, System.Text.Encoding.ASCII, true);
-
-            MemoryStream ms = new MemoryStream();
-            StructWriter writer = new StructWriter(ms, System.Text.Encoding.ASCII, true);
+            long start = stream.Position;
+            using var reader = new StructReader(stream, System.Text.Encoding.ASCII, true);
 
             var header = reader.ReadStruct<FTS_IO_UNIQUE_HEADER_0139>();
-            writer.WriteStruct(header);
+            long size = Marshal.SizeOf<FTS_IO_UNIQUE_HEADER_0139>();
+            size += header.count * Marshal.SizeOf<FTS_IO_UNIQUE_HEADER2>();
+            stream.Position = start;
+            return size;
+        }
 
-            for (int i = 0; i < header.count; i++)
-            {
-                writer.WriteStruct(reader.ReadStruct<FTS_IO_UNIQUE_HEADER2>());
-            }
-            Console.WriteLine("unpack offset: " + reader.BaseStream.Position);
-
-            byte[] restOfFile = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
-            byte[] unpacked = ArxIO.Unpack(restOfFile);
-
-            writer.Write(unpacked); //write unpacked rest
-            s.Dispose(); //close old stream
-            ms.Position = 0;
-            return ms;
+        public static Stream EnsureUnpacked(Stream s)
+        {
+            long headerSize = GetHeaderSize(s);
+            return CompressionUtil.EnsureUncompressed(s, headerSize, s.Length - headerSize);
         }
 
         public static Stream EnsurePacked(Stream s)
         {
-            s.Position = 0;
-            StructReader reader = new StructReader(s);
-            MemoryStream ms = new MemoryStream();
-            StructWriter writer = new StructWriter(ms, System.Text.Encoding.ASCII, true);
-
-            var header = reader.ReadStruct<FTS_IO_UNIQUE_HEADER_0139>();
-            writer.WriteStruct(header);
-
-            for (int i = 0; i < header.count; i++)
-            {
-                writer.WriteStruct(reader.ReadStruct<FTS_IO_UNIQUE_HEADER2>());
-            }
-
-            byte[] restOfFile = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
-            byte[] packed = ArxIO.Pack(restOfFile);
-
-            ms.Write(packed, 0, packed.Length);
-            ms.Position = 0;
-
-            s.Dispose();
-            return ms;
+            long headerSize = GetHeaderSize(s);
+            return CompressionUtil.EnsureCompressed(s, headerSize, s.Length - headerSize);
         }
     }
 }

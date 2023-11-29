@@ -37,7 +37,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             anchors.AddRange(cell.anchors);
         }
 
-        internal void WriteTo(ref FTS_IO_CELL cell)
+        internal void WriteTo(FTS_IO_CELL cell)
         {
             IOHelper.EnsureArraySize(ref cell.polygons, polygons.Count);
             for (int i = 0; i < polygons.Count; ++i)

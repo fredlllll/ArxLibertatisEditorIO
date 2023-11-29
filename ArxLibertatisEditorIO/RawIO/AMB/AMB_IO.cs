@@ -13,9 +13,9 @@ namespace ArxLibertatisEditorIO.RawIO.AEF
         public AMB_IO_HEADER header;
         public AMB_IO_TRACK_BASE[] tracks;
 
-        public void ReadFrom(Stream dataStream)
+        public void ReadFrom(Stream stream)
         {
-            using StructReader reader = new StructReader(dataStream);
+            using StructReader reader = new StructReader(stream, System.Text.Encoding.ASCII, true);
 
             header = reader.ReadStruct<AMB_IO_HEADER>();
 
@@ -42,7 +42,7 @@ namespace ArxLibertatisEditorIO.RawIO.AEF
             }
         }
 
-        public void WriteTo(Stream dataStream)
+        public void WriteTo(Stream stream)
         {
             switch (header.version)
             {
@@ -61,7 +61,7 @@ namespace ArxLibertatisEditorIO.RawIO.AEF
             }
             header.nbtracks = (uint)tracks.Length;
 
-            using StructWriter writer = new StructWriter(dataStream);
+            using StructWriter writer = new StructWriter(stream, System.Text.Encoding.ASCII, true);
 
             writer.WriteStruct(header);
             for (int i = 0; i < tracks.Length; i++)

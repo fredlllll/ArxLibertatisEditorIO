@@ -8,8 +8,8 @@ namespace ArxLibertatisEditorIO.RawIO.AMB
         INTERPOLATE = 2,
     }
 
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public unsafe struct AMB_IO_KEY_SETTING
+    [StructLayout(LayoutKind.Sequential)]
+    public struct AMB_IO_KEY_SETTING
     {
         public float min;
         public float max;

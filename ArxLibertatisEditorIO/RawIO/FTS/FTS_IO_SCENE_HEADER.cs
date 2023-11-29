@@ -17,7 +17,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         internal int nb_portals;
         internal int nb_rooms;
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"version: {version}\n" +
                 $"sizex: {sizex}\n" +

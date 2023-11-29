@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.FTS
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct EERIE_IO_EERIEPOLY
     {
         public PolyType type;
@@ -25,7 +25,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public short room;
         public short misc;
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"type: {type}\n" +
                 $"min: {min}\n" +

@@ -34,5 +34,17 @@ namespace ArxLibertatisEditorIO.RawIO.AMB
                 writer.WriteStruct(keys[i]);
             }
         }
+
+        public static explicit operator AMB_IO_TRACK_1003(AMB_IO_TRACK_1002 self)
+        {
+            return new AMB_IO_TRACK_1003()
+            {
+                sampleName = self.sampleName,
+                name = new byte[] { 0 },
+                flags = self.flags,
+                keyCount = self.keyCount,
+                keys = self.keys, //dont have to reverse them here as they are only stored in reverse
+            };
+        }
     }
 }

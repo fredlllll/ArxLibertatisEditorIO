@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace ArxLibertatisEditorIO.RawIO.CIN
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public unsafe struct CIN_IO_KEY_76
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CIN_IO_KEY_76
     {
         public int frame;
         public int numbitmap;

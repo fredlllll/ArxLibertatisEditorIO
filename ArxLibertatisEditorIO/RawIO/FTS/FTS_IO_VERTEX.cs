@@ -11,7 +11,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
         public float texU;
         public float texV;
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"posY: {posY}\n posX: {posX}\n posZ: {posZ}\ntexU: {texU}\ntexV: {texV}";
         }

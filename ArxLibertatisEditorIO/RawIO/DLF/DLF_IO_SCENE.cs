@@ -2,7 +2,7 @@
 
 namespace ArxLibertatisEditorIO.RawIO.DLF
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct DLF_IO_SCENE
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 512)]

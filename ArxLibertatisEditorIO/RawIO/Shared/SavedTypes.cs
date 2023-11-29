@@ -18,7 +18,7 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
             b = col.b;
         }
 
-        public Color ToColor()
+        public readonly Color ToColor()
         {
             return new Color(r, g, b);
         }
@@ -38,7 +38,7 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
             z = vec.Z;
         }
 
-        public Vector3 ToVector3()
+        public readonly Vector3 ToVector3()
         {
             return new Vector3(x, y, z);
         }
@@ -63,7 +63,7 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
             g = euler.Z;
         }
 
-        public Vector3 ToEuler()
+        public readonly Vector3 ToEuler()
         {
             return new Vector3(a, b - 90, g); //TODO: seems that rotation is handled differently depending on what type of object its used on...
         }
@@ -79,7 +79,7 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
         public float tu;
         public float tv;
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return $"pos: {pos}\n" +
                 $"rhw: {rhw}\n" +

@@ -17,62 +17,61 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
         public byte[] nodesData;
         public DLF_IO_PATH[] paths;
 
-        public void LoadFrom(Stream unpackedStream)
+        public void ReadFrom(Stream stream)
         {
-            using (StructReader reader = new StructReader(unpackedStream, System.Text.Encoding.ASCII, true))
+            using StructReader reader = new StructReader(stream, System.Text.Encoding.ASCII, true);
+
+            header = reader.ReadStruct<DLF_IO_HEADER>();
+
+            scenes = new DLF_IO_SCENE[header.numScenes];
+            for (int i = 0; i < header.numScenes; i++)
             {
-                header = reader.ReadStruct<DLF_IO_HEADER>();
+                scenes[i] = reader.ReadStruct<DLF_IO_SCENE>();
+            }
 
-                scenes = new DLF_IO_SCENE[header.numScenes];
-                for (int i = 0; i < header.numScenes; i++)
+            inters = new DLF_IO_INTER[header.numInters];
+            for (int i = 0; i < header.numInters; i++)
+            {
+                inters[i] = reader.ReadStruct<DLF_IO_INTER>();
+            }
+
+            if (header.lighting != 0)
+            {
+                lightingHeader = reader.ReadStruct<DANAE_IO_LIGHTINGHEADER>();
+
+                lightColors = new uint[lightingHeader.numLights];
+                for (int i = 0; i < lightingHeader.numLights; i++)
                 {
-                    scenes[i] = reader.ReadStruct<DLF_IO_SCENE>();
+                    lightColors[i] = reader.ReadUInt32(); //TODO is apparently BGRA if its in compact mode.
                 }
+            }
 
-                inters = new DLF_IO_INTER[header.numInters];
-                for (int i = 0; i < header.numInters; i++)
-                {
-                    inters[i] = reader.ReadStruct<DLF_IO_INTER>();
-                }
+            lights = new DANAE_IO_LIGHT[header.numLights];
+            for (int i = 0; i < header.numLights; i++)
+            {
+                lights[i] = reader.ReadStruct<DANAE_IO_LIGHT>();
+            }
 
-                if (header.lighting != 0)
-                {
-                    lightingHeader = reader.ReadStruct<DANAE_IO_LIGHTINGHEADER>();
+            fogs = new DLF_IO_FOG[header.numFogs];
+            for (int i = 0; i < header.numFogs; i++)
+            {
+                fogs[i] = reader.ReadStruct<DLF_IO_FOG>();
+            }
 
-                    lightColors = new uint[lightingHeader.numLights];
-                    for (int i = 0; i < lightingHeader.numLights; i++)
-                    {
-                        lightColors[i] = reader.ReadUInt32(); //TODO is apparently BGRA if its in compact mode.
-                    }
-                }
+            // Skip nodes, dont know why
+            //save in var so we can write it back later
+            nodesData = reader.ReadBytes(header.numNodes * (204 + header.numNodelinks * 64));
 
-                lights = new DANAE_IO_LIGHT[header.numLights];
-                for (int i = 0; i < header.numLights; i++)
-                {
-                    lights[i] = reader.ReadStruct<DANAE_IO_LIGHT>();
-                }
-
-                fogs = new DLF_IO_FOG[header.numFogs];
-                for (int i = 0; i < header.numFogs; i++)
-                {
-                    fogs[i] = reader.ReadStruct<DLF_IO_FOG>();
-                }
-
-                // Skip nodes, dont know why
-                //save in var so we can write it back later
-                nodesData = reader.ReadBytes(header.numNodes * (204 + header.numNodelinks * 64));
-
-                paths = new DLF_IO_PATH[header.numPaths];
-                for (int i = 0; i < header.numPaths; i++)
-                {
-                    var path = new DLF_IO_PATH();
-                    path.ReadFrom(reader);
-                    paths[i] = path;
-                }
+            paths = new DLF_IO_PATH[header.numPaths];
+            for (int i = 0; i < header.numPaths; i++)
+            {
+                var path = new DLF_IO_PATH();
+                path.ReadFrom(reader);
+                paths[i] = path;
             }
         }
 
-        public void WriteTo(Stream s)
+        public void WriteTo(Stream stream)
         {
             header.numScenes = scenes.Length;
             header.numInters = inters.Length;
@@ -80,95 +79,68 @@ namespace ArxLibertatisEditorIO.RawIO.DLF
             header.numFogs = fogs.Length;
             header.numPaths = paths.Length;
 
-            using (StructWriter writer = new StructWriter(s, System.Text.Encoding.ASCII, true))
+            using StructWriter writer = new StructWriter(stream, System.Text.Encoding.ASCII, true);
+
+            writer.WriteStruct(header);
+
+            for (int i = 0; i < scenes.Length; i++)
             {
-                writer.WriteStruct(header);
+                writer.WriteStruct(scenes[i]);
+            }
 
-                for (int i = 0; i < scenes.Length; i++)
+            for (int i = 0; i < inters.Length; i++)
+            {
+                writer.WriteStruct(inters[i]);
+            }
+
+            if (header.lighting != 0)
+            {
+                lightingHeader.numLights = lightColors.Length;
+                writer.WriteStruct(lightingHeader);
+
+                for (int i = 0; i < lightColors.Length; i++)
                 {
-                    writer.WriteStruct(scenes[i]);
+                    writer.Write(lightColors[i]);
                 }
+            }
 
-                for (int i = 0; i < inters.Length; i++)
-                {
-                    writer.WriteStruct(inters[i]);
-                }
+            for (int i = 0; i < lights.Length; i++)
+            {
+                writer.WriteStruct(lights[i]);
+            }
 
-                if (header.lighting != 0)
-                {
-                    lightingHeader.numLights = lightColors.Length;
-                    writer.WriteStruct(lightingHeader);
+            for (int i = 0; i < fogs.Length; i++)
+            {
+                writer.WriteStruct(fogs[i]);
+            }
 
-                    for (int i = 0; i < lightColors.Length; i++)
-                    {
-                        writer.Write(lightColors[i]);
-                    }
-                }
+            //write back nodes data
+            writer.Write(nodesData);
 
-                for (int i = 0; i < lights.Length; i++)
-                {
-                    writer.WriteStruct(lights[i]);
-                }
-
-                for (int i = 0; i < fogs.Length; i++)
-                {
-                    writer.WriteStruct(fogs[i]);
-                }
-
-                //write back nodes data
-                writer.Write(nodesData);
-
-                for (int i = 0; i < paths.Length; i++)
-                {
-                    paths[i].WriteTo(writer);
-                }
+            for (int i = 0; i < paths.Length; i++)
+            {
+                paths[i].WriteTo(writer);
             }
         }
 
-        public static Stream EnsureUnpacked(Stream s)
+        public static Stream EnsureUnpacked(Stream stream)
         {
-            var reader = new StructReader(s, System.Text.Encoding.ASCII, true);
-            var streamStart = s.Position;
+            using var reader = new StructReader(stream, System.Text.Encoding.ASCII, true);
 
             var version = reader.ReadSingle(); //read just version
-            s.Position = streamStart; //back to start for further processing
+            stream.Position -= sizeof(float);//back to start for further processing
             if (version >= 1.44f)
             {
-                var header = reader.ReadStruct<DLF_IO_HEADER>(); //read full header
-
-                MemoryStream ms = new MemoryStream();
-
-                StructWriter writer = new StructWriter(ms, System.Text.Encoding.ASCII, true);
-                writer.WriteStruct(header); //write header
-
-                byte[] restOfFile = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
-                byte[] unpacked = ArxIO.Unpack(restOfFile);
-
-                writer.Write(unpacked); //write unpacked rest
-                s.Dispose(); //close old stream
-                ms.Position = 0;
-                return ms;
+                var headerSize = Marshal.SizeOf<DLF_IO_HEADER>();
+                return CompressionUtil.EnsureUncompressed(stream, headerSize, stream.Length - headerSize);
             }
-            return s; //no need to unpack, return input stream
+            return stream; //no need to unpack, return input stream
         }
 
-        public static Stream EnsurePacked(Stream s)
+        public static Stream EnsurePacked(Stream stream)
         {
-            s.Position = 0;
-            MemoryStream ms = new MemoryStream();
-
-            BinaryReader reader = new BinaryReader(s);
-            byte[] header = reader.ReadBytes(Marshal.SizeOf(typeof(DLF_IO_HEADER)));
-            byte[] restOfFile = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
-
-            byte[] packed = ArxIO.Pack(restOfFile);
-
-            ms.Write(header, 0, header.Length);
-            ms.Write(packed, 0, packed.Length);
-            ms.Position = 0;
-
-            s.Dispose();
-            return ms;
+            var headerSize = Marshal.SizeOf<DLF_IO_HEADER>();
+            return CompressionUtil.EnsureCompressed(stream, headerSize, stream.Length - headerSize);
         }
     }
 }

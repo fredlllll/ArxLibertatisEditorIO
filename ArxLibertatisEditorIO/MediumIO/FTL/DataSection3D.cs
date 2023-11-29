@@ -66,7 +66,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
             }
         }
 
-        public void WriteTo(ref FTL_IO_3D_DATA_SECTION _3DDataSection)
+        public void WriteTo(FTL_IO_3D_DATA_SECTION _3DDataSection)
         {
             header.WriteTo(ref _3DDataSection.header);
 

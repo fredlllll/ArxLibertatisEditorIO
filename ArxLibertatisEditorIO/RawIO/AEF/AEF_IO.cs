@@ -14,9 +14,9 @@ namespace ArxLibertatisEditorIO.RawIO.AEF
         public float reverb_decay;
         public float reverb_hf_decay;
 
-        public void ReadFrom(Stream dataStream)
+        public void ReadFrom(Stream stream)
         {
-            using BinaryReader reader = new BinaryReader(dataStream);
+            using BinaryReader reader = new BinaryReader(stream, System.Text.Encoding.ASCII, true);
             size = reader.ReadSingle();
             diffusion = reader.ReadSingle();
             absorption = reader.ReadSingle();
@@ -28,9 +28,9 @@ namespace ArxLibertatisEditorIO.RawIO.AEF
             reverb_hf_decay = reader.ReadSingle();
         }
 
-        public void WriteTo(Stream dataStream)
+        public void WriteTo(Stream stream)
         {
-            using BinaryWriter writer = new BinaryWriter(dataStream);
+            using BinaryWriter writer = new BinaryWriter(stream, System.Text.Encoding.ASCII, true);
             writer.Write(size);
             writer.Write(diffusion);
             writer.Write(absorption);
