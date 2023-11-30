@@ -13,7 +13,7 @@ namespace ArxLibertatisEditorIO.WellDoneIO
         internal readonly Dictionary<int, string> tcToTex = new Dictionary<int, string>();
         internal readonly Dictionary<string, int> texToTc = new Dictionary<string, int>();
 
-        public MediumArxLevel LoadLevel(MediumArxLevel mal)
+        public WellDoneArxLevel LoadFrom(MediumArxLevel mal)
         {
             //make texture dict
             tcToTex.Clear();
@@ -42,10 +42,10 @@ namespace ArxLibertatisEditorIO.WellDoneIO
             }
 
             tcToTex.Clear();
-            return mal;
+            return this;
         }
 
-        public MediumArxLevel SaveLevel(MediumArxLevel mal)
+        public MediumArxLevel SaveTo(MediumArxLevel mal)
         {
             texToTc.Clear();
 
@@ -124,10 +124,12 @@ namespace ArxLibertatisEditorIO.WellDoneIO
                     var p = c.polygons[j];
                     if (p.room >= 0)
                     {
-                        var rp = new MediumIO.FTS.RoomPolygon();
-                        rp.cell_x = (short)cellx;
-                        rp.cell_z = (short)cellz;
-                        rp.idx = (short)j;
+                        var rp = new MediumIO.FTS.RoomPolygon
+                        {
+                            cell_x = (short)cellx,
+                            cell_z = (short)cellz,
+                            idx = (short)j
+                        };
                         var room = mal.FTS.rooms[p.room];
                         room.polygons.Add(rp);
                     }
@@ -146,10 +148,12 @@ namespace ArxLibertatisEditorIO.WellDoneIO
                     var center1 = room1.CalculateCenter(mal.FTS);
                     var center2 = room2.CalculateCenter(mal.FTS);
 
-                    var rd = new MediumIO.FTS.RoomDistance();
-                    rd.distance = Vector3.Distance(center1, center2);
-                    rd.startpos = center1;
-                    rd.endpos = center2;
+                    var rd = new MediumIO.FTS.RoomDistance
+                    {
+                        distance = Vector3.Distance(center1, center2),
+                        startpos = center1,
+                        endpos = center2
+                    };
                     mal.FTS.roomDistances.Add(rd);
                 }
             }
@@ -179,7 +183,7 @@ namespace ArxLibertatisEditorIO.WellDoneIO
             return mal;
         }
 
-        internal static Tuple<int, int> GetPolygonCellPos(Polygon polygon)
+        private static Tuple<int, int> GetPolygonCellPos(Polygon polygon)
         {
             float x = 0;
             float z = 0;
@@ -196,7 +200,7 @@ namespace ArxLibertatisEditorIO.WellDoneIO
             return GetCellPos(x, z);
         }
 
-        internal static Tuple<int, int> GetCellPos(float x, float z)
+        private static Tuple<int, int> GetCellPos(float x, float z)
         {
             return new Tuple<int, int>((int)(x / 100), (int)(z / 100));
         }

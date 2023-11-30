@@ -12,7 +12,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public Vector3 playerpos;
         public Vector3 Mscenepos;
 
-        internal void ReadFrom(FTS_IO_SCENE_HEADER header)
+        public void LoadFrom(ref FTS_IO_SCENE_HEADER header)
         {
             string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
@@ -23,7 +23,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             Mscenepos = header.Mscenepos.ToVector3();
         }
 
-        internal void WriteTo(ref FTS_IO_SCENE_HEADER header)
+        public void SaveTo(ref FTS_IO_SCENE_HEADER header)
         {
             string vers = version.Major + "." + version.Minor;
             header.version = float.Parse(vers, System.Globalization.CultureInfo.InvariantCulture);

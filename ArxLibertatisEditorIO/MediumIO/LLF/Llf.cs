@@ -14,10 +14,10 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
 
         public void LoadFrom(LLF_IO llf)
         {
-            header.ReadFrom(llf.header);
+            header.LoadFrom(llf.header);
 
             lightColors.Clear();
-            lightingHeader.ReadFrom(llf.lightingHeader);
+            lightingHeader.ReadFrom(ref llf.lightingHeader);
             for (int i = 0; i < llf.lightingHeader.numLights; ++i)
             {
                 lightColors.Add(IOHelper.ColorFromBGRA(llf.lightColors[i]));
@@ -27,16 +27,16 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
             for (int i = 0; i < llf.header.numLights; ++i)
             {
                 var light = new Light();
-                light.ReadFrom(llf.lights[i]);
+                light.ReadFrom(ref llf.lights[i]);
                 lights.Add(light);
             }
         }
 
-        public void WriteTo(LLF_IO llf)
+        public void SaveTo(LLF_IO llf)
         {
-            header.WriteTo(ref llf.header);
+            header.SaveTo(ref llf.header);
 
-            lightingHeader.WriteTo(ref llf.lightingHeader);
+            lightingHeader.SaveTo(ref llf.lightingHeader);
             IOHelper.EnsureArraySize(ref llf.lightColors, lightColors.Count);
             for (int i = 0; i < lightColors.Count; ++i)
             {

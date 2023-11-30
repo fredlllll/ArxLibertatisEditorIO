@@ -60,7 +60,7 @@ namespace ArxLibertatisEditorIO.RawIO
             }
         }
 
-        public void LoadLevel(string name)
+        public RawArxLevel LoadLevel(string name)
         {
             LevelName = name;
 
@@ -69,6 +69,7 @@ namespace ArxLibertatisEditorIO.RawIO
             string ftsPath = ArxPaths.GetFtsPath(name);
 
             LoadLevel(dlfPath, llfPath, ftsPath);
+            return this;
         }
 
         public void SaveLevel(string dlfPath, string llfPath, string ftsPath)
@@ -84,11 +85,9 @@ namespace ArxLibertatisEditorIO.RawIO
                 dlf.WriteTo(ms);
                 ms.Position = 0;
                 Directory.CreateDirectory(Path.GetDirectoryName(dlfPath));
-                using (var packedStream = DLF_IO.EnsurePacked(ms))
-                using (FileStream fs = new FileStream(dlfPath, FileMode.Create, FileAccess.Write))
-                {
-                    packedStream.CopyTo(fs);
-                }
+                using var packedStream = DLF_IO.EnsurePacked(ms);
+                using FileStream fs = new FileStream(dlfPath, FileMode.Create, FileAccess.Write);
+                packedStream.CopyTo(fs);
             }
 
             using (MemoryStream ms = new MemoryStream())
@@ -96,11 +95,9 @@ namespace ArxLibertatisEditorIO.RawIO
                 llf.WriteTo(ms);
                 ms.Position = 0;
                 Directory.CreateDirectory(Path.GetDirectoryName(llfPath));
-                using (var packedStream = LLF_IO.EnsurePacked(ms))
-                using (FileStream fs = new FileStream(llfPath, FileMode.Create, FileAccess.Write))
-                {
-                    packedStream.CopyTo(fs);
-                }
+                using var packedStream = LLF_IO.EnsurePacked(ms);
+                using FileStream fs = new FileStream(llfPath, FileMode.Create, FileAccess.Write);
+                packedStream.CopyTo(fs);
             }
 
             using (MemoryStream ms = new MemoryStream())
@@ -109,11 +106,9 @@ namespace ArxLibertatisEditorIO.RawIO
 
                 ms.Position = 0;
                 Directory.CreateDirectory(Path.GetDirectoryName(ftsPath));
-                using (var packedStream = FTS_IO.EnsurePacked(ms))
-                using (FileStream fs = new FileStream(ftsPath, FileMode.Create, FileAccess.Write))
-                {
-                    packedStream.CopyTo(fs);
-                }
+                using var packedStream = FTS_IO.EnsurePacked(ms);
+                using FileStream fs = new FileStream(ftsPath, FileMode.Create, FileAccess.Write);
+                packedStream.CopyTo(fs);
             }
         }
 

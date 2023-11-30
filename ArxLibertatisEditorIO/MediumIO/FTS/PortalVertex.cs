@@ -14,7 +14,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public float tv;
         public Vector3 normal;
 
-        internal void ReadFrom(EERIE_IO_EERIEPOLY poly, int index)
+        public void LoadFrom(ref EERIE_IO_EERIEPOLY poly, int index)
         {
             var vert = poly.v[index];
             pos = vert.pos.ToVector3();
@@ -26,7 +26,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             normal = poly.nrml[index].ToVector3();
         }
 
-        internal void WriteTo(ref EERIE_IO_EERIEPOLY poly, int index)
+        public void SaveTo(ref EERIE_IO_EERIEPOLY poly, int index)
         {
             poly.v[index].pos = new RawIO.Shared.SavedVec3(pos);
             poly.v[index].rhw = rhw;

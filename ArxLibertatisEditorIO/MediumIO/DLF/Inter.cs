@@ -12,7 +12,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
         public int identifier;
         public int flags; //apparently completely unused on level load
 
-        internal void ReadFrom(DLF_IO_INTER inter)
+        public void LoadFrom(ref DLF_IO_INTER inter)
         {
             name = IOHelper.GetString(inter.name);
             position = inter.pos.ToVector3();
@@ -21,7 +21,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             flags = inter.flags;
         }
 
-        internal void WriteTo(ref DLF_IO_INTER inter)
+        public void SaveTo(ref DLF_IO_INTER inter)
         {
             inter.name = IOHelper.GetBytes(name, 512);
             inter.pos = new RawIO.Shared.SavedVec3(position);

@@ -23,7 +23,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public short room;
         public short misc;
 
-        internal void ReadFrom(EERIE_IO_EERIEPOLY poly)
+        public void LoadFrom(ref EERIE_IO_EERIEPOLY poly)
         {
             type = poly.type;
             min = poly.min.ToVector3();
@@ -39,11 +39,11 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             misc = poly.misc;
             for (int i = 0; i < 4; ++i)
             {
-                vertices[i].ReadFrom(poly, i);
+                vertices[i].LoadFrom(ref poly, i);
             }
         }
 
-        internal void WriteTo(ref EERIE_IO_EERIEPOLY poly)
+        public void SaveTo(ref EERIE_IO_EERIEPOLY poly)
         {
             poly.type = type;
             poly.min = new RawIO.Shared.SavedVec3(min);

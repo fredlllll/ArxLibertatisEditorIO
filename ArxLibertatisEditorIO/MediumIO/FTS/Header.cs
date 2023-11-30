@@ -9,7 +9,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public string path;
         public Version version = new Version(0, 141);
 
-        internal void ReadFrom(FTS_IO_UNIQUE_HEADER header)
+        public void LoadFrom(ref FTS_IO_UNIQUE_HEADER header)
         {
             string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
@@ -17,7 +17,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             path = IOHelper.GetString(header.path);
         }
 
-        internal void WriteTo(ref FTS_IO_UNIQUE_HEADER header)
+        public void SaveTo(ref FTS_IO_UNIQUE_HEADER header)
         {
             string vers = version.Major + "." + version.Minor;
             header.version = float.Parse(vers, System.Globalization.CultureInfo.InvariantCulture);

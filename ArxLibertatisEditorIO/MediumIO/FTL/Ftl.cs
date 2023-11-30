@@ -9,14 +9,11 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
 
         public void LoadFrom(FTL_IO ftl)
         {
-            primaryHeader.ReadFrom(ftl.header);
+            primaryHeader.LoadFrom(ref ftl.header);
             if (ftl.has3DDataSection)
             {
-                if (dataSection3D == null)
-                {
-                    dataSection3D = new DataSection3D();
-                }
-                dataSection3D.ReadFrom(ftl._3DDataSection);
+                dataSection3D ??= new DataSection3D();
+                dataSection3D.LoadFrom(ftl._3DDataSection);
             }
             else
             {
@@ -24,13 +21,13 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
             }
         }
 
-        public void WriteTo(FTL_IO ftl)
+        public void SaveTo(FTL_IO ftl)
         {
-            primaryHeader.WriteTo(ref ftl.header);
+            primaryHeader.SaveTo(ref ftl.header);
 
             if (dataSection3D != null)
             {
-                dataSection3D.WriteTo(ref ftl._3DDataSection);
+                dataSection3D.SaveTo(ftl._3DDataSection);
                 ftl.has3DDataSection = true;
             }
             else

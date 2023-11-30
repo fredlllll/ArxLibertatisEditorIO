@@ -33,11 +33,11 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             get { return !IsQuad; }
         }
 
-        public void ReadFrom(FTS_IO_EERIEPOLY polygon)
+        public void LoadFrom(ref FTS_IO_EERIEPOLY polygon)
         {
             for (int i = 0; i < 4; ++i)
             {
-                vertices[i].ReadFrom(polygon, i);
+                vertices[i].LoadFrom(ref polygon, i);
             }
             norm = polygon.norm.ToVector3();
             norm2 = polygon.norm2.ToVector3();
@@ -48,13 +48,13 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             transVal = polygon.transval;
         }
 
-        public void WriteTo(ref FTS_IO_EERIEPOLY polygon)
+        public void SaveTo(ref FTS_IO_EERIEPOLY polygon)
         {
             IOHelper.EnsureArraySize(ref polygon.vertices, 4);
             IOHelper.EnsureArraySize(ref polygon.normals, 4);
             for (int i = 0; i < 4; ++i)
             {
-                vertices[i].WriteTo(ref polygon, i);
+                vertices[i].SaveTo(ref polygon, i);
             }
             polygon.norm = new RawIO.Shared.SavedVec3(norm);
             polygon.norm2 = new RawIO.Shared.SavedVec3(norm2);

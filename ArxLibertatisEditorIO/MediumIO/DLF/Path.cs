@@ -8,20 +8,20 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
     {
         public readonly PathHeader pathHeader = new PathHeader();
         public readonly List<Pathway> pathways = new List<Pathway>();
-        internal void ReadFrom(DLF_IO_PATH path)
+        public void LoadFrom(DLF_IO_PATH path)
         {
-            pathHeader.ReadFrom(path.header);
+            pathHeader.LoadFrom(ref path.header);
 
             pathways.Clear();
             for (int i = 0; i < path.header.numPathways; ++i)
             {
                 var pathway = new Pathway();
-                pathway.ReadFrom(path.paths[i]);
+                pathway.LoadFrom(ref path.paths[i]);
                 pathways.Add(pathway);
             }
         }
 
-        internal void WriteTo(DLF_IO_PATH path)
+        public void SaveTo(DLF_IO_PATH path)
         {
             pathHeader.WriteTo(ref path.header);
 

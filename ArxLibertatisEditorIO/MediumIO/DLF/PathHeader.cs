@@ -18,7 +18,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
         public int height;
         public string ambiance;
 
-        internal void ReadFrom(DLF_IO_PATH_HEADER header)
+        public void LoadFrom(ref DLF_IO_PATH_HEADER header)
         {
             name = IOHelper.GetString(header.name);
             idx = header.idx;
@@ -33,7 +33,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             ambiance = IOHelper.GetString(header.ambiance);
         }
 
-        internal void WriteTo(ref DLF_IO_PATH_HEADER header)
+        public void WriteTo(ref DLF_IO_PATH_HEADER header)
         {
             header.name = IOHelper.GetBytes(name, 64);
             header.idx = idx;
@@ -50,19 +50,6 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
 
         public override string ToString()
         {
-            /*
-            public string name;
-        public short idx;
-        public short flags; //TODO: enum
-        public Vector3 initPos;
-        public Vector3 pos;
-        public Color color;
-        public float farClip;
-        public float reverb;
-        public float ambientMaxVolume;
-        public int height;
-        public string ambiance;
-            */
             return $"Name:{name}\n" +
                 $"Index:{idx}\n" +
                 $"Flags:{flags}\n" +

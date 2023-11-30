@@ -13,7 +13,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public AnchorFlags flags;
         public readonly List<int> linkedAnchors = new List<int>();
 
-        internal void ReadFrom(FTS_IO_ANCHOR anchor)
+        public void LoadFrom(FTS_IO_ANCHOR anchor)
         {
             pos = anchor.data.pos.ToVector3();
             radius = anchor.data.radius;
@@ -23,7 +23,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             linkedAnchors.AddRange(anchor.linkedAnchors);
         }
 
-        internal void WriteTo(FTS_IO_ANCHOR anchor)
+        public void SaveTo(FTS_IO_ANCHOR anchor)
         {
             anchor.data.pos = new RawIO.Shared.SavedVec3(pos);
             anchor.data.radius = radius;

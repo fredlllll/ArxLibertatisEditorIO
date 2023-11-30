@@ -10,14 +10,14 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
         public PathwayType flag = PathwayType.STANDARD;
         public uint time; //game time
 
-        internal void ReadFrom(DLF_IO_PATHWAYS path)
+        public void LoadFrom(ref DLF_IO_PATHWAYS path)
         {
             rpos = path.rpos.ToVector3();
             flag = path.flag;
             time = path.time;
         }
 
-        internal void WriteTo(ref DLF_IO_PATHWAYS path)
+        public void WriteTo(ref DLF_IO_PATHWAYS path)
         {
             path.rpos = new RawIO.Shared.SavedVec3(rpos);
             path.flag = flag;

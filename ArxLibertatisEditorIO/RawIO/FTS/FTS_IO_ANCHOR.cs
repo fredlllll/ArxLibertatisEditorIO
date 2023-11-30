@@ -40,7 +40,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             return size;
         }
 
-        public override readonly string ToString()
+        public override string ToString()
         {
             return $"data: {data}\nlinked anchors: {Output.ToString(linkedAnchors)}";
         }

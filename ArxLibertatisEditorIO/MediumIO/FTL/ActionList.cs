@@ -10,7 +10,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
         public int action;
         public int sfx;
 
-        public void ReadFrom(EERIE_ACTIONLIST_FTL action)
+        public void LoadFrom(EERIE_ACTIONLIST_FTL action)
         {
             name = IOHelper.GetString(action.name);
             indexVertex = action.idx;
@@ -18,7 +18,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
             sfx = action.sfx;
         }
 
-        public void WriteTo(ref EERIE_ACTIONLIST_FTL action)
+        public void SaveTo(ref EERIE_ACTIONLIST_FTL action)
         {
             action.name = IOHelper.GetBytes(name, 256);
             action.idx = indexVertex;

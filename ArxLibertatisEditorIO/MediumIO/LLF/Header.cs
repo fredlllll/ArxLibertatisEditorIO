@@ -10,7 +10,7 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
         public string lastUser = "ArxLibertatisEditorIO";
         public DateTimeOffset time = DateTimeOffset.UtcNow;
 
-        internal void ReadFrom(LLF_IO_HEADER header)
+        public void LoadFrom(LLF_IO_HEADER header)
         {
             string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
@@ -19,7 +19,7 @@ namespace ArxLibertatisEditorIO.MediumIO.LLF
             time = DateTimeOffset.FromUnixTimeSeconds(header.time);
         }
 
-        internal void WriteTo(ref LLF_IO_HEADER header)
+        public void SaveTo(ref LLF_IO_HEADER header)
         {
             string vers = version.Major + "." + version.Minor;
             header.version = float.Parse(vers, System.Globalization.CultureInfo.InvariantCulture);

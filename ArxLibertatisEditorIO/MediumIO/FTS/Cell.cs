@@ -23,13 +23,13 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public readonly List<Polygon> polygons = new List<Polygon>();
         public readonly List<int> anchors = new List<int>();
 
-        internal void ReadFrom(FTS_IO_CELL cell)
+        public void LoadFrom(FTS_IO_CELL cell)
         {
             polygons.Clear();
             for (int i = 0; i < cell.polygons.Length; ++i)
             {
                 var p = new Polygon();
-                p.ReadFrom(cell.polygons[i]);
+                p.LoadFrom(ref cell.polygons[i]);
                 polygons.Add(p);
             }
 
@@ -37,12 +37,12 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             anchors.AddRange(cell.anchors);
         }
 
-        internal void WriteTo(FTS_IO_CELL cell)
+        public void SaveTo(FTS_IO_CELL cell)
         {
             IOHelper.EnsureArraySize(ref cell.polygons, polygons.Count);
             for (int i = 0; i < polygons.Count; ++i)
             {
-                polygons[i].WriteTo(ref cell.polygons[i]);
+                polygons[i].SaveTo(ref cell.polygons[i]);
             }
 
             IOHelper.EnsureArraySize(ref cell.anchors, anchors.Count);

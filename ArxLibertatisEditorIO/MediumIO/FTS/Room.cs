@@ -10,7 +10,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public readonly List<int> portals = new List<int>();
         public readonly List<RoomPolygon> polygons = new List<RoomPolygon>();
 
-        internal void ReadFrom(FTS_IO_ROOM room)
+        public void LoadFrom(FTS_IO_ROOM room)
         {
             portals.Clear();
             portals.AddRange(room.portals);
@@ -19,12 +19,12 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             for (int i = 0; i < room.polygons.Length; ++i)
             {
                 var p = new RoomPolygon();
-                p.ReadFrom(room.polygons[i]);
+                p.LoadFrom(ref room.polygons[i]);
                 polygons.Add(p);
             }
         }
 
-        internal void WriteTo(FTS_IO_ROOM room)
+        public void SaveTo(FTS_IO_ROOM room)
         {
             room.data.nb_portals = portals.Count;
             room.data.nb_polys = polygons.Count;
@@ -38,7 +38,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             IOHelper.EnsureArraySize(ref room.polygons, polygons.Count);
             for (int i = 0; i < polygons.Count; ++i)
             {
-                polygons[i].WriteTo(ref room.polygons[i]);
+                polygons[i].SaveTo(ref room.polygons[i]);
             }
         }
 
@@ -60,10 +60,10 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
                 var p = cell.polygons[poly.idx];
 
                 var vertCount = p.VertexCount;
+                vertexCount += vertCount;
                 for (int j = 0; j < vertCount; ++j)
                 {
                     center += p.vertices[j].position;
-                    ++vertexCount;
                 }
             }
             return center / vertexCount;

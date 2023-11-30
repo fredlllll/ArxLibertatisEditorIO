@@ -19,7 +19,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
         public int blend; //TODO: enum probably? flags?
         public float frequency;
 
-        internal void ReadFrom(DLF_IO_FOG fog)
+        public void LoadFrom(ref DLF_IO_FOG fog)
         {
             position = fog.pos.ToVector3();
             color = fog.rgb.ToColor();
@@ -35,7 +35,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             frequency = fog.frequency;
         }
 
-        internal void WriteTo(ref DLF_IO_FOG fog)
+        public void SaveTo(ref DLF_IO_FOG fog)
         {
             fog.pos = new RawIO.Shared.SavedVec3(position);
             fog.rgb = new RawIO.Shared.SavedColor(color);

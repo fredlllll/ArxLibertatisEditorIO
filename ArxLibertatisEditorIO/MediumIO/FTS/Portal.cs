@@ -10,17 +10,17 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public int room_2;
         public bool useportal; //apparently overwritten every frame in the engine? why is it even here?
 
-        internal void ReadFrom(EERIE_IO_PORTALS portal)
+        public void LoadFrom(ref EERIE_IO_PORTALS portal)
         {
-            poly.ReadFrom(portal.poly);
+            poly.LoadFrom(ref portal.poly);
             room_1 = portal.room_1;
             room_2 = portal.room_2;
             useportal = portal.useportal != 0;
         }
 
-        internal void WriteTo(ref EERIE_IO_PORTALS portal)
+        public void SaveTo(ref EERIE_IO_PORTALS portal)
         {
-            poly.WriteTo(ref portal.poly);
+            poly.SaveTo(ref portal.poly);
             portal.room_1 = room_1;
             portal.room_2 = room_2;
             portal.useportal = (short)(useportal ? 1 : 0);

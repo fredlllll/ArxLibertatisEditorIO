@@ -31,19 +31,19 @@ namespace ArxLibertatisEditorIO.MediumIO
             fts = new Fts();
         }
 
-        public RawArxLevel LoadLevel(RawArxLevel raw)
+        public MediumArxLevel LoadFrom(RawArxLevel raw)
         {
             dlf.LoadFrom(raw.DLF);
             llf.LoadFrom(raw.LLF);
             fts.LoadFrom(raw.FTS);
-            return raw;
+            return this;
         }
 
-        public RawArxLevel SaveLevel(RawArxLevel raw)
+        public RawArxLevel SaveTo(RawArxLevel raw)
         {
-            dlf.WriteTo(raw.DLF);
-            fts.WriteTo(raw.FTS);
-            llf.WriteTo(raw.LLF);
+            dlf.SaveTo(raw.DLF);
+            fts.SaveTo(raw.FTS);
+            llf.SaveTo(raw.LLF);
             return raw;
         }
 

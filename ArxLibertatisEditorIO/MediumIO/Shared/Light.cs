@@ -20,7 +20,7 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
         public float ex_flaresize;
         public ExtrasType extras;
 
-        internal void ReadFrom(DANAE_IO_LIGHT light)
+        public void ReadFrom(ref DANAE_IO_LIGHT light)
         {
             pos = light.pos.ToVector3();
             color = light.rgb.ToColor();
@@ -37,7 +37,7 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
             extras = light.extras;
         }
 
-        internal void WriteTo(ref DANAE_IO_LIGHT light)
+        public void WriteTo(ref DANAE_IO_LIGHT light)
         {
 
             light.pos = new SavedVec3(pos);
@@ -57,21 +57,6 @@ namespace ArxLibertatisEditorIO.MediumIO.Shared
 
         public override string ToString()
         {
-            /*
-            public Vector3 pos;
-        public Color color;
-        public float fallStart;
-        public float fallEnd;
-        public float intensity;
-        public float i; //no idea what this does
-        public Color ex_flicker;
-        public float ex_radius;
-        public float ex_frequency;
-        public float ex_size;
-        public float ex_speed;
-        public float ex_flaresize;
-        public int extras; //maybe bool or flags?
-            */
             return $"Position: {pos}\n" +
                 $"Color: {color}\n" +
                 $"Fall Start: {fallStart}\n" +

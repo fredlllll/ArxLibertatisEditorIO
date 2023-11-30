@@ -8,13 +8,13 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public int containerId;
         public string texturePath;
 
-        internal void ReadFrom(FTS_IO_TEXTURE_CONTAINER ftc)
+        public void LoadFrom(ref FTS_IO_TEXTURE_CONTAINER ftc)
         {
             containerId = ftc.tc;
             texturePath = IOHelper.GetString(ftc.fic);
         }
 
-        internal void WriteTo(ref FTS_IO_TEXTURE_CONTAINER ftc)
+        public void SaveTo(ref FTS_IO_TEXTURE_CONTAINER ftc)
         {
             ftc.tc = containerId;
             ftc.fic = IOHelper.GetBytes(texturePath, 256);

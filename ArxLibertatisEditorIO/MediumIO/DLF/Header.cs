@@ -15,7 +15,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
         public bool lighting = false;
         public Vector3 offset;
 
-        internal void ReadFrom(DLF_IO_HEADER header)
+        public void LoadFrom(ref DLF_IO_HEADER header)
         {
             string vers = header.version.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             string[] parts = vers.Split('.');
@@ -28,7 +28,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             offset = header.offset.ToVector3();
         }
 
-        internal void WriteTo(ref DLF_IO_HEADER header)
+        public void SaveTo(ref DLF_IO_HEADER header)
         {
             string vers = version.Major + "." + version.Minor;
             header.version = float.Parse(vers, System.Globalization.CultureInfo.InvariantCulture);

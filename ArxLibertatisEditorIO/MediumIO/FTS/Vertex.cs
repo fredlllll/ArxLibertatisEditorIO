@@ -9,7 +9,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public Vector2 uv;
         public Vector3 normal;
 
-        internal void ReadFrom(FTS_IO_EERIEPOLY poly, int index)
+        public void LoadFrom(ref FTS_IO_EERIEPOLY poly, int index)
         {
             var vert = poly.vertices[index];
             position = new Vector3(vert.posX, vert.posY, vert.posZ);
@@ -17,7 +17,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             normal = poly.normals[index].ToVector3();
         }
 
-        internal void WriteTo(ref FTS_IO_EERIEPOLY poly, int index)
+        public void SaveTo(ref FTS_IO_EERIEPOLY poly, int index)
         {
             poly.vertices[index].posX = position.X;
             poly.vertices[index].posY = position.Y;

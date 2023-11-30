@@ -8,14 +8,14 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public short cell_z;
         public short idx;
 
-        internal void ReadFrom(FTS_IO_EP_DATA epd)
+        public void LoadFrom(ref FTS_IO_EP_DATA epd)
         {
             cell_x = epd.cell_x;
             cell_z = epd.cell_z;
             idx = epd.idx;
         }
 
-        internal void WriteTo(ref FTS_IO_EP_DATA epd)
+        public void SaveTo(ref FTS_IO_EP_DATA epd)
         {
             epd.cell_x = cell_x;
             epd.cell_z = cell_z;

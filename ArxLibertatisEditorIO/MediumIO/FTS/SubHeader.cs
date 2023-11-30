@@ -8,13 +8,13 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
         public string path;
         public byte[] checksum;
 
-        internal void ReadFrom(FTS_IO_UNIQUE_HEADER2 header)
+        public void LoadFrom(ref FTS_IO_UNIQUE_HEADER2 header)
         {
             path = IOHelper.GetString(header.path);
             checksum = header.check;
         }
 
-        internal void WriteTo(ref FTS_IO_UNIQUE_HEADER2 header)
+        public void SaveTo(ref FTS_IO_UNIQUE_HEADER2 header)
         {
             header.path = IOHelper.GetBytes(path, 256);
             header.check = checksum;

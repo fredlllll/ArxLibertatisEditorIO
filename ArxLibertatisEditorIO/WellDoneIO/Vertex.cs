@@ -6,7 +6,7 @@ namespace ArxLibertatisEditorIO.WellDoneIO
     {
         public Color color;
 
-        internal void ReadFrom(MediumIO.FTS.Polygon poly, int index)
+        public void ReadFrom(MediumIO.FTS.Polygon poly, int index)
         {
             var vert = poly.vertices[index];
             position = vert.position;
@@ -14,7 +14,7 @@ namespace ArxLibertatisEditorIO.WellDoneIO
             normal = vert.normal;
         }
 
-        internal void WriteTo(MediumIO.FTS.Polygon poly, int index)
+        public void WriteTo(MediumIO.FTS.Polygon poly, int index)
         {
             var vert = poly.vertices[index];
             vert.position = position;

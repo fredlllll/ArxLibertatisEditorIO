@@ -28,7 +28,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
         public Vector3 normal;
         public float temp;
 
-        internal void ReadFrom(EERIE_FACE_FTL face)
+        public void LoadFrom(ref EERIE_FACE_FTL face)
         {
             faceType = face.facetype;
             textureContainerIndex = face.texid;
@@ -49,7 +49,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
             }
         }
 
-        internal void WriteTo(ref EERIE_FACE_FTL face)
+        public void SaveTo(ref EERIE_FACE_FTL face)
         {
             face.facetype = faceType;
             face.texid = textureContainerIndex;

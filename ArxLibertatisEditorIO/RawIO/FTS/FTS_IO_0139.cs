@@ -182,7 +182,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
                 var oc = new FTS_IO_CELL();
                 (int x, int z) = IOHelper.CellIndexToXZ(i, 160);
 
-                c.WriteTo(ref oc, x * 100, z * 100);
+                c.WriteTo(oc, x * 100, z * 100);
                 other.cells[i] = oc;
             }
 

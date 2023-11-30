@@ -30,23 +30,23 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
 
         public void LoadFrom(FTS_IO fts)
         {
-            header.ReadFrom(fts.header);
+            header.LoadFrom(ref fts.header);
 
             subHeaders.Clear();
             for (int i = 0; i < fts.header.count; ++i)
             {
                 var subHeader = new SubHeader();
-                subHeader.ReadFrom(fts.uniqueHeaders[i]);
+                subHeader.LoadFrom(ref fts.uniqueHeaders[i]);
                 subHeaders.Add(subHeader);
             }
 
-            sceneHeader.ReadFrom(fts.sceneHeader);
+            sceneHeader.LoadFrom(ref fts.sceneHeader);
 
             textureContainers.Clear();
             for (int i = 0; i < fts.textureContainers.Length; ++i)
             {
                 var tc = new TextureContainer();
-                tc.ReadFrom(fts.textureContainers[i]);
+                tc.LoadFrom(ref fts.textureContainers[i]);
                 textureContainers.Add(tc);
             }
 
@@ -54,7 +54,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             for (int i = 0; i < fts.cells.Length; ++i)
             {
                 var c = Cell.FromIndex(i, fts.sceneHeader.sizex);
-                c.ReadFrom(fts.cells[i]);
+                c.LoadFrom(fts.cells[i]);
                 cells.Add(c);
             }
 
@@ -62,7 +62,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             for (int i = 0; i < fts.anchors.Length; ++i)
             {
                 var anchor = new Anchor();
-                anchor.ReadFrom(fts.anchors[i]);
+                anchor.LoadFrom(fts.anchors[i]);
                 anchors.Add(anchor);
             }
 
@@ -70,7 +70,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             for (int i = 0; i < fts.portals.Length; ++i)
             {
                 var portal = new Portal();
-                portal.ReadFrom(fts.portals[i]);
+                portal.LoadFrom(ref fts.portals[i]);
                 portals.Add(portal);
             }
 
@@ -78,7 +78,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             for (int i = 0; i < fts.rooms.Length; ++i)
             {
                 var room = new Room();
-                room.ReadFrom(fts.rooms[i]);
+                room.LoadFrom(fts.rooms[i]);
                 rooms.Add(room);
             }
 
@@ -86,57 +86,57 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             for (int i = 0; i < fts.roomDistances.Length; ++i)
             {
                 var rd = new RoomDistance();
-                rd.ReadFrom(fts.roomDistances[i]);
+                rd.LoadFrom(ref fts.roomDistances[i]);
                 roomDistances.Add(rd);
             }
         }
 
-        public void WriteTo(FTS_IO fts)
+        public void SaveTo(FTS_IO fts)
         {
-            header.WriteTo(ref fts.header);
+            header.SaveTo(ref fts.header);
 
             IOHelper.EnsureArraySize(ref fts.uniqueHeaders, subHeaders.Count);
             for (int i = 0; i < subHeaders.Count; ++i)
             {
-                subHeaders[i].WriteTo(ref fts.uniqueHeaders[i]);
+                subHeaders[i].SaveTo(ref fts.uniqueHeaders[i]);
             }
 
-            sceneHeader.WriteTo(ref fts.sceneHeader);
+            sceneHeader.SaveTo(ref fts.sceneHeader);
 
             IOHelper.EnsureArraySize(ref fts.textureContainers, textureContainers.Count);
             for (int i = 0; i < textureContainers.Count; ++i)
             {
-                textureContainers[i].WriteTo(ref fts.textureContainers[i]);
+                textureContainers[i].SaveTo(ref fts.textureContainers[i]);
             }
 
             IOHelper.EnsureArraySize(ref fts.cells, cells.Count);
             for (int i = 0; i < cells.Count; ++i)
             {
-                cells[i].WriteTo(ref fts.cells[i]);
+                cells[i].SaveTo(fts.cells[i]);
             }
 
             IOHelper.EnsureArraySize(ref fts.anchors, anchors.Count);
             for (int i = 0; i < anchors.Count; ++i)
             {
-                anchors[i].WriteTo(ref fts.anchors[i]);
+                anchors[i].SaveTo(fts.anchors[i]);
             }
 
             IOHelper.EnsureArraySize(ref fts.portals, portals.Count);
             for (int i = 0; i < portals.Count; ++i)
             {
-                portals[i].WriteTo(ref fts.portals[i]);
+                portals[i].SaveTo(ref fts.portals[i]);
             }
 
             IOHelper.EnsureArraySize(ref fts.rooms, rooms.Count);
             for (int i = 0; i < rooms.Count; ++i)
             {
-                rooms[i].WriteTo(ref fts.rooms[i]);
+                rooms[i].SaveTo(fts.rooms[i]);
             }
 
             IOHelper.EnsureArraySize(ref fts.roomDistances, roomDistances.Count);
             for (int i = 0; i < roomDistances.Count; ++i)
             {
-                roomDistances[i].WriteTo(ref fts.roomDistances[i]);
+                roomDistances[i].SaveTo(ref fts.roomDistances[i]);
             }
         }
         public override string ToString()

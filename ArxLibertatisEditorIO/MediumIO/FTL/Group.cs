@@ -10,7 +10,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
         public int indexes;
         public float blobShadowSize;
         public int[] indices;
-        public void ReadFrom(FTL_IO_3D_DATA_GROUP group)
+        public void LoadFrom(ref FTL_IO_3D_DATA_GROUP group)
         {
             name = IOHelper.GetString(group.group.name);
             origin = group.group.origin;
@@ -19,7 +19,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
             indices = group.indices;
         }
 
-        public void WriteTo(ref FTL_IO_3D_DATA_GROUP group)
+        public void SaveTo(ref FTL_IO_3D_DATA_GROUP group)
         {
             group.group.name = IOHelper.GetBytes(name, 256);
             group.group.origin = origin;
