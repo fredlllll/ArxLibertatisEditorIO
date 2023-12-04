@@ -70,7 +70,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
             secondaryHeader.offset_progressive_data = -1;
 
             var secondaryHeaderPosition = stream.Position;
-            writer.WriteStruct(secondaryHeader); //write header with old values for now
+            writer.WriteStruct(secondaryHeader); //write header with old values, updated further down
 
             if (has3DDataSection)
             {

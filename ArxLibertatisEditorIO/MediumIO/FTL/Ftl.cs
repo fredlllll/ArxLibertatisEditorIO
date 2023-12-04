@@ -27,6 +27,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
 
             if (dataSection3D != null)
             {
+                ftl._3DDataSection ??= new FTL_IO_3D_DATA_SECTION();
                 dataSection3D.SaveTo(ftl._3DDataSection);
                 ftl.has3DDataSection = true;
             }
