@@ -70,6 +70,13 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
         {
             header.SaveTo(ref _3DDataSection.header);
 
+            _3DDataSection.header.nb_vertex = vertexList.Count;
+            _3DDataSection.header.nb_faces = faceList.Count;
+            _3DDataSection.header.nb_maps = textures.Count;
+            _3DDataSection.header.nb_groups = groups.Count;
+            _3DDataSection.header.nb_action = actions.Count;
+            _3DDataSection.header.nb_selections = selections.Count;
+
             IOHelper.EnsureArraySize(ref _3DDataSection.vertexList, vertexList.Count);
             for (int i = 0; i < vertexList.Count; ++i)
             {

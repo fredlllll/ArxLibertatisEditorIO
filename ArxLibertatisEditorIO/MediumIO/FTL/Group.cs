@@ -12,7 +12,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
         public int[] indices;
         public void LoadFrom(ref FTL_IO_3D_DATA_GROUP group)
         {
-            name = IOHelper.GetString(group.group.name);
+            name = IOHelper.GetStringSafe(group.group.name);
             origin = group.group.origin;
             indexes = group.group.indexes;
             blobShadowSize = group.group.siz;
