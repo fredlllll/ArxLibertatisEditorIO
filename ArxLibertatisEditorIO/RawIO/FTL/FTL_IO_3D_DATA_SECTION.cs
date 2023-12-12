@@ -103,7 +103,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
             for (int i = 0; i < groups.Length; ++i)
             {
                 groups[i].group.nb_index = groups[i].indices.Length;
-                writer.WriteStruct(groups[i]);
+                writer.WriteStruct(groups[i].group);
             }
 
             for (int i = 0; i < groups.Length; i++)
@@ -124,7 +124,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTL
             for (int i = 0; i < selections.Length; i++)
             {
                 selections[i].selection.nb_selected = selections[i].selected.Length;
-                writer.WriteStruct(selections[i]);
+                writer.WriteStruct(selections[i].selection);
             }
 
             for (int i = 0; i < selections.Length; i++)

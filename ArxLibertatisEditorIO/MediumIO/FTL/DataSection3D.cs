@@ -102,7 +102,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
             }
 
             IOHelper.EnsureArraySize(ref _3DDataSection.actionList, actions.Count);
-            for (int i = 0; i < groups.Count; ++i)
+            for (int i = 0; i < actions.Count; ++i)
             {
                 actions[i].SaveTo(ref _3DDataSection.actionList[i]);
             }
