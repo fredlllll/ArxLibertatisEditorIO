@@ -1,5 +1,9 @@
 ﻿namespace ArxLibertatisEditorIO.RawIO.PK
 {
+    /// <summary>
+    /// emulates a c like pointer to a fixed size array that can be changed with pointermath
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public struct Pointer<T>
     {
         public T[] array;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ArxLibertatisEditorIO.RawIO.PK
+namespace ArxLibertatisEditorIO.RawIO.PK.Explode
 {
     /// <summary>
     /// translated from https://github.com/arx/ArxLibertatis/blob/master/src/io/Blast.cpp
@@ -52,9 +52,6 @@ namespace ArxLibertatisEditorIO.RawIO.PK
             BLAST_INVALID_DIC_SIZE = -2, // dictionary size not in 4..6
             BLAST_INVALID_OFFSET = -3, // distance is too far back
         }
-
-
-
 
         class Blast
         {
@@ -141,7 +138,7 @@ namespace ArxLibertatisEditorIO.RawIO.PK
                 s.bitCnt -= need;
 
                 /* return need bits, zeroing the bits above that */
-                return val & ((1 << need) - 1);
+                return val & (1 << need) - 1;
             }
 
             static int Construct(Huffman h, byte[] rep)
@@ -177,7 +174,7 @@ namespace ArxLibertatisEditorIO.RawIO.PK
                 }
                 for (symbol = 0; symbol < n; symbol++)
                 {
-                    (h.count[length[symbol]])++; /* assumes lengths are within bounds */
+                    h.count[length[symbol]]++; /* assumes lengths are within bounds */
                 }
                 if (h.count[0] == n)
                 { /* no codes! */
@@ -237,13 +234,13 @@ namespace ArxLibertatisEditorIO.RawIO.PK
                 {
                     while (left-- != 0)
                     {
-                        code |= (bitbuf & 1) ^ 1;   /* invert code */
+                        code |= bitbuf & 1 ^ 1;   /* invert code */
                         bitbuf >>= 1;
                         count = h.count[countPointer++];
                         if (code < first + count)
                         { /* if length len, return symbol */
                             s.bitBuf = bitbuf;
-                            s.bitCnt = (s.bitCnt - len) & 7;
+                            s.bitCnt = s.bitCnt - len & 7;
                             return h.symbol[index + (code - first)];
                         }
                         index += count;             /* else update for next length */
@@ -252,7 +249,7 @@ namespace ArxLibertatisEditorIO.RawIO.PK
                         code <<= 1;
                         len++;
                     }
-                    left = (MAXBITS + 1) - len;
+                    left = MAXBITS + 1 - len;
                     if (left == 0) break;
                     bitbuf = s.inputStream.ReadByte();
                     if (bitbuf < 0)

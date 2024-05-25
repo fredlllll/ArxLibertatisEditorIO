@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace ArxLibertatisEditorIO.RawIO.PK
+namespace ArxLibertatisEditorIO.RawIO.PK.Implode
 {
     public enum ImplodeLiteralSize : byte
     {
@@ -33,14 +33,14 @@ namespace ArxLibertatisEditorIO.RawIO.PK
             header.literalSize = ImplodeLiteralSize.Fixed;
             header.dictSize = ImplodeDictSize.Size1024;
 
-            using(var sw = new StructWriter(output, Encoding.UTF8, true))
+            using (var sw = new StructWriter(output, Encoding.UTF8, true))
             {
                 sw.WriteStruct(header);
             }
 
             BitStream bits = new BitStream();
 
-            for(int i =0; i< bytes.Length; i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 bits.WriteFixedLiteral(bytes[i]);
             }

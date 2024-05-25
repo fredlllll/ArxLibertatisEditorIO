@@ -1,4 +1,5 @@
-﻿using ArxLibertatisEditorIO.RawIO.PK;
+﻿using ArxLibertatisEditorIO.RawIO.PK.Explode;
+using ArxLibertatisEditorIO.RawIO.PK.Implode;
 using System.IO;
 
 namespace ArxLibertatisEditorIO.Util

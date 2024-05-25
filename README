@@ -1,4 +1,4 @@
-this is a library for reading and writing arx libertatis level files
+this is a library for reading and writing arx libertatis files
 
 it DOES NOT rely on the ArxIO.dll anymore
 
