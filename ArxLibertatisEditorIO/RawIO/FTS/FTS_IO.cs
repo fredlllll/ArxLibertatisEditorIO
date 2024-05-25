@@ -193,6 +193,18 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             return size;
         }
 
+        static bool IsCompressed(Stream stream, out long headerSize)
+        {
+            long start = stream.Position;
+            using var reader = new StructReader(stream, System.Text.Encoding.ASCII, true);
+
+            var header = reader.ReadStruct<FTS_IO_UNIQUE_HEADER>();
+            headerSize = Marshal.SizeOf<FTS_IO_UNIQUE_HEADER>();
+            headerSize += header.count * Marshal.SizeOf<FTS_IO_UNIQUE_HEADER2>();
+            stream.Position = start;
+            return header.uncompressedsize != 0;
+        }
+
         static long GetHeaderSize(Stream stream)
         {
             long start = stream.Position;
@@ -207,8 +219,11 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
 
         public static Stream EnsureUnpacked(Stream s)
         {
-            long headerSize = GetHeaderSize(s);
-            return CompressionUtil.EnsureUncompressed(s, headerSize, s.Length - headerSize);
+            if (IsCompressed(s, out long headerSize))
+            {
+                return CompressionUtil.EnsureUncompressed(s, headerSize, s.Length - headerSize);
+            }
+            return s;
         }
 
         public static Stream EnsurePacked(Stream s)

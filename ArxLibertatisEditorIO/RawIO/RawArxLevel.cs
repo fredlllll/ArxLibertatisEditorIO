@@ -72,7 +72,7 @@ namespace ArxLibertatisEditorIO.RawIO
             return this;
         }
 
-        public void SaveLevel(string dlfPath, string llfPath, string ftsPath)
+        public void SaveLevel(string dlfPath, string llfPath, string ftsPath, bool compressFts)
         {
             if (dlf.scenes.Length > 0)
             {
@@ -102,17 +102,28 @@ namespace ArxLibertatisEditorIO.RawIO
 
             using (MemoryStream ms = new MemoryStream())
             {
+                if (!compressFts)
+                {
+                    fts.header.uncompressedsize = 0; // signals that fts is not compressed
+                }
                 fts.WriteTo(ms);
 
                 ms.Position = 0;
                 Directory.CreateDirectory(Path.GetDirectoryName(ftsPath));
-                using var packedStream = FTS_IO.EnsurePacked(ms);
                 using FileStream fs = new FileStream(ftsPath, FileMode.Create, FileAccess.Write);
-                packedStream.CopyTo(fs);
+                if (compressFts)
+                {
+                    using var packedStream = FTS_IO.EnsurePacked(ms);
+                    packedStream.CopyTo(fs);
+                }
+                else
+                {
+                    ms.CopyTo(fs);
+                }
             }
         }
 
-        public void SaveLevel(string name)
+        public void SaveLevel(string name, bool compressFts)
         {
             LevelName = name;
 
@@ -120,12 +131,12 @@ namespace ArxLibertatisEditorIO.RawIO
             string llfPath = ArxPaths.GetLlfPath(name);
             string ftsPath = ArxPaths.GetFtsPath(name);
 
-            SaveLevel(dlfPath, llfPath, ftsPath);
+            SaveLevel(dlfPath, llfPath, ftsPath, compressFts);
         }
 
-        public void SaveLevel()
+        public void SaveLevel(bool compressFts)
         {
-            SaveLevel(LevelName);
+            SaveLevel(LevelName, compressFts);
         }
     }
 }
