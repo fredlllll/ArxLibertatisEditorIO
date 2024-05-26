@@ -102,11 +102,15 @@ namespace ArxLibertatisEditorIO.RawIO
 
             using (MemoryStream ms = new MemoryStream())
             {
-                if (!compressFts)
+                if (compressFts)
+                {
+                    fts.WriteTo(ms);
+                }
+                else
                 {
                     fts.header.uncompressedsize = 0; // signals that fts is not compressed
+                    fts.WriteTo(ms, false);
                 }
-                fts.WriteTo(ms);
 
                 ms.Position = 0;
                 Directory.CreateDirectory(Path.GetDirectoryName(ftsPath));

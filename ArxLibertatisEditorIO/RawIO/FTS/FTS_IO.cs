@@ -97,7 +97,7 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             return count;
         }
 
-        public void WriteTo(Stream stream)
+        public void WriteTo(Stream stream, bool calculateUncompressedSize = true)
         {
             header.count = uniqueHeaders.Length;
 
@@ -107,7 +107,9 @@ namespace ArxLibertatisEditorIO.RawIO.FTS
             sceneHeader.nb_portals = portals.Length;
             sceneHeader.nb_rooms = rooms.Length - 1;
 
-            header.uncompressedsize = GetUncompressedSize();
+            if (calculateUncompressedSize) {
+                header.uncompressedsize = GetUncompressedSize();
+            }
 
             using StructWriter writer = new StructWriter(stream, System.Text.Encoding.ASCII, true);
 
