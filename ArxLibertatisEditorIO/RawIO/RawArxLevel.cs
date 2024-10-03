@@ -42,21 +42,35 @@ namespace ArxLibertatisEditorIO.RawIO
             LevelName = "unknown";
         }
 
-        public void LoadLevel(string dlfPath, string llfPath, string ftsPath)
+        /// <summary>
+        /// Loads the level from the 3 level files
+        /// </summary>
+        /// <param name="dlfPath">path to dlf</param>
+        /// <param name="llfPath">path to llf</param>
+        /// <param name="ftsPath">path to fts</param>
+        /// <param name="allowPartialLevel">if true, allows any of the 3 files to be missing. otherwise exceptions will be thrown for missing files</param>
+        public void LoadLevel(string dlfPath, string llfPath, string ftsPath, bool allowPartialLevel = true)
         {
-            using (FileStream fs = new FileStream(dlfPath, FileMode.Open, FileAccess.Read))
+            if (!allowPartialLevel || File.Exists(dlfPath))
             {
-                dlf.ReadFrom(DLF_IO.EnsureUnpacked(fs));
+                using (FileStream fs = new FileStream(dlfPath, FileMode.Open, FileAccess.Read))
+                {
+                    dlf.ReadFrom(DLF_IO.EnsureUnpacked(fs));
+                }
             }
-
-            using (FileStream fs = new FileStream(llfPath, FileMode.Open, FileAccess.Read))
+            if (!allowPartialLevel || File.Exists(llfPath))
             {
-                llf.ReadFrom(LLF_IO.EnsureUnpacked(fs));
+                using (FileStream fs = new FileStream(llfPath, FileMode.Open, FileAccess.Read))
+                {
+                    llf.ReadFrom(LLF_IO.EnsureUnpacked(fs));
+                }
             }
-
-            using (FileStream fs = new FileStream(ftsPath, FileMode.Open, FileAccess.Read))
+            if (!allowPartialLevel || File.Exists(ftsPath))
             {
-                fts.ReadFrom(FTS_IO.EnsureUnpacked(fs));
+                using (FileStream fs = new FileStream(ftsPath, FileMode.Open, FileAccess.Read))
+                {
+                    fts.ReadFrom(FTS_IO.EnsureUnpacked(fs));
+                }
             }
         }
 

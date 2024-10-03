@@ -16,7 +16,7 @@
     <PackageTags>arx fatalis libertatis editor io</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
 	<Title>ArxLibertatisEditorIO</Title>
-	<Version>2.1.1</Version>
+	<Version>2.1.2</Version>
 	<PackageReleaseNotes>cleanup and add operators and util functions to Color</PackageReleaseNotes>
   </PropertyGroup>
 
