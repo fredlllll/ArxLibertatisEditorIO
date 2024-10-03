@@ -48,8 +48,8 @@ namespace ArxLibertatisEditorIO.RawIO
         /// <param name="dlfPath">path to dlf</param>
         /// <param name="llfPath">path to llf</param>
         /// <param name="ftsPath">path to fts</param>
-        /// <param name="allowPartialLevel">if true, allows any of the 3 files to be missing. otherwise exceptions will be thrown for missing files</param>
-        public void LoadLevel(string dlfPath, string llfPath, string ftsPath, bool allowPartialLevel = true)
+        /// <param name="allowPartialLevel">if true, allows any of the 3 files to be missing. otherwise exceptions will be thrown for missing files. default false</param>
+        public void LoadLevel(string dlfPath, string llfPath, string ftsPath, bool allowPartialLevel = false)
         {
             if (!allowPartialLevel || File.Exists(dlfPath))
             {
