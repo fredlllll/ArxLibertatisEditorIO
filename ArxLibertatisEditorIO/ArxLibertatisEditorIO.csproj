@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Frederik Gelder</Authors>
-    <Product></Product>
-    <Company></Company>
+    <Product>
+    </Product>
+    <Company>
+    </Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>2023</Copyright>
     <PackageId>ArxLibertatisEditorIO</PackageId>
@@ -15,28 +16,51 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>arx fatalis libertatis editor io</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-	<Title>ArxLibertatisEditorIO</Title>
-	<Version>2.1.2</Version>
-	<PackageReleaseNotes>cleanup and add operators and util functions to Color</PackageReleaseNotes>
+    <Title>ArxLibertatisEditorIO</Title>
+    <Version>2.1.7</Version>
+    <PackageReleaseNotes>
+    </PackageReleaseNotes>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
-
+  <Target Name="IncrementVersion" BeforeTargets="BeforeBuild">
+    <!-- Read the current version -->
+    <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/Project/PropertyGroup/Version/text()">
+      <Output TaskParameter="Result" ItemName="CurrentVersion" />
+    </XmlPeek>
+    <!-- write result into a property group for access with $ -->
+    <PropertyGroup>
+      <CurrentVersion>@(CurrentVersion)</CurrentVersion>
+    </PropertyGroup>
+    <Message Text="Old Version: $(CurrentVersion)" Importance="high" />
+    <!-- Split the version into major, minor, and patch components -->
+    <PropertyGroup>
+      <Major>$(CurrentVersion.Split('.')[0])</Major>
+      <Minor>$(CurrentVersion.Split('.')[1])</Minor>
+      <Patch>$(CurrentVersion.Split('.')[2])</Patch>
+    </PropertyGroup>
+    <!-- Increment the patch version -->
+    <PropertyGroup>
+      <NewPatch>$([MSBuild]::Add($([System.Int32]::Parse($(Patch))),1))</NewPatch>
+      <Version>$(Major).$(Minor).$(NewPatch)</Version>
+    </PropertyGroup>
+    <!-- Update the version in the project file -->
+    <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/Project/PropertyGroup/Version" Value="$(Version)" />
+    <!-- Output the new version -->
+    <Message Text="New version: $(NewVersion)" Importance="high" />
+  </Target>
 </Project>

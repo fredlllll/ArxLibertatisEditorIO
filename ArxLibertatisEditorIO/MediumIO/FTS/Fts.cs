@@ -112,13 +112,13 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             IOHelper.EnsureArraySize(ref fts.cells, cells.Count);
             for (int i = 0; i < cells.Count; ++i)
             {
-                cells[i].SaveTo(fts.cells[i]);
+                cells[i].SaveTo(ref fts.cells[i]);
             }
 
             IOHelper.EnsureArraySize(ref fts.anchors, anchors.Count);
             for (int i = 0; i < anchors.Count; ++i)
             {
-                anchors[i].SaveTo(fts.anchors[i]);
+                anchors[i].SaveTo(ref fts.anchors[i]);
             }
 
             IOHelper.EnsureArraySize(ref fts.portals, portals.Count);
@@ -130,7 +130,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             IOHelper.EnsureArraySize(ref fts.rooms, rooms.Count);
             for (int i = 0; i < rooms.Count; ++i)
             {
-                rooms[i].SaveTo(fts.rooms[i]);
+                rooms[i].SaveTo(ref fts.rooms[i]);
             }
 
             IOHelper.EnsureArraySize(ref fts.roomDistances, roomDistances.Count);

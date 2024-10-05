@@ -23,8 +23,10 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             linkedAnchors.AddRange(anchor.linkedAnchors);
         }
 
-        public void SaveTo(FTS_IO_ANCHOR anchor)
+        public void SaveTo(ref FTS_IO_ANCHOR anchor)
         {
+            anchor ??= new FTS_IO_ANCHOR();
+
             anchor.data.pos = new RawIO.Shared.SavedVec3(pos);
             anchor.data.radius = radius;
             anchor.data.height = height;

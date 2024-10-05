@@ -24,8 +24,10 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             }
         }
 
-        public void SaveTo(FTS_IO_ROOM room)
+        public void SaveTo(ref FTS_IO_ROOM room)
         {
+            room ??= new FTS_IO_ROOM();
+
             room.data.nb_portals = portals.Count;
             room.data.nb_polys = polygons.Count;
 

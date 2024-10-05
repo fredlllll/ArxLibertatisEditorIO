@@ -1,4 +1,5 @@
 ﻿using ArxLibertatisEditorIO.MediumIO;
+using ArxLibertatisEditorIO.MediumIO.FTS;
 using ArxLibertatisEditorIO.Util;
 using System;
 using System.Collections.Generic;
@@ -177,6 +178,14 @@ namespace ArxLibertatisEditorIO.WellDoneIO
                 var tc = mal.FTS.textureContainers[kv.Value - 1]; //we start at 1 because 0 means no texture
                 tc.containerId = kv.Value;
                 tc.texturePath = kv.Key;
+            }
+
+            //write a unique header if none is present
+            if (mal.FTS.subHeaders.Count == 0)
+            {
+                var subHeader = new SubHeader();
+                subHeader.path = "unknown.scn";
+                mal.FTS.subHeaders.Add(subHeader);
             }
 
             texToTc.Clear();
