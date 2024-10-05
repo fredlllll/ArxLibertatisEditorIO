@@ -10,6 +10,7 @@ namespace ArxLibertatisEditorIO.WellDoneIO
     public class WellDoneArxLevel
     {
         public readonly List<Polygon> polygons = new List<Polygon>();
+        public readonly List<Light> lights = new List<Light>();
 
         internal readonly Dictionary<int, string> tcToTex = new Dictionary<int, string>();
         internal readonly Dictionary<string, int> texToTc = new Dictionary<string, int>();
@@ -43,6 +44,16 @@ namespace ArxLibertatisEditorIO.WellDoneIO
             }
 
             tcToTex.Clear();
+
+            //load lights
+            lights.Clear();
+            foreach (var l in mal.LLF.lights)
+            {
+                var ll = new Light();
+                ll.LoadFrom(l);
+                lights.Add(ll);
+            }
+
             return this;
         }
 
@@ -189,6 +200,16 @@ namespace ArxLibertatisEditorIO.WellDoneIO
             }
 
             texToTc.Clear();
+
+            //save lights
+            mal.LLF.lights.Clear();
+            foreach (var l in lights)
+            {
+                var ll = new MediumIO.Shared.Light();
+                l.SaveTo(ll);
+                mal.LLF.lights.Add(ll);
+            }
+
             return mal;
         }
 
