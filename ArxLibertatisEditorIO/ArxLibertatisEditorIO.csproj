@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Frederik Gelder</Authors>
@@ -17,7 +17,7 @@
     <PackageTags>arx fatalis libertatis editor io</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <Title>ArxLibertatisEditorIO</Title>
-    <Version>2.1.8</Version>
+    <Version>2.1.20</Version>
     <PackageReleaseNotes>
     </PackageReleaseNotes>
   </PropertyGroup>
@@ -28,7 +28,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.6.1" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE">
@@ -37,7 +37,7 @@
       </PackagePath>
     </None>
   </ItemGroup>
-  <Target Name="IncrementVersion" BeforeTargets="BeforeBuild">
+  <Target Name="IncrementVersion" BeforeTargets="Never">
     <!-- Read the current version -->
     <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/Project/PropertyGroup/Version/text()">
       <Output TaskParameter="Result" ItemName="CurrentVersion" />
@@ -61,6 +61,6 @@
     <!-- Update the version in the project file -->
     <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/Project/PropertyGroup/Version" Value="$(Version)" />
     <!-- Output the new version -->
-    <Message Text="New version: $(NewVersion)" Importance="high" />
+    <Message Text="New version: $(Version)" Importance="high" />
   </Target>
 </Project>

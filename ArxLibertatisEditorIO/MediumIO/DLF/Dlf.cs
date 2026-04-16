@@ -106,6 +106,7 @@ namespace ArxLibertatisEditorIO.MediumIO.DLF
             }
 
             IOHelper.EnsureArraySize(ref dlf.paths, paths.Count);
+            IOHelper.EnsureArrayNoNullEntries(dlf.paths);
             dlf.header.numPaths = paths.Count;
             for (int i = 0; i < paths.Count; ++i)
             {
