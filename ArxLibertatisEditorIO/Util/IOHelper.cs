@@ -14,9 +14,9 @@ namespace ArxLibertatisEditorIO.Util
         public static byte[] ReadVariableLengthString(BinaryReader reader)
         {
             long start = reader.BaseStream.Position;
-            while(true)
+            while (true)
             {
-                if(reader.ReadByte() == 0)
+                if (reader.ReadByte() == 0)
                 {
                     break;
                 }
@@ -177,6 +177,21 @@ namespace ArxLibertatisEditorIO.Util
                 else
                 {
                     arr = new T[size];
+                }
+            }
+        }
+
+        public static void EnsureArrayNoNullEntries<T>(T[] arr) where T : class, new()
+        {
+            if (arr == null)
+            {
+                return;
+            }
+            for (int i = 0; i < arr.Length; ++i)
+            {
+                if (arr[i] == null)
+                {
+                    arr[i] = new T();
                 }
             }
         }

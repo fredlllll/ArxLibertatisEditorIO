@@ -9,6 +9,8 @@ namespace ArxLibertatisEditorIO.RawIO.PK.Implode
 {
     //from https://github.com/arx-tools/node-pkware/blob/5e75119e5571972c5524231bf10c91a78a09ea44/src/bin/implode.ts
 
+    //TODO: use this one https://github.com/arx-tools/node-pkware/blob/main/src/simple/implode.ts
+
     public class ImplodeFromLali
     {
         bool verbose = false;
