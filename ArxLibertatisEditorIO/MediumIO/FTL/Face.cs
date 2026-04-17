@@ -15,7 +15,7 @@ namespace ArxLibertatisEditorIO.MediumIO.FTL
             public Vector3 normal;
         }
 
-        public PolyType faceType = PolyType.None;
+        public FaceType faceType = FaceType.Flat;
         public readonly EerieFaceVertex[] vertices = new EerieFaceVertex[]
         {
             new EerieFaceVertex(),
