@@ -105,16 +105,18 @@ namespace ArxLibertatisEditorIO.RawIO.Shared
         public float b;
         public float g;
 
+
+        //dont change the b angle here anymore as i have no idea what the correct conversion is
         public SavedAnglef(Vector3 euler)
         {
-            a = euler.X; //TODO: check if this is rads or degrees and if its flipped or anything
-            b = euler.Y + 90;
+            a = euler.X;
+            b = euler.Y;
             g = euler.Z;
         }
 
         public readonly Vector3 ToEuler()
         {
-            return new Vector3(a, b - 90, g); //TODO: seems that rotation is handled differently depending on what type of object its used on...
+            return new Vector3(a, b, g);
         }
 
         public static bool operator ==(SavedAnglef a1, SavedAnglef a2)
