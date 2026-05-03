@@ -58,6 +58,12 @@ namespace ArxLibertatisEditorIO.MediumIO.FTS
             poly.area = area;
             poly.room = room;
             poly.misc = misc;
+            IOHelper.EnsureArraySize(ref poly.v, 4, false);
+            IOHelper.EnsureArraySize(ref poly.nrml, 4, false);
+            for (int i = 0; i < 4; ++i)
+            {
+                vertices[i].SaveTo(ref poly, i);
+            }
         }
 
         public override string ToString()
