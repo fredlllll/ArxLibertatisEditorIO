@@ -1,5 +1,6 @@
 ﻿using ArxLibertatisEditorIO.Util;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace ArxLibertatisEditorIO.RawIO.PK.Implode
@@ -17,6 +18,7 @@ namespace ArxLibertatisEditorIO.RawIO.PK.Implode
         Size4096 = 6,
     }
 
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct ImplodeHeader
     {
         public ImplodeLiteralSize literalSize;
